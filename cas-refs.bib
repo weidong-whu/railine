@@ -1,0 +1,925 @@
+@String(PAMI  = {IEEE TPAMI})
+@String(IJCV  = {IJCV})
+@String(CVPR  = {CVPR})
+@String(ICCV  = {ICCV})
+@String(ECCV  = {ECCV})
+@String(NIPS  = {NeurIPS})
+@String(ICPR  = {ICPR})
+@String(BMVC  =	{BMVC})
+@String(TOG   = {ACM TOG})
+@String(TIP   = {IEEE TIP})
+@String(TVCG  = {IEEE TVCG})
+@String(TCSVT = {IEEE TCSVT})
+@String(TMM   =	{IEEE TMM})
+@String(ACMMM = {ACM MM})
+@String(ICME  =	{ICME})
+@String(ICASSP=	{ICASSP})
+@String(ICIP  = {ICIP})
+@String(ACCV  = {ACCV})
+@String(ICLR  = {ICLR})
+@String(IJCAI = {IJCAI})
+@String(PR = {PR})
+@String(AAAI = {AAAI})
+@String(CVPRW= {CVPRW})
+@String(CSVT = {IEEE TCSVT})
+
+
+
+@String(PAMI = {IEEE Trans. Pattern Anal. Mach. Intell.})
+@String(IJCV = {Int. J. Comput. Vis.})
+@String(CVPR= {IEEE Conf. Comput. Vis. Pattern Recog.})
+@String(ICCV= {Int. Conf. Comput. Vis.})
+@String(ECCV= {Eur. Conf. Comput. Vis.})
+@String(NIPS= {Adv. Neural Inform. Process. Syst.})
+@String(ICPR = {Int. Conf. Pattern Recog.})
+@String(BMVC= {Brit. Mach. Vis. Conf.})
+@String(TOG= {ACM Trans. Graph.})
+@String(TIP  = {IEEE Trans. Image Process.})
+@String(TVCG  = {IEEE Trans. Vis. Comput. Graph.})
+@String(TMM  = {IEEE Trans. Multimedia})
+@String(ACMMM= {ACM Int. Conf. Multimedia})
+@String(ICME = {Int. Conf. Multimedia and Expo})
+@String(ICASSP=	{ICASSP})
+@String(ICIP = {IEEE Int. Conf. Image Process.})
+@String(ACCV  = {ACCV})
+@String(ICLR = {Int. Conf. Learn. Represent.})
+@String(IJCAI = {IJCAI})
+@String(PR   = {Pattern Recognition})
+@String(AAAI = {AAAI})
+@String(CVPRW= {IEEE Conf. Comput. Vis. Pattern Recog. Worksh.})
+@String(CSVT = {IEEE Trans. Circuit Syst. Video Technol.})
+
+@String(SPL	= {IEEE Sign. Process. Letters})
+@String(VR   = {Vis. Res.})
+@String(JOV	 = {J. Vis.})
+@String(TVC  = {The Vis. Comput.})
+@String(JCST  = {J. Comput. Sci. Tech.})
+@String(CGF  = {Comput. Graph. Forum})
+@String(CVM = {Computational Visual Media})
+
+
+@article{HOFER,
+title = {Efficient 3D scene abstraction using line segments},
+journal = {Computer Vision and Image Understanding},
+volume = {157},
+pages = {167-178},
+year = {2017},
+issn = {1077-3142},
+doi = {https://doi.org/10.1016/j.cviu.2016.03.017},
+url = {https://www.sciencedirect.com/science/article/pii/S1077314216300236},
+author = {Manuel Hofer and Michael Maurer and Horst Bischof},
+keywords = {Structure-from-Motion, 3D reconstruction, Line segments, Scene abstraction, Multi-view Stereo},
+abstract = {Extracting 3D information from a moving camera is traditionally based on interest point detection and matching. This is especially challenging in urban indoor- and outdoor environments, where the number of distinctive interest points is naturally limited. While common Structure-from-Motion (SfM) approaches usually manage to obtain the correct camera poses, the number of accurate 3D points is very small due to the low number of matchable features. Subsequent Multi-view Stereo approaches may help to overcome this problem, but suffer from a high computational complexity. We propose a novel approach for the task of 3D scene abstraction, which uses straight line segments as underlying features. We use purely geometric constraints to match 2D line segments from different images, and formulate the reconstruction procedure as a graph-clustering problem. We show that our method generates accurate 3D models with low computational costs, which makes it especially useful for large-scale urban datasets.}
+}
+
+@INPROCEEDINGS{LINEPOINT,
+  author={Sugiura, Takayuki and Torii, Akihiko and Okutomi, Masatoshi},
+  booktitle={International Conference on 3D Vision}, 
+  title={3D Surface Reconstruction from Point-and-Line Cloud}, 
+  year={2015},
+  volume={},
+  number={},
+  pages={264-272},
+  doi={10.1109/3DV.2015.37}}
+
+@article{LIKAI,
+title = {Line segment matching and reconstruction via exploiting coplanar cues},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {125},
+pages = {33-49},
+year = {2017},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2017.01.006},
+url = {https://www.sciencedirect.com/science/article/pii/S0924271616301708},
+author = {Kai Li and Jian Yao},
+keywords = {Line segment matching, 3D line segment reconstruction, Local region detector, Homography estimation, Markov random field},
+abstract = {This paper introduces a new system for reconstructing 3D scenes from Line Segments (LS) on images. A new LS matching algorithm and a novel 3D LS reconstruction algorithm are incorporated into the system. Two coplanar cues that indicates image LSs are coplanar in physical (3D) space are extensively exploited in both algorithms: (1) adjacent image LSs are coplanar in space in a high possibility; (2) the projections of coplanar 3D LSs in two images are related by the same planar homography. Based on these two cues, we efficiently match LSs from two images firstly in pairs through matching the V-junctions formed by adjacent LSs, and secondly in individuals by exploiting local homographies. We extract for each V-junction a scale and affine invariant local region to match V-junctions from two images. The local homographies estimated from V-junction matches are used to match LSs in individuals. To get 3D LSs from the obtained LS matches, we propose to first estimate space planes from clustered LS matches and then back-project image LSs onto the space planes. Markov Random Field (MRF) is introduced to help more reliable LS match clustering. Experiments shows our LS matching algorithm significantly improves the efficiency of state-of-the-art methods while achieves comparable matching performance, and our 3D LS reconstruction algorithm generates more complete and detailed 3D scene models using much fewer images.}
+}
+
+@INPROCEEDINGS{Schmid1997,
+  author={Schmid, C. and Zisserman, A.},
+  booktitle={CVPR}, 
+  title={Automatic line matching across views}, 
+  year={1997},
+  volume={},
+  number={},
+  pages={666-671},
+  doi={10.1109/CVPR.1997.609397}}
+
+@article{MSLD,
+title = {MSLD: A robust descriptor for line matching},
+journal = {Pattern Recognition},
+volume = {42},
+number = {5},
+pages = {941-953},
+year = {2009},
+issn = {0031-3203},
+doi = {https://doi.org/10.1016/j.patcog.2008.08.035},
+url = {https://www.sciencedirect.com/science/article/pii/S0031320308003658},
+author = {Zhiheng Wang and Fuchao Wu and Zhanyi Hu},
+keywords = {Line matching, Line descriptor, MSLD descriptor},
+abstract = {Line matching plays an important role in many applications, such as image registration, 3D reconstruction, object recognition and video understanding. However, compared with other features (such as point, region matching), it has made little progress in recent years. In this paper, we investigate the problem of matching line segments automatically only from their neighborhood appearance, without resorting to any other constraints or priori knowledge. A novel line descriptor called mean–standard deviation line descriptor (MSLD) descriptor is proposed for this purpose, which is constructed by the following three steps: (1) For each pixel on the line segment, its pixel support region (PSR) is defined and then the PSR is divided into non-overlapped sub-regions. (2) Line gradient description matrix (GDM) is formed by characterizing each sub-region into a vector. (3) MSLD is built by computing the mean and standard deviation of GDM column vectors. Extensive experiments on real images show that MSLD descriptor is highly distinctive for line matching under rotation, illumination change, image blur, viewpoint change, noise, JPEG compression and partial occlusion. In addition, the concept of MSLD descriptor can also be extended to creating curve descriptor (mean–standard deviation curve descriptor, MSCD), and promising MSCD-based results for both curve and region matching are also demonstrated in this work.}
+}
+
+@article{OK,
+title = {Matching of straight line segments from aerial stereo images of urban areas},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {74},
+pages = {133-152},
+year = {2012},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2012.09.003},
+url = {https://www.sciencedirect.com/science/article/pii/S0924271612001591},
+author = {Ali Ozgun Ok and Jan Dirk Wegner and Christian Heipke and Franz Rottensteiner and Uwe Soergel and Vedat Toprak},
+keywords = {Image matching, Line segment matching, Stereo images, Aerial imagery, Urban areas},
+abstract = {Reliable extraction of corresponding straight lines in overlapping images can be used for different purposes such as 3D object extraction, image registration, automated triangulation, etc. In this study, a new approach for the matching of straight line features from stereo aerial images is presented. Initial correspondences between stereo images are generated using a pair-wise stereo matching approach, which involves a total of seven relational constraints. The final straight line correspondences between the stereo images are established in a line-to-line matching stage. The optimal settings for the parameters guiding the matching phase are determined after analysing the probability density functions (PDFs). The proposed approach is tested on 30 image patches of two different urban areas, and as a result, very successful and promising stereo line matching performances are achieved. Besides, the comparison of the results of the proposed approach with the results of one of the state-of-the-art stereo matching approaches proves the superiority and potential of the proposed approach.}
+}
+@article{SUN2015,
+title = {Line matching based on planar homography for stereo aerial images},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {104},
+pages = {1-17},
+year = {2015},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2014.12.003},
+url = {https://www.sciencedirect.com/science/article/pii/S0924271614002779},
+author = {Yanbiao Sun and Liang Zhao and Shoudong Huang and Lei Yan and Gamini Dissanayake},
+keywords = {Line matching, Planar homography, Point feature correspondences, Coplanarity, Bundle adjustment},
+abstract = {We propose an efficient line matching algorithm for a pair of calibrated aerial photogrammetric images, which makes use of sparse 3D points triangulated from 2D point feature correspondences to guide line matching based on planar homography. Two different strategies are applied in the proposed line matching algorithm for two different cases. When three or more points can be found coplanar with the line segment to be matched, the points are used to fit a plane and obtain an accurate planar homography. When one or two points can be found, the approximate terrain plane parallel to the line segment is utilized to compute an approximate planar homography. Six pairs of rural or urban aerial images are used to demonstrate the efficiency and validity of the proposed algorithm. Compared with line matching based on 2D point feature correspondences, the proposed method can increase the number of correctly matched line segments. In addition, compared with most line matching methods that do not use 2D point feature correspondences, the proposed method has better efficiency, although it obtains fewer matches. The C/C++ source code for the proposed algorithm is available at http://services.eng.uts.edu.au/∼sdhuang/research.htm.}
+}
+
+@article{WEI2021,
+title = {Robust line segment matching across views via ranking the line-point graph},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {171},
+pages = {49-62},
+year = {2021},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2020.11.002},
+url = {https://www.sciencedirect.com/science/article/pii/S0924271620303014},
+author = {Dong Wei and Yongjun Zhang and Xinyi Liu and Chang Li and Zhuofan Li},
+keywords = {Line segment matching, Graph rank, Scene plane theory, 3D reconstruction},
+abstract = {Line segment matching in two or multiple views is helpful to 3D reconstruction and pattern recognition. To fully utilize the geometry constraint of different features for line segment matching, a novel graph-based algorithm denoted as GLSM (Graph-based Line Segment Matching) is proposed in this paper, which includes: (1) the employment of three geometry types, i.e., homography, epipolar, and trifocal tensor, to constrain line and point candidates across views; (2) the method of unifying different geometry constraints into a line-point association graph for two or multiple views; and (3) a set of procedures for ranking, assigning, and clustering with the line-point association graph. The experimental results indicate that GLSM can obtain sufficient matches with a satisfactory accuracy in both two and multiple views. Moreover, GLSM can be employed with large image datasets. The implementation of GLSM will be available soon at https://skyearth.org/research/.}
+}
+
+@article{ZHANG2013,
+title = {An efficient and robust line segment matching approach based on LBD descriptor and pairwise geometric consistency},
+journal = {Journal of Visual Communication and Image Representation},
+volume = {24},
+number = {7},
+pages = {794-805},
+year = {2013},
+issn = {1047-3203},
+doi = {https://doi.org/10.1016/j.jvcir.2013.05.006},
+url = {https://www.sciencedirect.com/science/article/pii/S1047320313000874},
+author = {Lilian Zhang and Reinhard Koch},
+keywords = {Line segment matching, Multi-scale line detection, Line band descriptor, Unary geometric attribute, Pairwise geometric consistency, Relational graph, Graph matching, Spectral method},
+abstract = {We present a line matching algorithm which utilizes both the local appearance of lines and their geometric attributes. To overcome the problem of segment fragmentation and geometric variation, we extract lines in the scale space. To depict the local appearance of lines, we design a novel line descriptor called Line Band Descriptor (LBD). To evaluate the pairwise geometric consistency, we define the pairwise geometric attributes between line pairs. Then we built a relational graph for candidate line matches and employ a spectral technique to solve this matching problem efficiently. The advantages of the proposed algorithm are as follows: (1) it is robust to image transformations because of the multi-scale line detection strategy; (2) it is efficient because the designed LBD descriptor is fast to compute and the appearance similarities reduce the dimension of the graph matching problem; (3) it is accurate even for low-texture images because of the pairwise geometric consistency evaluation.}
+}
+
+@article{FAN2012,
+title = {Robust line matching through line–point invariants},
+journal = {Pattern Recognition},
+volume = {45},
+number = {2},
+pages = {794-805},
+year = {2012},
+issn = {0031-3203},
+doi = {https://doi.org/10.1016/j.patcog.2011.08.004},
+url = {https://www.sciencedirect.com/science/article/pii/S0031320311003189},
+author = {Bin Fan and Fuchao Wu and Zhanyi Hu},
+keywords = {Line matching, Point matching, Line–point invariants},
+abstract = {This paper is about line matching by line–point invariants which encode local geometric information between a line and its neighboring points. Specifically, two kinds of line–point invariants are introduced in this paper, one is an affine invariant constructed from one line and two points while the other is a projective invariant constructed from one line and four points. The basic idea of our proposed line matching methods is to use cheaply obtainable matched points to boost line matching via line–point invariants, even if the matched points are susceptible to severe outlier contamination. To deal with the inevitable mismatches in the matched points, two line similarity measures are proposed, one is based on the maximum and the other is based on the maximal median. Therefore, four different line matching methods are obtained by combining different line–point invariants with different similarity measures. Their performances are evaluated by extensive experiments. The results show that our proposed methods outperform the state-of-the-art methods, and are robust to mismatches in the matched points used for line matching.}
+}
+
+@article{WEI2021PR,
+title = {Robust line segment matching via reweighted random walks on the homography graph},
+journal = {Pattern Recognition},
+volume = {111},
+pages = {107693},
+year = {2021},
+issn = {0031-3203},
+doi = {https://doi.org/10.1016/j.patcog.2020.107693},
+url = {https://www.sciencedirect.com/science/article/pii/S0031320320304969},
+author = {Dong Wei and Yongjun Zhang and Chang Li},
+keywords = {Line segment matching, Epipolar geometry, Reweighted random walks, Graph matching},
+abstract = {This paper presents a novel method for matching line segments between stereo images. Given the fundamental matrix, the local homography can be over determined with pairwise line segment candidates. We exploit this constraint to initialize the candidate and construct the novel homography graph. Because the constraint between the node is based on the epipolar geometry, the homography graph is invariant to the local projective transformation. We employ the reweighted random walk on the graph to rank the candidate, then, we propose the constrained-greedy algorithm to obtain the reliable match. To the best of our knowledge, this is the first study to embed the epipolar geometry into the graph matching theory for the line segment matching. When evaluated on the 32 image patches, our method outperformed the state of the art methods, especially in the scenes of the wide baseline, steep viewpoint changes and dense line segments. The proposed algorithm is available at https://github.com/weidong-whu/line-match-RRW.}
+}
+
+@article{LOURAKIS2000,
+title = {Matching disparate views of planar surfaces using projective invariants},
+journal = {Image and Vision Computing},
+volume = {18},
+number = {9},
+pages = {673-683},
+year = {2000},
+issn = {0262-8856},
+doi = {https://doi.org/10.1016/S0262-8856(99)00071-2},
+url = {https://www.sciencedirect.com/science/article/pii/S0262885699000712},
+author = {M.I.A Lourakis and S.T Halkidis and S.C Orphanoudakis},
+keywords = {Geometric invariance, Correspondence problem, Wide baseline stereo matching, Planar surfaces, Plane homography},
+abstract = {Feature matching is a prerequisite to a wide variety of vision tasks. This paper presents a method that addresses the problem of matching two views of coplanar points and lines in a unified manner. The views to be matched are assumed to have been acquired from disparate, i.e. very different viewpoints. By employing a randomized search strategy combined with the two-line two-point projective invariant, the proposed method is able to derive small sets of possibly matching points and lines. These candidate matches are then verified by recovering the associated plane homography, which is further used to predict more matches. The resulting scheme is capable of successfully matching features extracted from views that differ considerably, even in the presence of large numbers of outlying features. Experimental results from the application of the method to indoor and aerial images indicate its effectiveness and robustness.}
+}
+
+@INPROCEEDINGS{Jain2010,
+  author={Jain, Arjun and Kurz, Christian and Thormählen, Thorsten and Seidel, Hans-Peter},
+  booktitle={CVPR}, 
+  title={Exploiting global connectivity constraints for reconstruction of 3D line segments from images}, 
+  year={2010},
+  volume={},
+  number={},
+  pages={1586-1593},
+  doi={10.1109/CVPR.2010.5539781}}
+
+@inproceedings{WU2013,
+  title={Towards linear-time incremental structure from motion},
+  author={Wu, Changchang},
+  booktitle={International Conference on 3D Vision},
+  pages={127-134},
+  year={2013},
+  
+}
+
+@article{Hartley2003,
+  title={Multiple view geometry in computer vision},
+  author={ Hartley, R.  and  Zisserman, A. },
+  year={2003},
+}
+
+@ARTICLE{Grompone2010,
+  author={Grompone von Gioi, Rafael and Jakubowicz, Jeremie and Morel, Jean-Michel and Randall, Gregory},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={LSD: A Fast Line Segment Detector with a False Detection Control}, 
+  year={2010},
+  volume={32},
+  number={4},
+  pages={722-732},
+  doi={10.1109/TPAMI.2008.300}}
+
+@misc{Strecha2020,
+   author = {Strecha},
+   title = { Strecha Dense MVS},
+   howpublished = {\url{https://documents.epfl.ch/groups/ 
+c/cv/cvlab-unit/www/data/multiview/denseMVS.html. }}
+}
+
+@misc{Laefer2020,
+   author = {Laefer},
+   title = { 2015 Aerial Laser and Photogrammetry Survey of Dublin City Collection 
+	Record},
+   howpublished = {\url{https://geo.nyu.edu/catalog/nyu_2451_38684}}
+}
+
+@inproceedings{Fan2010,
+  title={Line matching leveraged by point correspondences},
+  author={ Fan, B.  and  Wu, F.  and  Hu, Z. },
+  booktitle={CVPR},
+  year={2010},
+}
+
+@inproceedings{Heinly2015,
+  title={Reconstructing the world in six days},
+  author={ Heinly, J.  and  Schonberger, J. L.  and  Dunn, E.  and  Frahm, J. M. },
+  booktitle={CVPR},
+  year={2015},
+}
+
+@inproceedings{Planar2014,
+  title={Planar Structures from Line Correspondences in a Manhattan World},
+  author={ Kim, C.  and  Manduchi, R. },
+  booktitle={ACCV},
+  year={2014},
+}
+
+@inproceedings{Sugiura2015,
+  title={3D Surface Reconstruction from Point-and-Line Cloud},
+  author={ Sugiura, T.  and  Torii, A.  and  Okutomi, M. },
+  booktitle={International Conference on 3D Vision},
+  year={2015},
+}
+
+@inproceedings{Ramalingam2015,
+  author={Ramalingam, Srikumar and Antunes, Michel and Snow, Daniel and Lee, Gim Hee and Pillai, Sudeep},
+  booktitle={CVPR}, 
+  title={Line-sweep: Cross-ratio for wide-baseline matching and 3D reconstruction}, 
+  year={2015},
+  volume={},
+  number={},
+  pages={1238-1246},
+  doi={10.1109/CVPR.2015.7298728}}
+
+
+@misc{Line3DWEB,
+   author = {Manuel Hofer},
+   title = { Line3D++ Code},
+   howpublished = {\url{https://github.com/manhofer/Line3Dpp}}
+}
+
+@misc{GLMWEB,
+   author = {Wei Dong},
+   title = { GLM Code},
+   howpublished = {\url{https://github.com/weidong-whu/line-match-RRW}}
+}
+
+@misc{LJLWEB,
+   author = {Li KAI},
+   title = { LJL Code},
+   howpublished = {\url{https://github.com/kailigo/LineSegmentMatching}}
+}
+
+
+@misc{LPIWEB,
+   author = {Bin Fan},
+   title = { LPI Code},
+   howpublished = {\url{https://kailigo.github.io/projects/LineBenchmark/codes/LPI.zip}}
+}
+
+
+@article{Mohammed2014,
+  author={Al-Shahri, Mohammed and Yilmaz, Alper},
+  journal={IEEE Transactions on Image Processing}, 
+  title={Line Matching in Wide-Baseline Stereo: A Top-Down Approach}, 
+  year={2014},
+  volume={23},
+  number={9},
+  pages={4199-4210},
+  doi={10.1109/TIP.2014.2331147}}
+
+@ARTICLE{Snavely2008,
+  author={Snavely, Noah and Seitz, Steven M and Szeliski, Richard},
+  journal={International Journal of Computer Vision}, 
+  title={Modeling the world from Internet photo collections}, 
+  year={2008},
+  volume={80},
+  number={2},
+  pages={189-210},
+  doi={10.1109/TIP.2014.2331147}}
+
+@inproceedings{Moulon2013,
+  title={Global Fusion of Relative Motions for Robust, Accurate and Scalable Structure from Motion},
+  author={ Moulon, Pierre  and  Monasse, Pascal  and  Marlet, Renaud  and others},
+  booktitle={ICCV},
+  year={2013},
+}
+
+@INPROCEEDINGS{Fan2010,
+  author={Fan, Bin and Wu, Fuchao and Hu, Zhanyi},
+  booktitle={CVPR}, 
+  title={Line matching leveraged by point correspondences}, 
+  year={2010},
+  volume={},
+  number={},
+  pages={390-397},
+  doi={10.1109/CVPR.2010.5540186}}
+
+@misc{Capture,
+   author = {Bentley},
+   title = {Contextcapture},
+   howpublished = {\url{https://www.bentley.com/en/products/brands/contextcapture}}
+}
+@INPROCEEDINGS{WEI2022,  
+author={Wei, Dong and Wan, Yi and Zhang, Yongjun and Liu, Xinyi and Zhang, Bin and Wang, Xiqi},  
+booktitle={2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},   
+title={ELSR: Efficient Line Segment Reconstruction with Planes and Points Guidance},   
+year={2022},  
+volume={},
+number={},
+pages={15786-15794},  
+doi={10.1109/CVPR52688.2022.01535}}
+
+@inproceedings{Tuytelaars2000,
+  title={Wide Baseline Stereo Matching based on Local, Affinely Invariant Regions},
+  author={Tinne Tuytelaars and Luc Van Gool},
+  booktitle={British Machine Vision Conference},
+  year={2000}
+}
+
+@article{SIFT,
+author = {Lowe, David},
+year = {2004},
+month = {11},
+pages = {91-110},
+title = {Distinctive Image Features from Scale-Invariant Keypoints},
+volume = {60},
+journal = {International Journal of Computer Vision},
+doi = {10.1023/B%3AVISI.0000029664.99615.94}
+}
+
+@article{DAISY,
+  author={Tola, Engin and Lepetit, Vincent and Fua, Pascal},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={DAISY: An Efficient Dense Descriptor Applied to Wide-Baseline Stereo}, 
+  year={2010},
+  volume={32},
+  number={5},
+  pages={815-830},
+  doi={10.1109/TPAMI.2009.77}}
+
+
+@article{WANGQIANG,
+author = {Qiang Wang and Wei Zhang and Xiaolong Liu and Zhenxin Zhang and Muhammad Hasan Ali Baig and Guo Wang and Long He and Tiejun Cui},
+title = {Line matching of wide baseline images in an affine projection space},
+journal = {International Journal of Remote Sensing},
+volume = {41},
+number = {2},
+pages = {632-654},
+year  = {2020},
+publisher = {Taylor & Francis},
+doi = {10.1080/01431161.2019.1646937},
+
+URL = { 
+    
+        https://doi.org/10.1080/01431161.2019.1646937
+    
+    
+
+},
+eprint = { 
+    
+        https://doi.org/10.1080/01431161.2019.1646937
+}
+
+}
+
+@article{BEDER,
+author = {Beder, Christian},
+year = {2004},
+month = {01},
+pages = {},
+title = {A unified framework for the automatic matching of points and lines in multiple oriented images},
+volume = {35},
+journal = {ISPRS Congress}
+}
+
+@article{Soergel,
+author = {Soergel, Uwe and Ok, Ali and Heipke, Christian and Rottensteiner, Franz and Toprak, Vedat},
+year = {2012},
+month = {06},
+pages = {341-354},
+title = {Accurate Reconstruction of Near-Epipolar Line Segments from Stereo Aerial Images},
+volume = {2012},
+journal = {Photogrammetrie - Fernerkundung - Geoinformation},
+doi = {10.1127/1432-8364/2012/0122}
+}
+
+@INPROCEEDINGS{L2D2,
+  author={Abdellali, Hichem and Frohlich, Robert and Vilagos, Viktor and Kato, Zoltan},
+  booktitle={2021 International Conference on 3D Vision (3DV)}, 
+  title={L2D2: Learnable Line Detector and Descriptor}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={442-452},
+  doi={10.1109/3DV53792.2021.00054}}
+
+@InProceedings{Liu_2023_CVPR,
+    author    = {Liu, Shaohui and Yu, Yifan and Pautrat, R\'emi and Pollefeys, Marc and Larsson, Viktor},
+    title     = {3D Line Mapping Revisited},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {21445-21455}
+}
+
+@article{Chen2021HierarchicalLS,
+  title={Hierarchical line segment matching for wide-baseline images via exploiting viewpoint robust local structure and geometric constraints},
+  author={Min Chen and Yan Shaohua and Rongjun Qin and Xi Zhao and Tong Fang and Qing Zhu and Xuming Ge},
+  journal={ISPRS Journal of Photogrammetry and Remote Sensing},
+  year={2021},
+  url={https://api.semanticscholar.org/CorpusID:240530580}
+}
+
+@article{WANG202141,
+title = {Robust line feature matching based on pair-wise geometric constraints and matching redundancy},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {172},
+pages = {41-58},
+year = {2021},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2020.09.021},
+url = {https://www.sciencedirect.com/science/article/pii/S0924271620302689},
+author = {Jingxue Wang and Qing Zhu and Suyan Liu and Weixi Wang},
+keywords = {Line segment matching, Line pair matching, Pair-wise geometric constraint, Matching result checking},
+abstract = {This paper presents a novel method for matching line segments in images based on pair-wise geometric constraints and matching redundancy. In this study, pairs of line segments satisfying angle and distance constraints are used as matching primitives. To ensure that each extracted line segment is paired with another line segment, the search region of each line segment is gradually grown until it is paired. Initial pair-to-pair correspondences between two images are established using four pair-wise constraints; next, line-to-line correspondences are obtained. To effectively solve the matching conflict in the results, a method of recording the result of line pair matching based on a double-layer matrix is proposed. Based on the double-layer matrix, an effective checking method for the line matching results based on the collinearity constraint and matching redundancy is presented. It fully utilizes redundancy information and considers the collinearity of fragmented line segments. Further, it can effectively separate correct and incorrect matches from the one-to-many, many-to-one, and many-to-many matching results. The proposed method was tested on 12 image pairs from a benchmark of matched-lines, and compared with other state-of-the-art methods. The results demonstrate the superiority of the proposed method due to its higher accuracy and greater recall in challenging cases.}
+}
+
+@ARTICLE{FGM,
+  author={Zhou, Feng and De la Torre, Fernando},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Factorized Graph Matching}, 
+  year={2016},
+  volume={38},
+  number={9},
+  pages={1774-1789},
+  doi={10.1109/TPAMI.2015.2501802}}
+
+@ARTICLE{LGM,
+  author={Wang, Runzhong and Yan, Junchi and Yang, Xiaokang},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Combinatorial Learning of Robust Deep Graph Matching: An Embedding Based Approach}, 
+  year={2023},
+  volume={45},
+  number={6},
+  pages={6984-7000},
+  doi={10.1109/TPAMI.2020.3005590}}
+
+
+@ARTICLE{MINCHENDEPTH,
+  author={Fang, Tong and Chen, Min and Hu, Han and Li, Wen and Ge, Xuming and Zhu, Qing and Xu, Bo},
+  journal={IEEE Transactions on Geoscience and Remote Sensing}, 
+  title={3-D Line Segment Reconstruction With Depth Maps for Photogrammetric Mesh Refinement in Man-Made Environments}, 
+  year={2023},
+  volume={61},
+  number={},
+  pages={1-21},
+  doi={10.1109/TGRS.2023.3332211}}
+
+
+@ARTICLE{Line3DBuilding,
+  author={Guo, Jianwei and Liu, Yanchao and Song, Xin and Liu, Haoyu and Zhang, Xiaopeng and Cheng, Zhanglin},
+  journal={IEEE Transactions on Visualization and Computer Graphics}, 
+  title={Line-Based 3D Building Abstraction and Polygonal Surface Reconstruction From Images}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={1-15},
+  doi={10.1109/TVCG.2022.3230369}}
+
+@INPROCEEDINGS{VISUALSFM,
+  author={Wu, Changchang},
+  booktitle={2013 International Conference on 3D Vision - 3DV 2013}, 
+  title={Towards Linear-Time Incremental Structure from Motion}, 
+  year={2013},
+  volume={},
+  number={},
+  pages={127-134},
+  doi={10.1109/3DV.2013.25}}
+
+@INPROCEEDINGS{DEEPLSD,
+  author={Pautrat, Rémi and Barath, Daniel and Larsson, Viktor and Oswald, Martin R. and Pollefeys, Marc},
+  booktitle={2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}, 
+  title={DeepLSD: Line Segment Detection and Refinement with Deep Image Gradients}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={17327-17336},
+  doi={10.1109/CVPR52729.2023.01662}}
+@ARTICLE{LSD,
+  author={Grompone von Gioi, Rafael and Jakubowicz, Jeremie and Morel, Jean-Michel and Randall, Gregory},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={LSD: A Fast Line Segment Detector with a False Detection Control}, 
+  year={2010},
+  volume={32},
+  number={4},
+  pages={722-732},
+  doi={10.1109/TPAMI.2008.300}}
+
+
+@misc{Anonymous24,
+ author = {Anonymous},
+ title = {The frobnicatable foo filter},
+ note = {{ECCV} submission ID 00324, supplied as supplemental material {\tt 00324.pdf}},
+ year = 2024
+}
+
+@misc{Anonymous24b,
+ author = {Anonymous},
+ title = {Frobnication tutorial},
+ note = {Supplied as supplemental material {\tt tr.pdf}},
+ year = 2024
+}
+
+@article{Alpher02,
+author = {FirstName Alpher},
+title = {Frobnication},
+journal = PAMI,
+volume = 12,
+number = 1,
+pages = {234--778},
+year = 2002
+}
+
+@article{Alpher03,
+author = {FirstName Alpher and FirstName Fotheringham-Smythe},
+title = {Frobnication revisited},
+journal = {Journal of Foo},
+volume = 13,
+number = 1,
+pages = {234--778},
+year = 2003
+}
+
+@article{Alpher04,
+author = {FirstName Alpher and FirstName Fotheringham-Smythe and FirstName Gamow},
+title = {Can a machine frobnicate?},
+journal = {Journal of Foo},
+volume = 14,
+number = 1,
+pages = {234--778},
+year = 2004
+}
+
+@inproceedings{Alpher05,
+author = {FirstName Alpher and FirstName Gamow},
+title = {Can a computer frobnicate?},
+booktitle = CVPR,
+pages = {234--778},
+year = 2005
+}
+
+@book{ECCV2022,
+    editor = {Shai Avidan and Gabriel Brostow and Moustapha Cissé and Giovanni Maria Farinella and Tal Hassner},
+    title = {Computer Vision -- ECCV 2022},
+    year = {2022},
+    publisher = {Springer},
+    doi = {10.1007/978-3-031-19769-7}
+}
+@INPROCEEDINGS{WIREFRAME,
+  author={Huang, Kun and Wang, Yifan and Zhou, Zihan and Ding, Tianjiao and Gao, Shenghua and Ma, Yi},
+  booktitle={2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition}, 
+  title={Learning to Parse Wireframes in Images of Man-Made Environments}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={626-635},
+  keywords={Junctions;Image segmentation;Three-dimensional displays;Feature extraction;Image edge detection;Geometry;Task analysis},
+  doi={10.1109/CVPR.2018.00072}}
+
+@ARTICLE{LINELET,
+  author={Cho, Nam-Gyu and Yuille, Alan and Lee, Seong-Whan},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={A Novel Linelet-Based Representation for Line Segment Detection}, 
+  year={2018},
+  volume={40},
+  number={5},
+  pages={1195-1208},
+  keywords={Image segmentation;Image edge detection;Digital images;Benchmark testing;Electronic mail;Visualization;Estimation;Intrinsic properties of digital line, probabilistic line segment representation, line segment validation, image edge detection},
+  doi={10.1109/TPAMI.2017.2703841}}
+
+@INPROCEEDINGS{MegaDepth,
+  author={Li, Zhengqi and Snavely, Noah},
+  booktitle={2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition}, 
+  title={MegaDepth: Learning Single-View Depth Prediction from Internet Photos}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={2041-2050},
+  keywords={Semantics;Three-dimensional displays;Image reconstruction;Training data;Internet;Training;Image segmentation},
+  doi={10.1109/CVPR.2018.00218}}
+
+@article{guo2024one,
+  title={The One-Point-One-Line geometry for robust and efficient line segment correspondence},
+  author={Guo, Haoyu and Wei, Dong and Zhang, Yongjun and Wan, Yi and Zheng, Zhi and Yao, Yongxiang and Liu, Xinyi and Li, Zhuofan},
+  journal={ISPRS Journal of Photogrammetry and Remote Sensing},
+  volume={210},
+  pages={80--96},
+  year={2024},
+  publisher={Elsevier}
+}
+
+@article{Yangmeng,
+  author = {Wang, Yameng and Wan, Yi and Zhang, Yongjun and Zhang, Bin and Gao, Zhi},
+  year = {2023},
+  month = {08},
+  pages = {385-404},
+  title = {Imbalance knowledge-driven multi-modal network for land-cover semantic segmentation using aerial images and LiDAR point clouds},
+  volume = {202},
+  journal = {ISPRS - Journal - of - Photogrammetry - and - Remote - Sensing},
+  doi = {10.1016/j.isprsjprs.2023.06.014}
+}
+
+@InProceedings{ARUBA,
+author="Henricsson, Olof
+and Baltsavias, Emmanuel",
+editor="Gruen, Armin
+and Baltsavias, Emmanuel P.
+and Henricsson, Olof",
+title="3-D Building Reconstruction with ARUBA: A Qualitative and Quantitative Evaluation",
+booktitle="Automatic Extraction of Man-Made Objects from Aerial and Space Images (II)",
+year="1997",
+publisher="Birkh{\"a}user Basel",
+address="Basel",
+pages="65--76",
+abstract="Reliable and accurate 3-D reconstruction of man-made objects is essential for many applications using digital 3-D city models. Manual reconstruction of buildings from aerial images is time consuming and requires skilled personnel, hence large efforts are being directed towards the automation of building detection and reconstruction. In this paper we present ARUBA --- a framework for automated 3-D building reconstruction. After highlighting our strategy and concisely describing the framework and its modules, we evaluate the reconstructed roofs relative to accurate reference data based on three criteria: completeness, geometric accuracy and shape similarity. Finally, we interpret the results of the performance evaluation and make suggestions for improvements.",
+isbn="978-3-0348-8906-3"
+}
+
+@article{Liu2019TopoLAPTR,
+  title={TopoLAP: Topology Recovery for Building Reconstruction by Deducing the Relationships between Linear and Planar Primitives},
+  author={Xinyi Liu and Yongjun Zhang and Xiao Ling and Yi Wan and Linyu Liu and Q. Li},
+  journal={Remote. Sens.},
+  year={2019},
+  volume={11},
+  pages={1372},
+  url={https://api.semanticscholar.org/CorpusID:197560509}
+}
+
+@article{GRUEN1998108,
+title = {TOBAGO — a semi-automated approach for the generation of 3-D building models},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {53},
+number = {2},
+pages = {108-118},
+year = {1998},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/S0924-2716(97)00034-8},
+url = {https://www.sciencedirect.com/science/article/pii/S0924271697000348},
+author = {Armin Gruen},
+keywords = {city models, building extraction, semi-automation, CAD interface, visualization},
+abstract = {3-D city models are in increasing demand for a great number of applications. Photogrammetry is a relevant technology that can provide an abundance of geometric, topologic and semantic information concerning these models. The pressure to generate a large amount of data with high degree of accuracy and completeness poses a great challenge to phtogrammetry. The development of automated and semi-automated methods for the generation of those data sets is therefore a key issue in photogrammetric research. We present in this article a strategy and methodology for an efficient generation of even fairly complex building models. Within this concept we request the operator to measure the house roofs from a stereomodel in form of an unstructured point cloud. According to our experience this can be done very quickly. Even a non-experienced operator can measure several hundred roofs or roof units per day. In a second step we fit generic building models fully automatically to these point clouds. The structure information is inherently included in these building models. In such a way geometric, topologic and even semantic data can be handed over to a CAD-system, in our case AutoCad, for further visualization and manipulation. The structuring is achieved in three steps. In a first step a classifier is initiated which recognizes the class of houses a particular roof point cloud belongs to. This recognition step is primarily based on the analysis of the number of ridge points. In the second and third steps the concrete topological relations between roof points are investigated and generic building models are fitted to the point clouds. Based on the technique of constraint-based reasoning two geometrical parsers are solving this problem. We have tested the methodology under a variety of different conditions in several pilot projects. The results will indicate the good performance of our approach. In addition we will demonstrate how the results can be used for visualization (texture mapping) and animation (walk-throughs and fly-overs).}
+}
+
+@article{Canny,
+author = {Canny, John},
+year = {1986},
+month = {12},
+pages = {679 - 698},
+title = {A Computational Approach To Edge Detection},
+volume = {PAMI-8},
+isbn = {9780080515816},
+journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+doi = {10.1109/TPAMI.1986.4767851}
+}
+
+@article{Habib2003AUTOMATICMA,
+  title={AUTOMATIC MATCHING AND THREE-DIMENSIONAL RECONSTRUCTION OF FREE-FORM LINEAR FEATURES FROM STEREO IMAGES},
+  author={Ayman W. Habib and Young-Ran Lee and M. Morgan},
+  journal={Photogrammetric Engineering and Remote Sensing},
+  year={2003},
+  volume={69},
+  pages={189-197},
+  url={https://api.semanticscholar.org/CorpusID:129752391}
+}
+
+@book{henricsson1996analysis,
+  title={Analysis of Image Structures using Color Attributes and Similarity Relations},
+  author={Henricsson, O},
+  year={1996},
+  publisher={ETH Zürich, Institute for Geodesy and Photogrammetry},
+  isbn={978-3-906513-84-3}
+}
+
+
+@InProceedings{Pautrat_Lin_2021_CVPR,
+    author = {Pautrat, Rémi and Lin, Juan-Ting and Larsson, Viktor and Oswald, Martin R. and Pollefeys, Marc},
+    title = {SOLD2: Self-supervised Occlusion-aware Line Description and Detection},
+    booktitle = {Computer Vision and Pattern Recognition (CVPR)},
+    year = {2021},
+}
+
+@ARTICLE{kmean,
+  author={Lloyd, S.},
+  journal={IEEE Transactions on Information Theory}, 
+  title={Least squares quantization in PCM}, 
+  year={1982},
+  volume={28},
+  number={2},
+  pages={129-137},
+  keywords={},
+  doi={10.1109/TIT.1982.1056489}}
+
+@article{kerdvibulvech2009model,
+  title={Model-Based Hand Tracking by Chamfer Distance and Adaptive Color Learning Using Particle Filter},
+  author={Kerdvibulvech, Chutiporn and Saito, Hideo},
+  journal={Journal of Image and Video Processing},
+  volume={2009},
+  pages={724947},
+  year={2009},
+  publisher={Hindawi Publishing Corporation}
+}
+
+@InProceedings{Chutisant,
+author="Kerdvibulvech, Chutisant",
+editor="Perales, Francisco Jos{\'e}
+and Santos-Victor, Jos{\'e}",
+title="Human Hand Motion Recognition Using an Extended Particle Filter",
+booktitle="Articulated Motion and Deformable Objects",
+year="2014",
+publisher="Springer International Publishing",
+address="Cham",
+pages="71--80",
+abstract="This paper presents a method to recognize hand motion using an extended particle filter in real-time. We integrate a deterministic clustering algorithm and particle filter together. The skin color of a human hand is firstly segmented by using a Bayesian classifier. Next, during online process, the adaptive algorithm is used to calculate skin color probabilities. By using the online adaptation, this method is able to cope extremely well with luminance changes. After that, we determine the probabilities of the fingertips by using semicircle models for fitting curves to fingertips. Following this, the deterministic clustering algorithm is utilized to search for regions of interest (ROIs), and then the standard particle filter is also performed for motion recognition robustly. Representative experimental results, even when occlusion exists, have been included.",
+isbn="978-3-319-08849-5"
+}
+
+@article{Granshaw,
+author = {Granshaw, Stuart I.},
+title = {Photogrammetric terminology: fourth edition},
+journal = {The Photogrammetric Record},
+volume = {35},
+number = {170},
+pages = {143-288},
+keywords = {editing, English, geomatics, language, photogrammetry, terminology},
+doi = {https://doi.org/10.1111/phor.12314},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/phor.12314},
+eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1111/phor.12314},
+abstract = {Abstract This contribution offers a considerably expanded and updated version of the previous three editions of this guide to terms used in the photogrammetric literature. The aim is to assist authors in preparing contributions for publication and readers in the wider geomatics community in understanding current photogrammetric and related terminology and abbreviations. The paper is recognised as an ISPRS document (https://www.isprs.org/documents/).},
+year = {2020}
+}
+
+@article{Moisan2004,
+author = {Moisan, Lionel and Stival, B\'{e}renger},
+title = {A Probabilistic Criterion to Detect Rigid Point Matches Between Two Images and Estimate the Fundamental Matrix},
+year = {2004},
+issue_date = {May-June 2004},
+publisher = {Kluwer Academic Publishers},
+address = {USA},
+volume = {57},
+number = {3},
+issn = {0920-5691},
+url = {https://doi.org/10.1023/B:VISI.0000013094.38752.54},
+doi = {10.1023/B:VISI.0000013094.38752.54},
+abstract = {The perspective projections of n physical points on two views (stereovision) are constrained as soon as n ≥ 8. However, to prove in practice the existence of a rigid motion between two images, more than 8 point matches are desirable in order to compensate for the limited accuracy of the matches. In this paper, we propose a computational definition of rigidity and a probabilistic criterion to rate the meaningfulness of a rigid set as a function of both the number of pairs of points (n) and the accuracy of the matches. This criterion yields an objective way to compare, say, precise matches of a few points and approximate matches of a lot of points. It gives a yes/no answer to the question: “could this rigid points correspondence have occurred by chance?”, since it guarantees that the expected number of meaningful rigid sets found by chance in a random distribution of points is as small as desired. It also yields absolute accuracy requirements for rigidity detection in the case of non-matched points, and optimal values of n, depending on the expected accuracy of the matches and on the proportion of outliers. We use it to build an optimized random sampling algorithm that is able to detect a rigid motion and estimate the fundamental matrix when the set of point matches contains up to 90\% of outliers, which outperforms the best currently known methods like M-estimators, LMedS, classical RANSAC and Tensor Voting.},
+journal = {Int. J. Comput. Vision},
+month = {may},
+pages = {201–218},
+numpages = {18},
+keywords = {fundamental matrix, meaningful event, point matches, rigidity detection, stereovision, structure from motion}
+}
+@ARTICLE{Kamgarpami,
+  author={Kamgar-Parsi, B. and Kamgar-Parsi, B.},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Algorithms for matching 3D line sets}, 
+  year={2004},
+  volume={26},
+  number={5},
+  pages={582-593},
+  keywords={Image segmentation;Motion estimation;Computer vision;Image edge detection;Application software;Layout;Object recognition;Image converters;Laser radar;Image reconstruction},
+  doi={10.1109/TPAMI.2004.1273930}}
+
+@article{LING2022,
+title = {A graph-matching approach for cross-view registration of over-view and street-view based point clouds},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {185},
+pages = {2-15},
+year = {2022},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2021.12.013},
+url = {https://www.sciencedirect.com/science/article/pii/S0924271622000065},
+author = {Xiao Ling and Rongjun Qin},
+keywords = {Cross-view registration, Global optimization, Multi-view satellite image},
+abstract = {Wide-area 3D data generation for complex urban environments often needs to leverage a mixed use of data collected from both air and ground platforms, such as from aerial surveys, satellite, and mobile vehicles. On one hand, such kind of data with information from drastically different views (ca. 90° and more) forming cross-view data, which due to very limited overlapping region caused by the drastically different line of sight of the sensors, is difficult to be registered without significant manual efforts. On the other hand, the registration of such data often suffers from non-rigid distortion of the street-view data (e.g., non-rigid trajectory drift), which cannot be simply rectified by a similarity transformation. In this paper, based on the assumption that the object boundaries (e.g., buildings) from the over-view data should coincide with footprints of façade 3D points generated from street-view photogrammetric images, we aim to address this problem by proposing a fully automated geo-registration method for cross-view data, which utilizes semantically segmented object boundaries as view-invariant features under a global optimization framework through graph-matching: taking the over-view point clouds generated from stereo/multi-stereo satellite images and the street-view point clouds generated from monocular video images as the inputs, the proposed method models segments of buildings as nodes of graphs, both detected from the satellite-based and street-view based point clouds, thus to form the registration as a graph-matching problem to allow non-rigid matches; to enable a robust solution and fully utilize the topological relations between these segments, we propose to address the graph-matching problem on its conjugate graph solved through a belief-propagation algorithm. The matched nodes will be subject to a further optimization to allow precise-registration, followed by a constrained bundle adjustment on the street-view image to keep 2D-3D consistencies, which yields well-registered street-view images and point clouds to the satellite point clouds. Our proposed method assumes no or little prior pose information (e.g. very sparse locations from consumer-grade GPS (global positioning system)) for the street-view data and has been applied to a large cross-view dataset with significant scale difference containing 0.5 m GSD (Ground Sampling Distance) satellite data and 0.005 m GSD street-view data, 1.5 km in length involving 12 GB of data. The experiment shows that the proposed method has achieved promising results (1.27 m accuracy in 3D), evaluated using collected LiDAR point clouds. Furthermore, we included additional experiments to demonstrate that this method can be generalized to process different types of over-view and street-view data sources, e.g., the open street view maps and the semantic labeling maps. Codes will be made available through Github Repository.1https://github.com/GDAOSU/graph-matching-based-crossview-registration.1}
+}
+
+@INPROCEEDINGS{LiuCVPR,
+  author={Liu, Liu and Li, Hongdong and Yao, Haodong and Zha, Ruyi},
+  booktitle={2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}, 
+  title={PlückerNet: Learn to Register 3D Line Reconstructions¨}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={1842-1852},
+  keywords={Geometry;Technological innovation;Three-dimensional displays;Impedance matching;Neural networks;Multilayer perceptrons;Feature extraction},
+  doi={10.1109/CVPR46437.2021.00188}}
+
+@article{POLEWSKI201979,
+title = {Scale invariant line-based co-registration of multimodal aerial data using L1 minimization of spatial and angular deviations},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {152},
+pages = {79-93},
+year = {2019},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2019.04.004},
+url = {https://www.sciencedirect.com/science/article/pii/S0924271619300942},
+author = {Przemyslaw Polewski and Wei Yao},
+keywords = {Coregistration, Gable roof lines, Urban areas, Graph matching, Suburban areas},
+abstract = {In this work, we investigate the coregistration of multimodal data, such as photogrammetric/LiDAR point clouds, digital surface models, orthoimages, or 3D CAD city models, using corresponding line segments. The lines are analytically derived as intersections of adjacent planar surfaces, which can be determined more robustly and are deemed more accurate compared to single point based features. We propose a two-stage approach, which first focuses on finding optimal line correspondences between the datasets using a scale-invariant graph matching method, and then utilizes the found matching as a basis for calculating the optimal coregistration transform. By decoupling the correspondence search from the transform calculation, our approach can use more line pairs for determining the optimal transform than would be practicable with a combined, sampling-style approach. As opposed to competing methods, our transform computation is based on explicitly minimizing the average L1 distance on the matched line set. The assumed model accounts for an isotropic scaling factor, three translations and three rotation angles. We conducted experiments on two publicly available ISPRS datasets: Vaihingen and Dortmund, and compared the performance of several variations of our approach with three competing methods. The results indicate that the L1 methods decreased the median matched line distance by up to one third in case of pre-aligned Z axes. Moreover, when coregistering two photogrammetric datasets acquired from distinct viewing perspectives, our method was able to triple the number of matched lines (under a strict proximity-based criterion) compared to its competitor. Our results show that it is worthwhile to base the transform calculation on significantly more line pairs than is customary for sample consensus-based approaches. Our established validation dataset for line-based coregistration has been published and made available online (https://doi.org/10.17632/dmp7tkn8kc.2).}
+}
+
+@ARTICLE{Lusk,
+  author={Lusk, Parker C. and Parikh, Devarth and How, Jonathan P.},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={GraffMatch: Global Matching of 3D Lines and Planes for Wide Baseline LiDAR Registration}, 
+  year={2023},
+  volume={8},
+  number={2},
+  pages={632-639},
+  keywords={Three-dimensional displays;Manifolds;Robot sensing systems;Laser radar;Euclidean distance;Task analysis;Navigation;Localization;mapping;recognition},
+  doi={10.1109/LRA.2022.3229224}}
+
+@article{LvPR2024,
+author = {Lv, Kaiyun and Chen, Longyu and He, Haiqing and Zhou, Fuyang and Yu, Shixun},
+title = {Optimisation of real-scene 3D building models based on straight-line constraints},
+journal = {The Photogrammetric Record},
+volume = {39},
+number = {187},
+pages = {680-704},
+keywords = {building facade, building modelling, co-constraint RANSAC, point clouds, straight line},
+doi = {https://doi.org/10.1111/phor.12514},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/phor.12514},
+eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1111/phor.12514},
+abstract = {Abstract Due to the influence of repeated textures or edge perspective transformations on building facades, building modelling based on unmanned aerial vehicle (UAV) photogrammetry often suffers geometric deformation and distortion when using existing methods or commercial software. To address this issue, a real-scene three-dimensional (3D) building model optimisation method based on straight-line constraints is proposed. First, point clouds generated by unmanned aerial vehicle (UAV) photogrammetry are down-sampled based on local curvature characteristics, and structural point clouds located at the edges of buildings are extracted. Subsequently, an improved random sample consensus (RANSAC) algorithm, considering distance and angle constraints on lines, known as co-constrained RANSAC, is applied to further extract point clouds with straight-line features from the structural point clouds. Finally, point clouds with straight-line features are optimised and updated using sampled points on the fitted straight lines. Experimental results demonstrate that the proposed method can effectively eliminate redundant 3D points or noise while retaining the fundamental structure of buildings. Compared to popular methods and commercial software, the proposed method significantly enhances the accuracy of building modelling. The average reduction in error is 59.2\%, including the optimisation of deviations in the original model's contour projection.},
+year = {2024}
+}
+
+
+@INPROCEEDINGS{Langlois2019,
+  author={Langlois, Pierre-Alain and Boulch, Alexandre and Marlet, Renaud},
+  booktitle={2019 International Conference on 3D Vision (3DV)}, 
+  title={Surface Reconstruction from 3D Line Segments}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={553-563},
+  keywords={Three-dimensional displays;Image reconstruction;Surface reconstruction;Image segmentation;Shape;Surface treatment;Image edge detection;photogrammetry;line;reconstruction;multi view;piecewise planar;watertight},
+  doi={10.1109/3DV.2019.00067}}
