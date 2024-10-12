@@ -1,16 +1,17 @@
 \section{Introduction}
 
 Currently,
-the length of the railway has exceeded 1.3 million kilometers on the earth.
-Thus,
-extracting the center line of the rail track (CRT) accurately and efficiently, 
+the length of the railway has exceeded 1.3 million kilometers on the earth,
+for which the maintenance and development of railways have a significant impact on safe operations.
+As the preliminary stage of 
+extracting 3D railway track (RT) accurately and efficiently, 
 to support engineering design, monitor construction quality, 
 and ensure operational safety,
 has become one of the basic components in the maintenance of existing railways.
 
-CRT extraction can be achieved by real-time kinematics, LiDAR,
+The extraction of RT can be achieved by real-time kinematics, LiDAR,
 and multiple images.
-The real-time kinematic is generally mounted on a railway measurement vehicle and obtains the CRT by moving along the rail track.
+The real-time kinematic is generally mounted on a railway measurement vehicle and obtains the RT by moving along the rail track.
 In general, 
 it has a satisfactory accuracy while requiring operations on the track,
 thus demanding the cooperation of railway departments, 
@@ -19,20 +20,67 @@ LiDAR sensors can be mounted on a drone,
 which is more convenient and secure than real-time kinematic. 
 Because a further process, 
 like point segmentation or classification,
-is required for CRT extraction,
+is required for RT extraction,
 the drone must maintain a low flight altitude to satisfy the standards of the point-cloud density,
 which would impact the efficiency.
-A drone with cameras can capture multiple images efficiently with a safe distance from the railway area.
-But CRT extraction is challenging in multiple images:
-(1) The dense points reconstructed with images are inaccurate around the railway track because of the occlusion and matching problems caused by the parallax variation.
-(2) Joining image semantics to obtain CRT might be workable;
+A drone with cameras can capture aerial images efficiently with a safe distance from the railway area.
+But RT extraction is challenging in aerial images:
+(1) The dense points reconstructed with aerial images are inaccurate around the railway track because of the occlusion and matching problems caused by the parallax variation.
+(2) Joining image semantics to obtain RT might be workable;
 However,
-how to detect the semantics of CRT accurately and completely in multiple images remains to be studied.
-I have changed in overleaf
+how to detect the semantics of RT accurately and completely in aerial images remains to be studied.
 
-I have changed in github
+If we reconstruct the dense points from multiple aerial images and detect the RT from point clouds,
+the overall method of finding RT is similar to deal with the point clouds that obtained from mobile laser scanning (MLS) or airborne laser scanning (ALS).
+Generally,
+the RT can be detected with semantic segmentation,
+while the significant noise, inaccurate edge localization, and large density variations of point clouds bring about great challenges to the robust semantic segmentation.
+Thus,
+most general segmentation algorithm cannot be used directly in RT segmentation;
+instead,
+the carefully designed geometric priors was used to guide the segmentation and the grouping of RT:
+such as constructing the shape features and density data on the basis of railway bed extraction.
+However,
+these methods relies heavily on the quality and density of the point cloud,
+thus requiring the drone to maintain a low flight path to improve point cloud quality and reduce the processing range.
+Compared with point clouds,
+images contains rich semantic informations.
+Thus,
+several studies exploited the deep learning method that design the network for training and detect the RT from aerial images,
+which demonstrated the effectiveness of deep learning technology in RT extraction. 
+Moreover,
+the deep learning method relies heavily on training samples and considering the texture of railway regions varies greatly across the world,
+it may require an increased number of training samples to obtain a more generalizable detection network.
+In addition, 
+these methods just deal with single frame and lacked the strategy of processing multiple aerial images.
 
-i have changed in mac
+This paper propose the accurate RT extraction for multiple aerial images,
+which fully exploits the contexture and geometry informations across multiple images.
+Compared to LiDAR based methods,
+we can use more affordable imaging drones to conduct a efficient and safer railway aera maping than ALS drones or MLS equipments. 
+Compared to the former image-based methods,
+we propsose the complete clustering and reconstruction strategies that obtain the accurate and non-redundant 3D RT from multiple aerial images;
+moreover, 
+in the clustering of RT across multiple images,
+we use the deep features of existing network trianed from imagenet, 
+rather than detecting the RT with a new network;
+thus, 
+non pre-training, which generaly needs expensive samples, is required.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,18 +1,18 @@
-Three dimensional (3D) line segment is becoming a useful supplementary for 3D mapping.
-While the accuracy of line reconstruction in both clustering and triangulation still requires improvement.
-The line clustering assigns multiple image lines to a single 3D line
-and currently depend highly on the fixed and empirical parameter.
+Three-dimensional (3D) lines require further enhancement in both clustering and triangulation.
+Line clustering assigns multiple image lines to a single 3D line to eliminate redundant 3D lines.
+Currently, it depends on the fixed and empirical parameter.
 However,
-a loose parameter may cause over clustering and a strict one may result in duplicated 3D lines.
-The line triangulation from multiple image lines is failed frequently.
-Because it is sensitive to the error, position, and angle of the image line.
-This paper focus on these two kinds of accuracy that directly influence the 3D line application.
-For accurate line clustering,
-we exploit the triangulation error of the connection point that is a common product in recovering the camera pose,
-and we exploit the prior error to find the adaptive threshold in the image line clustering.
-For robust line triangulation,
-we use the \textit{a contrario} theory to find the meaningful colinear cells adaptively,
-and the multistage triangulation is then based on either colinear or coplanar constraint.
-Finally,
-we acquire the adaptive 3D line reconstruction,
-and the experiments show its advantage when compared with the state-of-the-art method.
+a loose parameter could lead to over-clustering,
+while a strict one may cause redundant 3D lines.
+Due to the absence of the ground truth,
+the assessment of line clustering remains unexplored.
+Additionally,
+3D line triangulation,
+which determines the 3D line segment in object space,
+is prone to failure due to its sensitivity to positional and camera errors.
+
+\noindent This paper aims to improve the clustering and triangulation of 3D lines and to offer a reliable evaluation method.
+(1) To achieve accurate clustering,
+we introduce a probability model,
+which uses the prior error of the structure from the motion,
+to determine adaptive thresholds;
