@@ -55,17 +55,30 @@ In addition,
 these methods just deal with single frame and lacked the strategy of processing multiple aerial images.
 
 This paper propose the accurate RT extraction for multiple aerial images,
-which fully exploits the contexture and geometry informations across multiple images.
+which fully exploits the contexture and geometry informations across multiple images:
+\vspace{-0.5em}
+\begin{itemize}
+    \item To exploit the geometry constraint of RT across multiple images, 
+    we extract the straight line from images as the basic geometry cell, 
+    for which we propose the robust clustering and triangulation methods.
+    We first propose the noise-resistant clustering across multiple images to obtain the complete and non-redundant 3D line;
+    Then, we propose the novel and accurate triangulation algorithm to refine the 3D line position of the RT.  
+    \vspace{-0.5em}
+    \item To exploit the rich texture information in images,
+    our clustering method exploit the deep features of existing network trianed from millions of images, 
+    rather than a new network specifically designed for RT extraction;
+    thus requiring non pre-training, which generaly needs expensive samples.
+\end{itemize}
+\vspace{-0.5em}
 Compared to LiDAR based methods,
-we can use more affordable imaging drones to conduct a efficient and safer railway aera maping than ALS drones or MLS equipments. 
+we use more affordable imaging drones to conduct an efficient and safer railway aera maping than ALS drones or MLS equipments,
+and the rich contexture is exploited to compensate for issues caused by point cloud quality.
 Compared to the former image-based methods,
 we propsose the complete clustering and reconstruction strategies that obtain the accurate and non-redundant 3D RT from multiple aerial images;
-moreover, 
-in the clustering of RT across multiple images,
-we use the deep features of existing network trianed from imagenet, 
-rather than detecting the RT with a new network;
-thus, 
-non pre-training, which generaly needs expensive samples, is required.
+and non pre-training is required due to the utilization of geometry guidance in multiple images.
+
+
+
 
 
 

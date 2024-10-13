@@ -1,0 +1,42 @@
+\section{Methodology}
+
+The flow of our methodology is presented in figure 1.
+We take the aerial images of the railway aera as the input,
+for which SfM and point clouds are employed in advanced with existing softwares.
+We first extract the image line and convert it to space line with the locally optimal plane of the point cloud.
+Then,
+we cluster the single 3D line to RT candidates with the frame work derived from DBSCAN,  
+during which the contexture information of multiple images extracted from ResNet is used as one of the inlier distance,
+and the locally SAM are exploited to reduce the seed of DBSCAN to control the false positive.
+Having obtained the RT cluster, we then extract the vector-based RT with RANSAC and refine it with our triangulation methods,
+which fully exploit the RT structure to resolve the uncertrainty caused by initial image line segment extraction and the point cloud error.
+
+\subsection{Initial 3D line reconstruction}
+
+The initial 3D line $\mathrm{L}$ is the basic cell for the following method.
+For each 2D line $\mathbf l=[\mathbf p_1]$ detected in each image,
+the two endpoint 3D candidate line segment must be on the 
+we randomly sample three space points around $\mathbf l$ and obtain the space plane $\mathrm P$ that $\mathbf l$ may lie on;
+then, 
+the 3D candidate line segment of $\mathbf l$ corresponding to $\mathrm P$  must be on the two rays is obtained by the ray-to-plane intersection:
+\begin{equation}
+    \bar{\mathrm L}\in R^{3\times2}=\textit{Inter} \left(\mathrm P, \mathrm C+\mathrm M^{-1} \left[t_1 \mathbf p_1, t_2 \mathbf p_2 \right] \right) 
+\end{equation}
+
+
+
+and generate $n$ space planes $\left\{ \mathrm{P}_i\right\}_{i=1}^n$ 
+and generate the initial 3D line via projecting it into the local 3D plane ,
+where {P} is calculated with sampled points around the endpoints of image line.
+Due to the uncertainty of point cloud quality,
+it is hard to use a fixed distance threshold to define the inliers
+
+
+
+
+
+
+
+
+
+
