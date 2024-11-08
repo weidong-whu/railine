@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.12)  14 OCT 2024 00:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.12)  8 NOV 2024 23:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1033,52 +1033,52 @@ Package caption Info: End \AtBeginDocument code.
 \verbatim@out=\write5
 \openout5 = `main.abs'.
 
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 195.
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 194.
  (D:\Programs\MiKTeX\tex/latex/base\t1cmss.fd
 File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 195.
+LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 194.
  (D:\Programs\MiKTeX\tex/latex/stix\ls1stixscr.fd
 File: ls1stixscr.fd 2015/04/17 v1.1.2-latex STIX script LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 195.
+LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 194.
  (D:\Programs\MiKTeX\tex/latex/stix\ls2stixex.fd
 File: ls2stixex.fd 2015/04/17 v1.1.2-latex STIX extentions LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 195.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 194.
  (D:\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 195.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 194.
  (D:\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 195.
+LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 194.
  (D:\Programs\MiKTeX\tex/latex/stix\ls1stixfrak.fd
 File: ls1stixfrak.fd 2015/04/17 v1.1.2-latex STIX fraktur LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 195.
+LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 194.
  (D:\Programs\MiKTeX\tex/latex/stix\ls1stixbb.fd
 File: ls1stixbb.fd 2015/04/17 v1.1.2-latex STIX blackboard LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 195.
+LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 194.
  (D:\Programs\MiKTeX\tex/latex/stix\ls2stixcal.fd
 File: ls2stixcal.fd 2015/04/17 v1.1.2-latex STIX calligraphic LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 195.
+LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 194.
  (D:\Programs\MiKTeX\tex/latex/stix\ls1stixsf.fd
 File: ls1stixsf.fd 2015/04/17 v1.1.2-latex STIX sans-serif LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 195.
+LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 194.
  (D:\Programs\MiKTeX\tex/latex/stix\ls2stixtt.fd
 File: ls2stixtt.fd 2015/04/17 v1.1.2-latex STIX typewriter LS2 font definitions
 )
-Overfull \hbox (117.0831pt too wide) detected at line 195
+Overfull \hbox (117.0831pt too wide) detected at line 194
 []
  []
 
 (main.abs)
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 195.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 194.
  (D:\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 ) (sec/Introduction.tex
@@ -1089,7 +1089,21 @@ File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 LaTeX Font Info:    Trying to load font information for TS1+stix on input line 61.
  (D:\Programs\MiKTeX\tex/latex/stix\ts1stix.fd
 File: ts1stix.fd 2015/04/17 v1.1.2-latex STIX TS1 font definitions
-)) (sec/relatedWorks.tex) (sec/methodology.tex) (main.bbl
+)) (sec/relatedWorks.tex) (sec/methodology.tex
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[2{D:/Programs/MiKTeX/fonts/enc/dvips/stix/stix-ts1.enc}]
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[3]) (main.bbl
 
 Package natbib Warning: Empty `thebibliography' environment on input line 8.
 
@@ -1100,7 +1114,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[2{D:/Programs/MiKTeX/fonts/enc/dvips/stix/stix-ts1.enc}] (main.aux)
+[4] (main.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-08-30>
@@ -1109,17 +1123,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31081 strings out of 473899
- 552068 string characters out of 5738693
- 930452 words of memory out of 5000000
- 53392 multiletter control sequences out of 15000+600000
- 653963 words of font info for 150 fonts, out of 8000000 for 9000
+ 31107 strings out of 473899
+ 552409 string characters out of 5738693
+ 929454 words of memory out of 5000000
+ 53395 multiletter control sequences out of 15000+600000
+ 648462 words of font info for 148 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,9n,94p,428b,460s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0800.pk> <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi375\ecss0800.pk><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Bold.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Italic.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Regular.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathex.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathit.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathrm-bold.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathrm.pfb>
-Output written on main.pdf (2 pages, 173473 bytes).
+ 90i,11n,94p,666b,481s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0800.pk> <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi375\ecss0800.pk><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Bold.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Italic.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Regular.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathcal.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathex.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathit.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathrm-bold.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathrm.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathscr.pfb>
+Output written on main.pdf (4 pages, 211568 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 9 named destinations out of 1000 (max. 500000)
+ 163 PDF objects out of 1000 (max. 8388607)
+ 32 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

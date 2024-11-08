@@ -1,4 +1,4 @@
-\section{Methodology}
+\section{Methodology overview}
 
 The flow of our methodology is presented in Figure 1.
 We take aerial images of the railway area as input,
@@ -17,7 +17,119 @@ we cluster the single 3D line to RT pairs with DBSCAN frame work,
 during which the deep feature of multiple images is used as the inlier distance.
 
 
-\section{The seed of 3D railway-track pairs}
+
+
+
+\section{Kalman filter-Based railway-track reconstruction}
+
+In this study, we utilize the Kalman Filter to optimize the three-dimensional coordinates and directions of two points. The state vector is defined to encapsulate the positions and directions of both points, represented as a $12$-dimensional vector:
+\begin{equation}
+\mathbf{x} = \begin{bmatrix}
+    \mathbf p_1,\mathbf d_1,\mathbf p_2,\mathbf d_2 
+\end{bmatrix}^T
+\end{equation}
+where $\mathbf p_i=\left(x_i, y_i, z_i\right)$ denotes the position 
+and $\mathbf p_i=\left(dx_i, dy_i, dz_i\right)$ represents the direction.
+The state transition model assumes that at each time step $t$, each point moves in its respective direction by a fixed distance $t$, while maintaining a constant direction. The state transition matrix $\mathbf{F}$ is constructed as a block diagonal matrix comprising two identical $6 \times 6$ submatrices $\mathbf{F}_p$:
+\begin{equation}
+\mathbf{F}_p = \begin{bmatrix}
+\mathbf{I}_3 & t \cdot \mathbf{I}_3 \\
+\mathbf{0}_3 & \mathbf{I}_3 \\
+\end{bmatrix}, \quad
+\mathbf{F} = \text{blkdiag}(\mathbf{F}_p, \mathbf{F}_p)
+\end{equation}
+where $\mathbf{I}_3$ is the $3 \times 3$ identity matrix and $\mathbf{0}_3$ is the $3 \times 3$ zero matrix. The process noise covariance matrix $\mathbf{Q}$ accounts for uncertainties in position and direction and is similarly structured:
+\begin{equation}
+\mathbf{Q}_p = \text{diag}(q_p, q_p, q_p, q_d, q_d, q_d), \quad \mathbf{Q} = \text{blkdiag}(\mathbf{Q}_p, \mathbf{Q}_p)
+\end{equation}
+Here, $q_p$ and $q_d$ represent the process noise variances for the position and direction components, respectively.
+The observation model integrates both actual measurements of the points' positions and directions and the imposed constraints. The observation matrix $\mathbf{H}$ is augmented to include these constraints:
+\begin{equation}
+\mathbf{H} = \begin{bmatrix}
+\mathbf{I}_{12} \\
+\mathbf{H}_c \\
+\mathbf{H}_{dr}
+\end{bmatrix}
+\end{equation}
+where $\mathbf{I}_{12}$ is the $12 \times 12$ identity matrix corresponding to the direct measurements of the state vector. The constraint matrices are defined as:
+\begin{equation}
+\mathbf{H}_c = \begin{bmatrix}
+\mathbf{0}_{3 \times 3} & \mathbf{I}_3 & \mathbf{0}_{3 \times 3} & -\mathbf{I}_3
+\end{bmatrix}, \quad
+\mathbf{H}_{dr} = \begin{bmatrix}
+\mathbf{I}_3 & \mathbf{0}_{3 \times 9} & -\mathbf{I}_3
+\end{bmatrix}
+\end{equation}
+The matrix $\mathbf{H}_c$ enforces direction consistency by computing the difference between the directions of the two points:
+\begin{equation}
+\mathbf{H}_c \mathbf{x} = \begin{bmatrix}
+dx_1 - dx_2 \\
+dy_1 - dy_2 \\
+dz_1 - dz_2
+\end{bmatrix}
+\end{equation}
+Similarly, $\mathbf{H}_{dr}$ imposes relative distance consistency by calculating the relative positions:
+\begin{equation}
+\mathbf{H}_{dr} \mathbf{x} = \begin{bmatrix}
+x_1 - x_2 \\
+y_1 - y_2 \\
+z_1 - z_2
+\end{bmatrix}
+\end{equation}
+
+The observation noise covariance matrix $\mathbf{R}$ incorporates both the measurement noise and the noise associated with the constraints:
+\begin{equation}
+\mathbf{R} = \text{blkdiag}(\mathbf{R}_1, \mathbf{R}_2, \mathbf{R}_c, \mathbf{R}_{dr})
+\end{equation}
+where $\mathbf{R}_1$ and $\mathbf{R}_2$ correspond to the measurement noise of the first and second points, respectively:
+\begin{equation}
+\mathbf{R}_1 = \text{diag}(r_p, r_p, r_p, r_d, r_d, r_d), \quad
+\mathbf{R}_2 = \text{diag}(r_p, r_p, r_p, r_d, r_d, r_d)
+\end{equation}
+$\mathbf{R}_c$ and $\mathbf{R}_{dr}$ represent the noise associated with the direction consistency and relative distance constraints:
+\begin{equation}
+\mathbf{R}_c = \sigma_c^2 \cdot \mathbf{I}_3, \quad
+\mathbf{R}_{dr} = \sigma_r^2 \cdot \mathbf{I}_3
+\end{equation}
+Here, $\sigma_c$ and $\sigma_r$ are the standard deviations controlling the strictness of the direction consistency and relative distance constraints, respectively.
+
+The Kalman Filter operates through iterative prediction and update steps. In the prediction step, the state vector and covariance matrix are projected forward using the state transition model:
+\begin{equation}
+\mathbf{x}_{k+1|k} = \mathbf{F} \mathbf{x}_k
+\end{equation}
+\begin{equation}
+\mathbf{P}_{k+1|k} = \mathbf{F} \mathbf{P}_k \mathbf{F}^T + \mathbf{Q}
+\end{equation}
+In the update step, both the actual measurements and the constraints are incorporated. The combined observation vector $\mathbf{z}$ includes the actual measurements and the desired constraint outcomes (typically zero, indicating no difference for constraints):
+\begin{equation}
+\mathbf{z} = \begin{bmatrix}
+\mathbf{z}_{\text{actual}} \\
+\mathbf{0}_{6 \times 1}
+\end{bmatrix}
+\end{equation}
+The observation residual $\mathbf{y}$ is computed as:
+\begin{equation}
+\mathbf{y} = \mathbf{z} - \mathbf{H} \mathbf{x}_{k+1|k}
+\end{equation}
+The residual covariance $\mathbf{S}$ and the Kalman Gain $\mathbf{K}$ are then determined:
+\begin{equation}
+\mathbf{S} = \mathbf{H} \mathbf{P}_{k+1|k} \mathbf{H}^T + \mathbf{R}
+\end{equation}
+\begin{equation}
+\mathbf{K} = \mathbf{P}_{k+1|k} \mathbf{H}^T \mathbf{S}^{-1}
+\end{equation}
+Finally, the state vector and covariance matrix are updated:
+\begin{equation}
+\mathbf{x}_{k+1} = \mathbf{x}_{k+1|k} + \mathbf{K} \mathbf{y}
+\end{equation}
+\begin{equation}
+\mathbf{P}_{k+1} = (\mathbf{I}_{12} - \mathbf{K} \mathbf{H}) \mathbf{P}_{k+1|k}
+\end{equation}
+
+Through this iterative process, the Kalman Filter effectively fuses actual measurements with the imposed constraints, refining the estimates of the two points' positions and directions. The direction consistency constraint ensures that the directional vectors of the two points remain aligned, while the relative distance constraint maintains a stable spatial relationship between them. Proper tuning of the noise covariance matrices $\mathbf{Q}$ and $\mathbf{R}$ is essential to balance the influence of the process dynamics and the strength of the constraints on the state estimation.
+
+
+\section{The seed generation of railway-tracks}
 We construct the rough 3D line based on the dense point cloud.
 Given the end point $\mathbf p$ of a 2D line segment,
 we randomly sample three space points around $\mathbf p$ to construct the plane $\pi$,
@@ -55,24 +167,18 @@ We recommend setting $I=\left[2/3\omega,4/3\omega\right]$ that uses one-third of
 Because a 3D line may satisfy \cref{eq_geometrycons} with many others,
 the greedy algorithm is used to assign the candidate pair,
 which uses the sum of the overlap rate as the maximum score.
-Then,
-we score the RT based on their geometry alignment with others.
 
-We use contextual information to further validate the RT pair.
-Because many publicly available deep networks have been trained on massive amounts of data,
-which can capture texture information for classification in the absence of explicit labels,
-we directly use the global average pooling layer in ResNet50 to describe the feature of the RT pair.
-Also,
+We sort the RT based on their scores of the geometry alignment and select the top 10\% RT and use contextual information to further validate the RT pair.
+In detail,
+if the RT's central line is within $1^\circ$ and $t$ projection distance with another RT,
+its score is increased by $\mathcal{N}\left(\mu, \left(t/3\right)^2\right)$.
+we use the global average pooling layer in ResNet50 to describe the feature of the RT pair.
+Because it has been trained on massive amounts of data and can capture texture information for classification in the absence of labels.
+Also, 
 we re-transform the image blocks to reduce the ambiguity caused by scale and rotation.
-After extraction of features for all image blocks, 
-we use the DBSCAN method to group them with the cosine distance,
-and we retain the group with the highest number as the seeds of RT.
-Since we aim to find the seed point for the Kalman process,
-for which accuracy is more important than completeness,
-we use a strict distance threshold in DBSCAN to control false positive. 
-Finally,
-we merge repetitive RT and remove isolated RT based on the projection distance of adjacent RT pairs.
-\subsection{Re-triangulation with railway geometries}
+After extraction of RT features, 
+we use DBSCAN to group them with the cosine distance,
+and retain the group with the highest number as the seeds of RT.
 
 
 
