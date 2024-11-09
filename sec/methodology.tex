@@ -20,23 +20,54 @@ during which the deep feature of multiple images is used as the inlier distance.
 
 
 
-\section{Kalman filter-Based railway-track reconstruction}
+\section{Railway track with Kalman filter}
 
-In this study, we utilize the Kalman Filter to optimize the three-dimensional coordinates and directions of two points. The state vector is defined to encapsulate the positions and directions of both points, represented as a $12$-dimensional vector:
+The state to be estimated is in our work is the two points and directions on the railway pair:
+\begin{equation}
+\mathbf{x} = \begin{bmatrix}
+    \mathbf p_1,\mathbf d_1,\mathbf p_2,\mathbf d_2 
+\end{bmatrix}^ \top,
+\end{equation}
+where $\mathbf p_i=\left(x_i, y_i, z_i\right)$ denotes the position 
+and $\mathbf d_i=\left(dx_i, dy_i, dz_i\right)$ is the normalized vector represents the direction.
+Then,
+the linear stochastic difference equation govern the state transition is
+\begin{equation}
+\mathbf x_{k+1} = 
+    \mathrm A \mathbf x_{k} + \mathbf w_k,
+    \label{eq_statetransition}
+\end{equation}
+where $\mathrm A \in R ^ {12 \times 12 }$ is the transition matrix
+\begin{equation}
+\mathrm A=diag \left(\left\{\mathrm T\right\}_{i=1}^2\right),\quad
+\mathrm T=
+\left[
+\begin{smallmatrix}
+\mathbf I_{3\times3}  &  t \cdot \mathbf I_{3\times3} \\
+\mathbf 0_{3\times3}  &  \mathbf I_{3\times3}
+\end{smallmatrix}
+\right]
+\end{equation}
+and $p \left(\mathbf w_k \right) \sim N(0, Q)$.
+
+we utilize the Kalman Filter to optimize the three-dimensional coordinates and directions of two points. The state vector is defined to encapsulate the positions and directions of both points, represented as a $12$-dimensional vector:
 \begin{equation}
 \mathbf{x} = \begin{bmatrix}
     \mathbf p_1,\mathbf d_1,\mathbf p_2,\mathbf d_2 
 \end{bmatrix}^T
 \end{equation}
 where $\mathbf p_i=\left(x_i, y_i, z_i\right)$ denotes the position 
-and $\mathbf p_i=\left(dx_i, dy_i, dz_i\right)$ represents the direction.
+and $\mathbf d_i=\left(dx_i, dy_i, dz_i\right)$ represents the direction.
 The state transition model assumes that at each time step $t$, each point moves in its respective direction by a fixed distance $t$, while maintaining a constant direction. The state transition matrix $\mathbf{F}$ is constructed as a block diagonal matrix comprising two identical $6 \times 6$ submatrices $\mathbf{F}_p$:
 \begin{equation}
 \mathbf{F}_p = \begin{bmatrix}
-\mathbf{I}_3 & t \cdot \mathbf{I}_3 \\
-\mathbf{0}_3 & \mathbf{I}_3 \\
+\mathbf{I} & t \cdot \mathbf{I} \\
+\mathbf{0} & \mathbf{I} \\
 \end{bmatrix}, \quad
-\mathbf{F} = \text{blkdiag}(\mathbf{F}_p, \mathbf{F}_p)
+\mathbf{F} = \begin{bmatrix}
+\mathbf{F}_p & \mathbf{0} \\
+\mathbf{0} & \mathbf{F}_p \\
+\end{bmatrix}
 \end{equation}
 where $\mathbf{I}_3$ is the $3 \times 3$ identity matrix and $\mathbf{0}_3$ is the $3 \times 3$ zero matrix. The process noise covariance matrix $\mathbf{Q}$ accounts for uncertainties in position and direction and is similarly structured:
 \begin{equation}
@@ -62,19 +93,13 @@ where $\mathbf{I}_{12}$ is the $12 \times 12$ identity matrix corresponding to t
 \end{equation}
 The matrix $\mathbf{H}_c$ enforces direction consistency by computing the difference between the directions of the two points:
 \begin{equation}
-\mathbf{H}_c \mathbf{x} = \begin{bmatrix}
-dx_1 - dx_2 \\
-dy_1 - dy_2 \\
-dz_1 - dz_2
-\end{bmatrix}
+\mathbf{H}_c \mathbf{x} = 
+\mathbf d_1 - \mathbf d_2
 \end{equation}
 Similarly, $\mathbf{H}_{dr}$ imposes relative distance consistency by calculating the relative positions:
 \begin{equation}
-\mathbf{H}_{dr} \mathbf{x} = \begin{bmatrix}
-x_1 - x_2 \\
-y_1 - y_2 \\
-z_1 - z_2
-\end{bmatrix}
+\mathbf{H}_{dr} \mathbf{x} = 
+\mathbf p_1 - \mathbf p_2
 \end{equation}
 
 The observation noise covariance matrix $\mathbf{R}$ incorporates both the measurement noise and the noise associated with the constraints:
@@ -103,9 +128,9 @@ The Kalman Filter operates through iterative prediction and update steps. In the
 In the update step, both the actual measurements and the constraints are incorporated. The combined observation vector $\mathbf{z}$ includes the actual measurements and the desired constraint outcomes (typically zero, indicating no difference for constraints):
 \begin{equation}
 \mathbf{z} = \begin{bmatrix}
-\mathbf{z}_{\text{actual}} \\
-\mathbf{0}_{6 \times 1}
-\end{bmatrix}
+\mathbf{z}_{\text{actual}},
+\mathbf{0}_{1 \times 6}
+\end{bmatrix}^\top
 \end{equation}
 The observation residual $\mathbf{y}$ is computed as:
 \begin{equation}
@@ -128,8 +153,9 @@ Finally, the state vector and covariance matrix are updated:
 
 Through this iterative process, the Kalman Filter effectively fuses actual measurements with the imposed constraints, refining the estimates of the two points' positions and directions. The direction consistency constraint ensures that the directional vectors of the two points remain aligned, while the relative distance constraint maintains a stable spatial relationship between them. Proper tuning of the noise covariance matrices $\mathbf{Q}$ and $\mathbf{R}$ is essential to balance the influence of the process dynamics and the strength of the constraints on the state estimation.
 
+\section{Accurate railway line reconstruction}
 
-\section{The seed generation of railway-tracks}
+\section{The seed generation for railway track}
 We construct the rough 3D line based on the dense point cloud.
 Given the end point $\mathbf p$ of a 2D line segment,
 we randomly sample three space points around $\mathbf p$ to construct the plane $\pi$,
