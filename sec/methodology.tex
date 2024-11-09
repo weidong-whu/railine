@@ -1,4 +1,4 @@
-\section{Methodology overview}
+\section{Methodology}
 
 The flow of our methodology is presented in Figure 1.
 We take aerial images of the railway area as input,
@@ -20,9 +20,10 @@ during which the deep feature of multiple images is used as the inlier distance.
 
 
 
-\section{Railway track with Kalman filter}
+\subsection{Railway track with Kalman filter}
 
-The state to be estimated is in our work is the two points and directions on the railway pair:
+Let us first introduce the Kalman filter that optimize the \textit{RLP} without the geometry constraint between each other.
+The state to be estimated is the two points and directions on the the \textit{RLP}:
 \begin{equation}
 \mathbf{x} = \begin{bmatrix}
     \mathbf p_1,\mathbf d_1,\mathbf p_2,\mathbf d_2 
@@ -33,129 +34,35 @@ and $\mathbf d_i=\left(dx_i, dy_i, dz_i\right)$ is the normalized vector represe
 Then,
 the linear stochastic difference equation govern the state transition is
 \begin{equation}
-\mathbf x_{k+1} = 
-    \mathrm A \mathbf x_{k} + \mathbf w_k,
-    \label{eq_statetransition}
+        \mathbf{x}_{k+1}= 
+        \operatorname{diag} \left(\mathrm I,t \! \cdot \! \mathrm I, \mathrm I, t \! \cdot \! \mathrm I \right) \mathbf{x}_{k} + \mathbf{w}_k,
+        \label {eq_statetransition}
 \end{equation}
-where $\mathrm A \in R ^ {12 \times 12 }$ is the transition matrix
+where $\mathrm I_{3\times3}$ is the identity matrix and $p \left(\mathbf w_k \right) \sim N(0, Q)$.
+In each transition,
+we can reconstruct the 3D line with multiple images (\cref*{sec_linereconstruction} ),
+with which the observed position and direction related to $\mathbf x_k$ can be obtained.
+Thus,
+the measurement can be the same as $\mathbf x_k$,
+and the general Kalman filter to track the \textit{RPL} is
 \begin{equation}
-\mathrm A=diag \left(\left\{\mathrm T\right\}_{i=1}^2\right),\quad
-\mathrm T=
-\left[
-\begin{smallmatrix}
-\mathbf I_{3\times3}  &  t \cdot \mathbf I_{3\times3} \\
-\mathbf 0_{3\times3}  &  \mathbf I_{3\times3}
-\end{smallmatrix}
-\right]
+    \mathbf {\hat x}_k =\mathbf {\hat x}_k^{\mbox -}+ \mathrm K\left(\mathbf z_k - \mathbf {\hat x}_k^{\mbox -}\right),\quad
+    \mathbf z_k = \mathbf x_k+ \mathbf v_k,
 \end{equation}
-and $p \left(\mathbf w_k \right) \sim N(0, Q)$.
+where $p \left(\mathbf v_k \right) \sim N(0, R)$,
+$\mathbf {\hat x}_k^{\mbox -}$ is the prediction with \cref{eq_statetransition},
+and $\mathrm K$ is the Kalman gain that iteratively calculated from the estimate error.
+Please refer to (ref) for the details of Kalman gain. 
 
-we utilize the Kalman Filter to optimize the three-dimensional coordinates and directions of two points. The state vector is defined to encapsulate the positions and directions of both points, represented as a $12$-dimensional vector:
-\begin{equation}
-\mathbf{x} = \begin{bmatrix}
-    \mathbf p_1,\mathbf d_1,\mathbf p_2,\mathbf d_2 
-\end{bmatrix}^T
-\end{equation}
-where $\mathbf p_i=\left(x_i, y_i, z_i\right)$ denotes the position 
-and $\mathbf d_i=\left(dx_i, dy_i, dz_i\right)$ represents the direction.
-The state transition model assumes that at each time step $t$, each point moves in its respective direction by a fixed distance $t$, while maintaining a constant direction. The state transition matrix $\mathbf{F}$ is constructed as a block diagonal matrix comprising two identical $6 \times 6$ submatrices $\mathbf{F}_p$:
-\begin{equation}
-\mathbf{F}_p = \begin{bmatrix}
-\mathbf{I} & t \cdot \mathbf{I} \\
-\mathbf{0} & \mathbf{I} \\
-\end{bmatrix}, \quad
-\mathbf{F} = \begin{bmatrix}
-\mathbf{F}_p & \mathbf{0} \\
-\mathbf{0} & \mathbf{F}_p \\
-\end{bmatrix}
-\end{equation}
-where $\mathbf{I}_3$ is the $3 \times 3$ identity matrix and $\mathbf{0}_3$ is the $3 \times 3$ zero matrix. The process noise covariance matrix $\mathbf{Q}$ accounts for uncertainties in position and direction and is similarly structured:
-\begin{equation}
-\mathbf{Q}_p = \text{diag}(q_p, q_p, q_p, q_d, q_d, q_d), \quad \mathbf{Q} = \text{blkdiag}(\mathbf{Q}_p, \mathbf{Q}_p)
-\end{equation}
-Here, $q_p$ and $q_d$ represent the process noise variances for the position and direction components, respectively.
-The observation model integrates both actual measurements of the points' positions and directions and the imposed constraints. The observation matrix $\mathbf{H}$ is augmented to include these constraints:
-\begin{equation}
-\mathbf{H} = \begin{bmatrix}
-\mathbf{I}_{12} \\
-\mathbf{H}_c \\
-\mathbf{H}_{dr}
-\end{bmatrix}
-\end{equation}
-where $\mathbf{I}_{12}$ is the $12 \times 12$ identity matrix corresponding to the direct measurements of the state vector. The constraint matrices are defined as:
-\begin{equation}
-\mathbf{H}_c = \begin{bmatrix}
-\mathbf{0}_{3 \times 3} & \mathbf{I}_3 & \mathbf{0}_{3 \times 3} & -\mathbf{I}_3
-\end{bmatrix}, \quad
-\mathbf{H}_{dr} = \begin{bmatrix}
-\mathbf{I}_3 & \mathbf{0}_{3 \times 9} & -\mathbf{I}_3
-\end{bmatrix}
-\end{equation}
-The matrix $\mathbf{H}_c$ enforces direction consistency by computing the difference between the directions of the two points:
-\begin{equation}
-\mathbf{H}_c \mathbf{x} = 
-\mathbf d_1 - \mathbf d_2
-\end{equation}
-Similarly, $\mathbf{H}_{dr}$ imposes relative distance consistency by calculating the relative positions:
-\begin{equation}
-\mathbf{H}_{dr} \mathbf{x} = 
-\mathbf p_1 - \mathbf p_2
-\end{equation}
+Now we add two geometry constraints of the \textit{RLP} to the filter process:
+(1) $\mathbf d_1$ and $\mathbf d_2$ should be as close as possible;
+and (2) The change in distance between $\mathbf p_1$ and $\mathbf p_2$ is as small as possible.
 
-The observation noise covariance matrix $\mathbf{R}$ incorporates both the measurement noise and the noise associated with the constraints:
-\begin{equation}
-\mathbf{R} = \text{blkdiag}(\mathbf{R}_1, \mathbf{R}_2, \mathbf{R}_c, \mathbf{R}_{dr})
-\end{equation}
-where $\mathbf{R}_1$ and $\mathbf{R}_2$ correspond to the measurement noise of the first and second points, respectively:
-\begin{equation}
-\mathbf{R}_1 = \text{diag}(r_p, r_p, r_p, r_d, r_d, r_d), \quad
-\mathbf{R}_2 = \text{diag}(r_p, r_p, r_p, r_d, r_d, r_d)
-\end{equation}
-$\mathbf{R}_c$ and $\mathbf{R}_{dr}$ represent the noise associated with the direction consistency and relative distance constraints:
-\begin{equation}
-\mathbf{R}_c = \sigma_c^2 \cdot \mathbf{I}_3, \quad
-\mathbf{R}_{dr} = \sigma_r^2 \cdot \mathbf{I}_3
-\end{equation}
-Here, $\sigma_c$ and $\sigma_r$ are the standard deviations controlling the strictness of the direction consistency and relative distance constraints, respectively.
 
-The Kalman Filter operates through iterative prediction and update steps. In the prediction step, the state vector and covariance matrix are projected forward using the state transition model:
-\begin{equation}
-\mathbf{x}_{k+1|k} = \mathbf{F} \mathbf{x}_k
-\end{equation}
-\begin{equation}
-\mathbf{P}_{k+1|k} = \mathbf{F} \mathbf{P}_k \mathbf{F}^T + \mathbf{Q}
-\end{equation}
-In the update step, both the actual measurements and the constraints are incorporated. The combined observation vector $\mathbf{z}$ includes the actual measurements and the desired constraint outcomes (typically zero, indicating no difference for constraints):
-\begin{equation}
-\mathbf{z} = \begin{bmatrix}
-\mathbf{z}_{\text{actual}},
-\mathbf{0}_{1 \times 6}
-\end{bmatrix}^\top
-\end{equation}
-The observation residual $\mathbf{y}$ is computed as:
-\begin{equation}
-\mathbf{y} = \mathbf{z} - \mathbf{H} \mathbf{x}_{k+1|k}
-\end{equation}
-The residual covariance $\mathbf{S}$ and the Kalman Gain $\mathbf{K}$ are then determined:
-\begin{equation}
-\mathbf{S} = \mathbf{H} \mathbf{P}_{k+1|k} \mathbf{H}^T + \mathbf{R}
-\end{equation}
-\begin{equation}
-\mathbf{K} = \mathbf{P}_{k+1|k} \mathbf{H}^T \mathbf{S}^{-1}
-\end{equation}
-Finally, the state vector and covariance matrix are updated:
-\begin{equation}
-\mathbf{x}_{k+1} = \mathbf{x}_{k+1|k} + \mathbf{K} \mathbf{y}
-\end{equation}
-\begin{equation}
-\mathbf{P}_{k+1} = (\mathbf{I}_{12} - \mathbf{K} \mathbf{H}) \mathbf{P}_{k+1|k}
-\end{equation}
+\subsection{Accurate railway line reconstruction}
+\label{sec_linereconstruction}
 
-Through this iterative process, the Kalman Filter effectively fuses actual measurements with the imposed constraints, refining the estimates of the two points' positions and directions. The direction consistency constraint ensures that the directional vectors of the two points remain aligned, while the relative distance constraint maintains a stable spatial relationship between them. Proper tuning of the noise covariance matrices $\mathbf{Q}$ and $\mathbf{R}$ is essential to balance the influence of the process dynamics and the strength of the constraints on the state estimation.
-
-\section{Accurate railway line reconstruction}
-
-\section{The seed generation for railway track}
+\subsection{The seed generation for railway track}
 We construct the rough 3D line based on the dense point cloud.
 Given the end point $\mathbf p$ of a 2D line segment,
 we randomly sample three space points around $\mathbf p$ to construct the plane $\pi$,
@@ -172,9 +79,9 @@ After random sampling of $n$ times,
 we obtain a set of candidate 3D lines $\left\{ L\right\}_{i=1}^n$ and use the LMEDS algorithm,
 which does not require an inlier threshold, to confirm the best 3D line for a 2D line:
 \begin{equation}
-    L^* = \arg\min_{L_i} \text{median} \left\{ d_{i1}, d_{i2}, \dots, d_{in}\right\} ,
+    L^* = \arg\min_{L_i} \text{median} \left\{ d_{ij}\right\}_{j=1}^n ,
 \end{equation}
-where $d_{ij}$ is the distance between $L_i$ and $L_j$.  
+where $d_{ij}$ is the projection distance between $L_i$ and $L_j$.  
 
 We group two 3D lines as a RT pair based on their angle $\theta_{i,j}$,
 overlap $o_{i,j}$,
