@@ -15,73 +15,131 @@ We first convert image lines to 3D lines with the local optimal plane of the poi
 Then,
 we cluster the single 3D line to RT pairs with DBSCAN frame work,  
 during which the deep feature of multiple images is used as the inlier distance.
-
+Since the 
 
 
 
 
 \subsection{Railway track with Kalman filter}
-For a point $\mathbf p=\left(x,y,z\right)$ on the \textit{RL}, 
-we can calculate its normalized local direction $\mathbf d=\left(dx,dy,dz\right)$,
-and we use  two points and directions to represent the state of the local \textit{RLP}.
-Denote the two points as $\mathbf p_1$ and $\mathbf p_2$,  
-and denote the directions of the two points as $\mathbf d_1$ and $\mathbf d_2$.
-Obviously,
-the \textit{RLP} has fixed geometry patterns
-we introduce two geometry constraints for them in the filter process:
-(1) $\mathbf d_1$ and $\mathbf d_2$ should be as close as possible;
-and (2) the change in distance between $\mathbf p_1$ and $\mathbf p_2$ is as small as possible during the filter process.
-Then,
-the state to be estimated in Kalman filter is
+As shown in, 
+we use two points and directions to represent the state of the local \textit{RLP}.
+Denote the point and direction as
+$\mathbf p=\left(x,y,z\right)$ and $\mathbf d=\left(dx,dy,dz\right)$,
+respectively.
+The vector to be estimated for the \textit{RLP} is
 \begin{equation}
-\mathbf{x_k} = \begin{bmatrix}
-    \mathbf p_{k,1} & \mathbf d_{k,1} & \mathbf p_{k,2} & \mathbf d_{k,2}  & \mathbf p_{k,1}-\mathbf p_{k,2} & \mathbf d_{k,1}-\mathbf d_{k,2}
-\end{bmatrix}^ \top \in R^{18}.
+\mathbf x = \begin{bmatrix}
+    \mathbf p_1 & \mathbf p_2 & \mathbf d_1  & \mathbf d_2 
+\end{bmatrix}^ \top \in R^{12}.
 \end{equation}
-In the following contents,
-we use the superscript $pre$ like $\mathbf{x}^{pre}$ or $\mathbf{p}_1^{pre}$  to denote the prediction variable
-and use superscript $obs$ like $\mathbf{x}^{obs}$ or $\mathbf{p}_1^{obs}$  to show the observation variable.
-We use a scalar $t$ to control the prediction during the transition along the \textit{RL}:
+The prediction of $\mathbf x$ is controlled by a scalar $t$:
 \begin{equation}
-        \mathbf{x}^{pre}_k= 
-        \mathrm F \mathbf{x}_{k-1}, \quad  
-        \mathrm F=\operatorname{diag}\left(\mathrm I,t \! \cdot \! \mathrm I, \mathrm I, t \! \cdot \! \mathrm I, \mathrm I , \mathrm I\right)
+        \mathbf{x}^{pre}= 
+        \mathrm F \mathbf x^{{\mbox -}}, \in R^{12}, \quad  
+        \mathrm F=\operatorname{diag}\left(t \! \cdot \! \mathrm I_{6\times6} , \mathrm I_{6\times6}\right) \in R^{12\times 12},
         \label {eq_statetransition}
 \end{equation}
-where $\mathrm I$ is $3\times3$ identity matrix.
-In each transition,
-the observation state is acquired as follows:
-for $\mathbf{p}_{k,i}^{obs}$ and $\mathbf{d}_{k,i}^{obs}$,
-we reconstruct the 3D line with multiple images (\cref*{sec_linereconstruction}),
-with which the actual position and direction can be calculated;
-$\mathbf p_{k,1}^{obs}-\mathbf p_{k,2}^{obs}$ is set as $\mathbf 0$ to make the direction consistent;
-for $\mathbf d_{k,1}^{obs}-\mathbf d_{k,2}^{obs}$,
-we want it to be equal during the transition,
-thus setting it as the last state directly.
-Thus,
-the observation state is summarized by
+where the superscript $^{\mbox -}$ marks the previous state.
+For each prediction $\mathbf{x}^{pre}$,
+There is an actual observation $\mathbf{x}^{obs}$ arising from line reconstruction in multiple images~(\cref*{sec_linereconstruction}).
+The \textit{RLP} has fixed geometry patterns,
+i.e.,
+$\mathbf d_1$ and $\mathbf d_2$ should be as close as possible,
+and the distance change between $\mathbf p_1$ and $\mathbf p_2$ is as small as possible.
+We achieve these two constraints by extending the observation vector:
 \begin{equation}
-    \mathbf{x}^{obs}_k= 
-    \begin{bmatrix}
-        \mathbf p_{k,1}^{obs} & \mathbf d_{k,1}^{obs} & \mathbf p_{k,2}^{obs} & \mathbf d_{k,2}^{obs}
-          &\mathbf p_{k-1,1}-\mathbf p_{k-1,2} & \mathbf 0
-    \end{bmatrix}^ \top \in R^{18}.
-    \label {eq_observation}
+\mathbf{z}^{obs} = \begin{bmatrix}
+    \mathbf{x}^{obs} & \mathbf p_1^{\mbox -} - \mathbf p_{2}^{\mbox -} & \mathbf 0_{1\times3}
+\end{bmatrix}^ \top \in R^{18}.
+\label {eq_observationvector}
 \end{equation}
-
-Thus,
-the measurement can be the same as $\mathbf x_k$,
-and the general Kalman filter to track the \textit{RPL} is
+Correspondingly,
+the observation matrix that translate $\mathbf{x}^{pre}$ to the observation form is
 \begin{equation}
-    \mathbf {\hat x}_k =\mathbf {\hat x}_k^{\mbox -}+ \mathrm K\left(\mathbf z_k - \mathbf {\hat x}_k^{\mbox -}\right),\quad
-    \mathbf z_k = \mathbf x_k+ \mathbf v_k,
+        \mathbf{z}^{pre}= 
+        \mathrm H \mathbf x^{pre}, \quad  
+        \mathrm H=
+        \begin{bmatrix}
+            \multicolumn{4}{c}{\mathrm{I}_{12 \times 12}} \\
+            \mathrm{I}_{3 \times 3} & -\mathrm{I}_{3 \times 3} & \mathbf{0}_{3 \times 3} & \mathbf{0}_{3 \times 3} \\
+            \mathbf{0}_{3 \times 3} & \mathbf{0}_{3 \times 3} & \mathrm{I}_{3 \times 3} & -\mathrm{I}_{3 \times 3}
+        \end{bmatrix} \in R^{18 \times 12}.
+        \label {eq_observationmatrix }
 \end{equation}
-where $p \left(\mathbf v_k \right) \sim N(0, R)$,
-$\mathbf {\hat x}_k^{\mbox -}$ is the prediction with \cref{eq_statetransition},
-and $\mathrm K$ is the Kalman gain that iteratively calculated from the estimate error.
-Please refer to (ref) for the details of Kalman gain. 
+Then,
+as shown in fig.1,
+we use the general discrete Kalman filter to update the state:
+\begin{figure}[!ht]
+\centering
+\resizebox{0.75\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\normalsize]
+\draw  (0,23.5) rectangle  
+node {\normalsize
+\begin{minipage}{5cm}
+(b)~$\mathbf{z}^{obs}$ (\cref{eq_observationvector}) calculation via
+3D line reconstruction.  
+\end{minipage}
+} (6.25,21.5);
+\draw  (0,20.5) rectangle  
+node {\normalsize  
+\begin{minipage}{5cm}
+(a)~$\mathbf{x}^{pre}$ prediction  with \cref{eq_statetransition}
+and error covariance prediction via 
+\begin{equation}
+\mathrm P^{pred}= \mathrm F \mathrm P^{\mbox -} \mathrm F^{\top}+\mathrm Q
+\end{equation}
+\end{minipage}
+}  (6.25,18.5);
+\draw  (7.5,23.5) rectangle  
+node {
+\normalsize 
+\begin{minipage}{5cm}
+(c)~Kalman gain update :
+\begin{equation}
+\mathrm K= \mathrm P \mathrm H^{\top}
+\left(\mathrm H \mathrm P \mathrm H^{\top}+\mathrm R\right)^{-1}
+\end{equation}
+(d)~estimation update:
+\begin{equation}
+\mathbf{\hat{x}}= \mathbf x^{pre} + \mathrm K \left(\mathbf{z}^{pre}- \mathbf{z}^{obs}\right)
+\end{equation}
+(e)~error covariance update:
+\begin{equation}
+\mathrm{P} = \left( \mathrm{I} - \mathrm{K} \mathrm{H} \right) \mathrm{P}^{pre}
+\end{equation}
+ \end{minipage}
+} (13.5,18.5);
+\draw [->, >=Stealth] (6.25,22.5) -- (7.5,22.5);
+\draw [->, >=Stealth] (7.5,19.5) -- (6.25,19.5);
+\draw [->, >=Stealth] (3.3,20.5) -- (3.3,21.5);
+\draw [->, >=Stealth] (-1.25,19.5) -- (0,19.5);
+\draw [<-, >=Stealth] (-1.25,22.5) -- (0,22.5);
+\draw [draw=none] (-4.5,16.7) rectangle  
+node {\normalsize
+\begin{minipage}{6cm}
+Initial estimate of $\mathbf {\hat{x}}$ and $\mathrm {P}$
+\end{minipage}
+} (-1,22.5);
+\draw [draw=none] (-6,22.4) rectangle  
+node {\normalsize
+\begin{minipage}{4cm}
+Check for termination:
+\begin{itemize}
+    \vspace{-0.5em}
+    \item non-convergence of reconstruction
+    \vspace{-0.5em}
+    \item visual inconsistency
+    \vspace{-0.5em}
+    \item positional overlap 
+\end{itemize}
+\end{minipage}
+} (-2,22.4);
+\end{circuitikz}
+}%
+\label{fig:my_label}
+\end{figure}
 
-Now
 
 \subsection{Accurate railway line reconstruction}
 \label{sec_linereconstruction}
