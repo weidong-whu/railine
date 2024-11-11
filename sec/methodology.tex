@@ -21,27 +21,54 @@ during which the deep feature of multiple images is used as the inlier distance.
 
 
 \subsection{Railway track with Kalman filter}
-
-Let us first introduce the Kalman filter that optimize the \textit{RLP} without the geometry constraint between each other.
-The state to be estimated is the two points and directions on the the \textit{RLP}:
-\begin{equation}
-\mathbf{x} = \begin{bmatrix}
-    \mathbf p_1,\mathbf d_1,\mathbf p_2,\mathbf d_2 
-\end{bmatrix}^ \top,
-\end{equation}
-where $\mathbf p_i=\left(x_i, y_i, z_i\right)$ denotes the position 
-and $\mathbf d_i=\left(dx_i, dy_i, dz_i\right)$ is the normalized vector represents the direction.
+For a point $\mathbf p=\left(x,y,z\right)$ on the \textit{RL}, 
+we can calculate its normalized local direction $\mathbf d=\left(dx,dy,dz\right)$,
+and we use  two points and directions to represent the state of the local \textit{RLP}.
+Denote the two points as $\mathbf p_1$ and $\mathbf p_2$,  
+and denote the directions of the two points as $\mathbf d_1$ and $\mathbf d_2$.
+Obviously,
+the \textit{RLP} has fixed geometry patterns
+we introduce two geometry constraints for them in the filter process:
+(1) $\mathbf d_1$ and $\mathbf d_2$ should be as close as possible;
+and (2) the change in distance between $\mathbf p_1$ and $\mathbf p_2$ is as small as possible during the filter process.
 Then,
-the linear stochastic difference equation govern the state transition is
+the state to be estimated in Kalman filter is
 \begin{equation}
-        \mathbf{x}_{k+1}= 
-        \operatorname{diag} \left(\mathrm I,t \! \cdot \! \mathrm I, \mathrm I, t \! \cdot \! \mathrm I \right) \mathbf{x}_{k} + \mathbf{w}_k,
+\mathbf{x_k} = \begin{bmatrix}
+    \mathbf p_{k,1} & \mathbf d_{k,1} & \mathbf p_{k,2} & \mathbf d_{k,2}  & \mathbf p_{k,1}-\mathbf p_{k,2} & \mathbf d_{k,1}-\mathbf d_{k,2}
+\end{bmatrix}^ \top \in R^{18}.
+\end{equation}
+In the following contents,
+we use the superscript $pre$ like $\mathbf{x}^{pre}$ or $\mathbf{p}_1^{pre}$  to denote the prediction variable
+and use superscript $obs$ like $\mathbf{x}^{obs}$ or $\mathbf{p}_1^{obs}$  to show the observation variable.
+We use a scalar $t$ to control the prediction during the transition along the \textit{RL}:
+\begin{equation}
+        \mathbf{x}^{pre}_k= 
+        \mathrm F \mathbf{x}_{k-1}, \quad  
+        \mathrm F=\operatorname{diag}\left(\mathrm I,t \! \cdot \! \mathrm I, \mathrm I, t \! \cdot \! \mathrm I, \mathrm I , \mathrm I\right)
         \label {eq_statetransition}
 \end{equation}
-where $\mathrm I_{3\times3}$ is the identity matrix and $p \left(\mathbf w_k \right) \sim N(0, Q)$.
+where $\mathrm I$ is $3\times3$ identity matrix.
 In each transition,
-we can reconstruct the 3D line with multiple images (\cref*{sec_linereconstruction} ),
-with which the observed position and direction related to $\mathbf x_k$ can be obtained.
+the observation state is acquired as follows:
+for $\mathbf{p}_{k,i}^{obs}$ and $\mathbf{d}_{k,i}^{obs}$,
+we reconstruct the 3D line with multiple images (\cref*{sec_linereconstruction}),
+with which the actual position and direction can be calculated;
+$\mathbf p_{k,1}^{obs}-\mathbf p_{k,2}^{obs}$ is set as $\mathbf 0$ to make the direction consistent;
+for $\mathbf d_{k,1}^{obs}-\mathbf d_{k,2}^{obs}$,
+we want it to be equal during the transition,
+thus setting it as the last state directly.
+Thus,
+the observation state is summarized by
+\begin{equation}
+    \mathbf{x}^{obs}_k= 
+    \begin{bmatrix}
+        \mathbf p_{k,1}^{obs} & \mathbf d_{k,1}^{obs} & \mathbf p_{k,2}^{obs} & \mathbf d_{k,2}^{obs}
+          &\mathbf p_{k-1,1}-\mathbf p_{k-1,2} & \mathbf 0
+    \end{bmatrix}^ \top \in R^{18}.
+    \label {eq_observation}
+\end{equation}
+
 Thus,
 the measurement can be the same as $\mathbf x_k$,
 and the general Kalman filter to track the \textit{RPL} is
@@ -54,10 +81,7 @@ $\mathbf {\hat x}_k^{\mbox -}$ is the prediction with \cref{eq_statetransition},
 and $\mathrm K$ is the Kalman gain that iteratively calculated from the estimate error.
 Please refer to (ref) for the details of Kalman gain. 
 
-Now we add two geometry constraints of the \textit{RLP} to the filter process:
-(1) $\mathbf d_1$ and $\mathbf d_2$ should be as close as possible;
-and (2) The change in distance between $\mathbf p_1$ and $\mathbf p_2$ is as small as possible.
-
+Now
 
 \subsection{Accurate railway line reconstruction}
 \label{sec_linereconstruction}

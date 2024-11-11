@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.12)  9 NOV 2024 23:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.12)  11 NOV 2024 00:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1116,17 +1116,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31098 strings out of 473899
- 552361 string characters out of 5738693
- 929454 words of memory out of 5000000
- 53401 multiletter control sequences out of 15000+600000
+ 31101 strings out of 473899
+ 552410 string characters out of 5738693
+ 929452 words of memory out of 5000000
+ 53403 multiletter control sequences out of 15000+600000
  653963 words of font info for 150 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,9n,94p,428b,463s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,9n,94p,428b,473s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0800.pk> <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi375\ecss0800.pk><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Bold.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Italic.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Regular.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathcal.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathex.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathit.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathrm-bold.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathrm.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathscr.pfb>
-Output written on main.pdf (3 pages, 202523 bytes).
+Output written on main.pdf (3 pages, 205057 bytes).
 PDF statistics:
- 142 PDF objects out of 1000 (max. 8388607)
- 17 named destinations out of 1000 (max. 500000)
+ 143 PDF objects out of 1000 (max. 8388607)
+ 18 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

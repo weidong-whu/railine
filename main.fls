@@ -459,7 +459,6 @@ INPUT .\sec\methodology.tex
 INPUT sec\methodology.tex
 INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
 INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
-INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-italic.tfm
 INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathrm.tfm
 INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathrm.tfm
 INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathit.tfm
@@ -490,6 +489,7 @@ INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathtt.tfm
 INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathtt.tfm
 INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathit-bold.tfm
 INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathit-bold.tfm
+INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-italic.tfm
 INPUT D:\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecss1000.tfm
 INPUT D:\Programs\MiKTeX\fonts\enc\dvips\stix\stix-ts1.enc
 INPUT D:\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
