@@ -41,7 +41,7 @@ the linear stochastic difference equation govern the state transition is
 where $\mathrm I_{3\times3}$ is the identity matrix and $p \left(\mathbf w_k \right) \sim N(0, Q)$.
 In each transition,
 we can reconstruct the 3D line with multiple images (\cref*{sec_linereconstruction} ),
-with which the observed position and direction related to $\mathbf x_k$ can be obtained.
+with which the observed position and direction related to $\mathbf x_k$ are available.
 Thus,
 the measurement can be the same as $\mathbf x_k$,
 and the general Kalman filter to track the \textit{RPL} is
@@ -57,7 +57,7 @@ Please refer to (ref) for the details of Kalman gain.
 Now we add two geometry constraints of the \textit{RLP} to the filter process:
 (1) $\mathbf d_1$ and $\mathbf d_2$ should be as close as possible;
 and (2) The change in distance between $\mathbf p_1$ and $\mathbf p_2$ is as small as possible.
-
+To achieve this,
 
 \subsection{Accurate railway line reconstruction}
 \label{sec_linereconstruction}
@@ -65,7 +65,7 @@ and (2) The change in distance between $\mathbf p_1$ and $\mathbf p_2$ is as sma
 \subsection{The seed generation for railway track}
 We construct the rough 3D line based on the dense point cloud.
 Given the end point $\mathbf p$ of a 2D line segment,
-we randomly sample three space points around $\mathbf p$ to construct the plane $\pi$,
+we randomly sample three space points around $\mathbf p$ to build the plane $\pi$,
 and we cast a ray $\mathbf r$ passing through $\mathbf p$ from the camera center.
 Then,
 the 3D point candidate $\mathrm P \in R ^ {3\times1}$ for $\mathbf p$ can be obtained by $\mathbf r$-to-$\pi$ intersection,
