@@ -67,84 +67,110 @@ the observation matrix that translate $\mathbf{x}^{pre}$ to the observation form
         \label {eq_observationmatrix }
 \end{equation}
 Then,
-as shown in fig.1,
-we use the general discrete Kalman filter to update the state:
+as shown in \cref*{fig_kalmanflow},
+we use the general discrete Kalman filter to update the state.
 \begin{figure}[!ht]
-\centering
-\resizebox{0.75\textwidth}{!}{%
-\begin{circuitikz}
-\tikzstyle{every node}=[font=\normalsize]
-\draw  (0,23.5) rectangle  
-node {\normalsize
-\begin{minipage}{5cm}
-(b)~$\mathbf{z}^{obs}$ (\cref{eq_observationvector}) calculation via
-3D line reconstruction.  
-\end{minipage}
-} (6.25,21.5);
-\draw  (0,20.5) rectangle  
-node {\normalsize  
-\begin{minipage}{5cm}
-(a)~$\mathbf{x}^{pre}$ prediction  with \cref{eq_statetransition}
-and error covariance prediction via 
-\begin{equation}
-\mathrm P^{pred}= \mathrm F \mathrm P^{\mbox -} \mathrm F^{\top}+\mathrm Q
-\end{equation}
-\end{minipage}
-}  (6.25,18.5);
-\draw  (7.5,23.5) rectangle  
-node {
-\normalsize 
-\begin{minipage}{5cm}
-(c)~Kalman gain update :
-\begin{equation}
-\mathrm K= \mathrm P \mathrm H^{\top}
-\left(\mathrm H \mathrm P \mathrm H^{\top}+\mathrm R\right)^{-1}
-\end{equation}
-(d)~estimation update:
-\begin{equation}
-\mathbf{\hat{x}}= \mathbf x^{pre} + \mathrm K \left(\mathbf{z}^{pre}- \mathbf{z}^{obs}\right)
-\end{equation}
-(e)~error covariance update:
-\begin{equation}
-\mathrm{P} = \left( \mathrm{I} - \mathrm{K} \mathrm{H} \right) \mathrm{P}^{pre}
-\end{equation}
- \end{minipage}
-} (13.5,18.5);
-\draw [->, >=Stealth] (6.25,22.5) -- (7.5,22.5);
-\draw [->, >=Stealth] (7.5,19.5) -- (6.25,19.5);
-\draw [->, >=Stealth] (3.3,20.5) -- (3.3,21.5);
-\draw [->, >=Stealth] (-1.25,19.5) -- (0,19.5);
-\draw [<-, >=Stealth] (-1.25,22.5) -- (0,22.5);
-\draw [draw=none] (-4.5,16.7) rectangle  
-node {\normalsize
-\begin{minipage}{6cm}
-Initial estimate of $\mathbf {\hat{x}}$ and $\mathrm {P}$
-\end{minipage}
-} (-1,22.5);
-\draw [draw=none] (-6,22.4) rectangle  
-node {\normalsize
-\begin{minipage}{4cm}
-Check for termination:
-\begin{itemize}
+    \centering
+    \resizebox{0.8\textwidth}{!}{%
+    \begin{circuitikz}
+    \tikzstyle{every node}=[font=\normalsize]
+    
+    % 右侧矩形 (b)
+    \draw  (0,23.5) rectangle  
+    node {\large
+    \begin{minipage}{6cm}
+    (b)~$\mathbf{z}^{obs}$ (\cref{eq_observationvector}) calculation via
+    3D line reconstruction.  
+    \end{minipage}
+    } (6.25,21.5);
+    
+    % 右侧矩形 (a)
+    \draw  (0,20.5) rectangle  
+    node {\large
+    \begin{minipage}{6cm}
+    (a)~$\mathbf{x}^{pre}$ prediction  with \cref{eq_statetransition}
+    and error covariance prediction via 
     \vspace{-0.5em}
-    \item non-convergence of reconstruction
-    \vspace{-0.5em}
-    \item visual inconsistency
-    \vspace{-0.5em}
-    \item positional overlap 
-\end{itemize}
-\end{minipage}
-} (-2,22.4);
-\end{circuitikz}
-}%
-\label{fig:my_label}
+    \begin{equation}
+    \mathrm P^{pred}= \mathrm F \mathrm P^{\mbox -} \mathrm F^{\top}+\mathrm Q
+    \end{equation}
+    \end{minipage}
+    }  (6.25,18.5);
+    
+    % 右侧大矩形，右移 0.5 单位
+    \draw  (8.0,23.5) rectangle  
+    node {
+        \large
+    \begin{minipage}{7cm}
+    (c)~Kalman gain update :
+    \begin{equation}
+    \mathrm K= \mathrm P \mathrm H^{\top}
+    \left(\mathrm H \mathrm P \mathrm H^{\top}+\mathrm R\right)^{-1}
+    \end{equation}
+    (d)~estimation update:
+    \begin{equation}
+    \mathbf{\hat{x}}= \mathbf x^{pre} + \mathrm K \left(\mathbf{z}^{pre}- \mathbf{z}^{obs}\right)
+    \end{equation}
+    (e)~error covariance update:
+    \begin{equation}
+    \mathrm{P} = \left( \mathrm{I} - \mathrm{K} \mathrm{H} \right) \mathrm{P}^{pre}
+    \end{equation}
+     \end{minipage}
+    } (15.5,18.5);
+    
+    % 拉长的右侧箭头
+    \draw [->, >=Stealth] (6.25,22.5) -- (8.0,22.5); % 拉长到 8.0
+    \draw [->, >=Stealth] (8.0,19.5) -- (6.25,19.5); % 拉长到 8.0
+
+    % 左侧矩形 Initial estimate，左移 0.5 单位
+    \draw [fill=gray!5] (-7.7,20.5) rectangle  
+    node {\large
+    \begin{minipage}{5cm}
+    Initial estimation of $\mathbf {\hat{x}}$ and $\mathrm {P}$
+    ~(\cref{sec_seedgeneration})
+    \end{minipage}
+    } (-1.72,18.5);
+    
+    % 左侧矩形 Check for termination，左移 0.5 单位
+    \draw [fill=gray!5] (-7.7,23.5) rectangle  
+    node {\large
+    \hspace{0.4em} 
+    \begin{minipage}{5.5cm}
+        \raggedright % 使标题顶格
+        Check for termination:
+        \vspace{-0.5em}
+        \begin{itemize}
+            \setlength{\itemsep}{0pt} 
+            \setlength{\parskip}{0pt} 
+            \setlength{\parsep}{0pt}
+            \setlength{\leftskip}{0pt} % 保持item缩进
+            \item non-convergence of reconstruction~(\cref{sec_linereconstruction})
+            \item visual inconsistency
+            \item positional overlap 
+        \end{itemize}
+    \end{minipage}
+    } (-1.72,21);
+
+    % 拉长的左侧箭头
+    \draw [->, >=Stealth] (-1.72,19.5) -- (0,19.5); % 左侧箭头延长到 -1.72
+    \draw [<-, >=Stealth] (-1.72,22.5) -- (0,22.5); % 左侧箭头延长到 -1.72
+    
+    \end{circuitikz}
+    }%
+    \caption{The flow of kalman filter for the \textit{RLP} estimation.}
+    \label{fig_kalmanflow}
 \end{figure}
 
 
-\subsection{Accurate railway line reconstruction}
+
+    
+
+
+\subsection{Railway line reconstruction with multiple images}
 \label{sec_linereconstruction}
 
 \subsection{The seed generation for railway track}
+\label{sec_seedgeneration}
 We construct the rough 3D line based on the dense point cloud.
 Given the end point $\mathbf p$ of a 2D line segment,
 we randomly sample three space points around $\mathbf p$ to construct the plane $\pi$,

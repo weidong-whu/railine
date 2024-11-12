@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.12)  11 NOV 2024 00:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.12)  12 NOV 2024 00:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -921,55 +921,102 @@ Package: ragged2e 2023/06/22 v3.6 ragged2e Package
 \RaggedLeftParindent=\skip94
 \RaggedRightParindent=\skip95
 \JustifyingParindent=\skip96
+) (D:\Programs\MiKTeX\tex/latex/circuitikz\circuitikz.sty
+Package: circuitikz 2024/08/03{} The CircuiTikz circuit drawing package version 1.7.0
+ (D:\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (D:\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowinset=\dimen351
+\pgfarrowlength=\dimen352
+\pgfarrowwidth=\dimen353
+\pgfarrowlinewidth=\dimen354
+) (D:\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarybending.code.tex
+File: tikzlibrarybending.code.tex 2023-01-15 v3.1.10 (3.1.10)
+ (D:\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulebending.code.tex
+File: pgfmodulebending.code.tex 2023-01-15 v3.1.10 (3.1.10)
+ (D:\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulenonlineartransformations.code.tex
+File: pgfmodulenonlineartransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgftransformnonlinearflatness=\dimen355
+) (D:\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibrarycurvilinear.code.tex
+File: pgflibrarycurvilinear.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@curvilinear@time@a=\dimen356
+\pgf@curvilinear@length@a=\dimen357
+\pgf@curvilinear@length@b=\dimen358
+\pgf@curvilinear@length@c=\dimen359
+\pgf@curvilinear@length@d=\dimen360
 )
-LaTeX Font Info:    Trying to load font information for T1+stix on input line 77.
+\pgf@arrows@the@rigidity=\dimen361
+)) (D:\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryfpu.code.tex (D:\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryfpu.code.tex)) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcirc.defines.tex
+\pgf@circ@count@a=\count400
+\pgf@circ@count@b=\count401
+\pgf@circ@count@c=\count402
+\pgf@circ@res@up=\dimen362
+\pgf@circ@res@down=\dimen363
+\pgf@circ@res@zero=\dimen364
+\pgf@circ@res@left=\dimen365
+\pgf@circ@res@right=\dimen366
+\pgf@circ@res@other=\dimen367
+\pgf@circ@res@step=\dimen368
+\pgf@circ@res@temp=\dimen369
+\pgf@circ@Rlen=\dimen370
+\pgf@circ@scaled@Rlen=\dimen371
+\pgfstartlinewidth=\dimen372
+) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcircutils.tex
+\ctikz@scratchbox=\box88
+) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcircpath.tex) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcircshapes.tex) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcircmonopoles.tex) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcircbipoles.tex) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcirctripoles.tex
+\pgf@circ@res@count=\count403
+) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcircquadpoles.tex) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcircmultipoles.tex) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcirclabel.tex) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcircvoltage.tex
+\pgfcirc@labelshift=\dimen373
+) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcirccurrent.tex) (D:\Programs\MiKTeX\tex/generic/circuitikz\pgfcircflow.tex))
+LaTeX Font Info:    Trying to load font information for T1+stix on input line 79.
  (D:\Programs\MiKTeX\tex/latex/stix\t1stix.fd
 File: t1stix.fd 2015/04/17 v1.1.2-latex STIX T1 font definitions
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for LS1/stix/m/n on input line 77.
-LaTeX Font Info:    Trying to load font information for LS1+stix on input line 77.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for LS1/stix/m/n on input line 79.
+LaTeX Font Info:    Trying to load font information for LS1+stix on input line 79.
  (D:\Programs\MiKTeX\tex/latex/stix\ls1stix.fd
 File: ls1stix.fd 2015/04/17 v1.1.2-latex STIX LS1 font definitions
 )
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for LS2/stix/m/n on input line 77.
-LaTeX Font Info:    Trying to load font information for LS2+stix on input line 77.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for LS2/stix/m/n on input line 79.
+LaTeX Font Info:    Trying to load font information for LS2+stix on input line 79.
  (D:\Programs\MiKTeX\tex/latex/stix\ls2stix.fd
 File: ls2stix.fd 2015/04/17 v1.1.2-latex STIX LS2 font definitions
 )
-LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    ... okay on input line 79.
  (D:\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count400
-\scratchdimen=\dimen351
-\scratchbox=\box88
-\nofMPsegments=\count401
-\nofMParguments=\count402
+\scratchcounter=\count404
+\scratchdimen=\dimen374
+\scratchbox=\box89
+\nofMPsegments=\count405
+\nofMParguments=\count406
 \everyMPshowfont=\toks58
-\MPscratchCnt=\count403
-\MPscratchDim=\dimen352
-\MPnumerator=\count404
-\makeMPintoPDFobject=\count405
+\MPscratchCnt=\count407
+\MPscratchDim=\dimen375
+\MPnumerator=\count408
+\makeMPintoPDFobject=\count409
 \everyMPtoPDFconversion=\toks59
 ) (D:\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -977,9 +1024,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (D:\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Info: Command `\dddot' is already robust on input line 77.
-LaTeX Info: Command `\ddddot' is already robust on input line 77.
-Package hyperref Info: Link coloring ON on input line 77.
+LaTeX Info: Command `\dddot' is already robust on input line 79.
+LaTeX Info: Command `\ddddot' is already robust on input line 79.
+Package hyperref Info: Link coloring ON on input line 79.
  (main.out) (main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -1022,8 +1069,8 @@ Package hyperref Info: Link coloring ON on input line 77.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: changepage package is loaded.
-\caption@adjustwidth@hsize=\dimen353
-\caption@adjustwidth@linewidth=\dimen354
+\caption@adjustwidth@hsize=\dimen376
+\caption@adjustwidth@linewidth=\dimen377
 Package caption Info: float package is loaded.
 Package caption Info: longtable package is loaded.
 (D:\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
@@ -1033,52 +1080,52 @@ Package caption Info: End \AtBeginDocument code.
 \verbatim@out=\write5
 \openout5 = `main.abs'.
 
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 194.
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 196.
  (D:\Programs\MiKTeX\tex/latex/base\t1cmss.fd
 File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 194.
+LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 196.
  (D:\Programs\MiKTeX\tex/latex/stix\ls1stixscr.fd
 File: ls1stixscr.fd 2015/04/17 v1.1.2-latex STIX script LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 194.
+LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 196.
  (D:\Programs\MiKTeX\tex/latex/stix\ls2stixex.fd
 File: ls2stixex.fd 2015/04/17 v1.1.2-latex STIX extentions LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 194.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 196.
  (D:\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 194.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 196.
  (D:\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 194.
+LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 196.
  (D:\Programs\MiKTeX\tex/latex/stix\ls1stixfrak.fd
 File: ls1stixfrak.fd 2015/04/17 v1.1.2-latex STIX fraktur LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 194.
+LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 196.
  (D:\Programs\MiKTeX\tex/latex/stix\ls1stixbb.fd
 File: ls1stixbb.fd 2015/04/17 v1.1.2-latex STIX blackboard LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 194.
+LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 196.
  (D:\Programs\MiKTeX\tex/latex/stix\ls2stixcal.fd
 File: ls2stixcal.fd 2015/04/17 v1.1.2-latex STIX calligraphic LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 194.
+LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 196.
  (D:\Programs\MiKTeX\tex/latex/stix\ls1stixsf.fd
 File: ls1stixsf.fd 2015/04/17 v1.1.2-latex STIX sans-serif LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 194.
+LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 196.
  (D:\Programs\MiKTeX\tex/latex/stix\ls2stixtt.fd
 File: ls2stixtt.fd 2015/04/17 v1.1.2-latex STIX typewriter LS2 font definitions
 )
-Overfull \hbox (117.0831pt too wide) detected at line 194
+Overfull \hbox (117.0831pt too wide) detected at line 196
 []
  []
 
 (main.abs)
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 194.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 196.
  (D:\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 ) (sec/Introduction.tex
@@ -1116,17 +1163,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31101 strings out of 473899
- 552410 string characters out of 5738693
- 929452 words of memory out of 5000000
- 53403 multiletter control sequences out of 15000+600000
- 653963 words of font info for 150 fonts, out of 8000000 for 9000
+ 48703 strings out of 473899
+ 1081666 string characters out of 5738693
+ 1699549 words of memory out of 5000000
+ 70931 multiletter control sequences out of 15000+600000
+ 657023 words of font info for 152 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,9n,94p,428b,473s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,14n,94p,428b,1066s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0800.pk> <C:\Users\weixi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi375\ecss0800.pk><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Bold.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Italic.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/STIXGeneral-Regular.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathcal.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathex.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathit.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathrm-bold.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathrm.pfb><D:/Programs/MiKTeX/fonts/type1/public/stix/stix-mathscr.pfb>
-Output written on main.pdf (3 pages, 205057 bytes).
+Output written on main.pdf (3 pages, 207897 bytes).
 PDF statistics:
- 143 PDF objects out of 1000 (max. 8388607)
- 18 named destinations out of 1000 (max. 500000)
+ 152 PDF objects out of 1000 (max. 8388607)
+ 23 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
