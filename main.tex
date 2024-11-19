@@ -46,6 +46,16 @@
 \usepackage{changepage} % 提供 adjustwidth 环境
 \usepackage{ragged2e} % for \justifying
 \usepackage{circuitikz}
+\usepackage[usenames,dvipsnames]{pstricks}
+\usepackage{pstricks-add}
+\usepackage{pst-grad} % For gradients
+\usepackage{pst-plot} % For axes
+\usepackage{etoolbox} % For spaces in paths
+\makeatletter % For spaces in paths
+\patchcmd\Gread@eps{\@inputcheck#1 }{\@inputcheck"#1"\relax}{}{ }
+\makeatother
+
+
 
 \newcommand{\lightblue}{rgb:red,0.8;green,1;blue,1.2}
 \definecolor{mygray}{rgb}{1,1,1} %
