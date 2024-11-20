@@ -1,5 +1,14 @@
 \section{Methodology}
-
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/overview.pdf}
+    \caption{Visual alignment check in Kalman Filter.
+    We project the estimation of \textit{RLP} in multiple images and extract the deep feature with pre-trained network.
+    Then, 
+    we check their cosine distance with the first $n/2$ cells in the queue,
+    where $n$ is obtained by dividing the \textit{RLP} width by the step size $t$.}
+    \label{fig_visualCheck}
+\end{figure}
 The flow of our methodology is presented in Figure 1.
 We first define 
 
