@@ -1,21 +1,15 @@
 \section{Methodology}
 
 The flow of our methodology is presented in Figure 1.
-We take aerial images of the railway area as input,
-for which SfM and point clouds are used in advanced with existing software.
-We first extract the image line and convert it to a space line with the locally optimal plane of the point cloud.
+We first define 
+
+We take aerial images along with the camera matrix of the railway area as input.
+We first reconstruct the 3D line with our proposed algorithm that are publicly available in.
 Then,
-we cluster the single 3D line to RT candidates with the frame work derived from DBSCAN,  
-during which the texture information of multiple images extracted from ResNet is used as one of the inlier distance.
-Having obtained the RT cluster, 
-we then trace and reconstruct the vector-based RT in the Kalman framwork,
-which fully exploits the RT structure and the multi-view geometries to resolve the uncertainty caused by initial image line segment extraction and the point cloud error.
-The railway-track pair is the start seed of our Kalman method.
-We first convert image lines to 3D lines with the local optimal plane of the point cloud.
-Then,
-we cluster the single 3D line to RT pairs with DBSCAN frame work,  
-during which the deep feature of multiple images is used as the inlier distance.
-Since the 
+we cluster the single 3D line to initial RT seed with the alignment in both geometry and deep features.
+Start with each initial seed,
+we trace and reconstruct the 3D RLP in the Kalman framwork,
+which fully exploits the RLP structure and the multi-view geometries to achieve accurate and robust RLP reconstruction.
 
 \subsection{Initial seed generation}
 
