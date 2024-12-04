@@ -1,88 +1,88 @@
 \section{Methodology}
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\textwidth]{images/overview.pdf}
-    \caption{Visual alignment check in Kalman Filter.
-    We project the estimation of \textit{RLP} in multiple images and extract the deep feature with pre-trained network.
-    Then, 
-    we check their cosine distance with the first $n/2$ cells in the queue,
-    where $n$ is obtained by dividing the \textit{RLP} width by the step size $t$.}
-    \label{fig_visualCheck}
-\end{figure}
-The flow of our methodology is presented in Figure 1.
-We first define 
-
-We take aerial images along with the camera matrix of the railway area as input.
-We first reconstruct the 3D line with our proposed algorithm that are publicly available in.
-Then,
-we cluster the single 3D line to initial RT seed with the alignment in both geometry and deep features.
-Start with each initial seed,
-we trace and reconstruct the 3D RLP in the Kalman framwork,
-which fully exploits the RLP structure and the multi-view geometries to achieve accurate and robust RLP reconstruction.
-
-\subsection{Initial seed generation}
-
-We group two 3D lines as a RT pair based on their angle $\theta_{i,j}$,
-overlap $o_{i,j}$,
-and projection distance $d_{i,j}$:
-\begin{equation}
-   \left\{ RT= \left(L_i, L_j\right) \mid \theta_{i,j} < t_\theta, o_{i,j} > t_o, d_{i,j} \in I  \right\},
-    \label{eq_geometrycons}
-\end{equation}
-$\theta_{i,j}$ and $o_{i,j}$are easy to choose,
-e.g.,
-$5^\circ$ and 60\%,
-because the RT pair is parallel and highly overlapped;
-while the interval $I$ needs the rough width $\omega$ between the two RT,
-which can be acquired from construction standards or point clouds.
-We recommend setting $I=\left[2/3\omega,4/3\omega\right]$ that uses one-third of $\omega$ as the margin of error.
-Because a 3D line may satisfy \cref{eq_geometrycons} with many others,
-the greedy algorithm is used to assign the candidate pair,
-which uses the sum of the overlap rate as the maximum score.
-We sort the RT based on their scores of the geometry alignment and select the top 10\% RT and use contextual information to further validate the RT pair.
-In detail,
-if the RT's central line is within $1^\circ$ and $t$ projection distance with another RT,
-its score is increased by $\mathcal{N}\left(\mu, \left(t/3\right)^2\right)$.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/initialSeed.pdf}
-    \caption{Visual alignment check in Kalman Filter.
-    We project the estimation of \textit{RLP} in multiple images and extract the deep feature with pre-trained network.
-    Then, 
-    we check their cosine distance with the first $n/2$ cells in the queue,
-    where $n$ is obtained by dividing the \textit{RLP} width by the step size $t$.}
-    \label{fig_visualCheck}
+    \includegraphics[width=0.98\textwidth]{images/overview.pdf}
+    \caption{The flow of our method.
+    It uses the aerial images as the input and produces accurate
+    and connected 3D railway lines.}
+    \label{fig_overview}
 \end{figure}
 
-Considering the texture along the \textit{RLP} should be roughly the same, 
-as illustrated in \cref{fig_visualCheck},
-we use the global average pooling layer in ResNet101 as the basic feature,
-which has been trained on massive amounts of data and can capture texture patterns for classification in the absence of labels,
-to confirm the initial seed and check for termination.
-Denoting $\mathbf f \in R^n$ as the \textit{RLP} feature,
-we acquire the set of features $\left\{\mathbf f_i\right\}_{i=1}^m$ from the $m$ support images.
-To reduce the ambiguity of the deep feature caused by scale and rotation,
-the image block is transformed to ensure that the center line of \textit{RLP} passes through the image center horizontally and the width of \textit{RLP} is half of the image.
-After extraction of RT features, 
-we use DBSCAN to group them with the cosine distance,
-and retain the group with the highest number as the seeds of RT.
-
-
-
-\subsection{Railway track with Kalman filter}
-As shown in, 
-we use two points and directions to represent the state of the local \textit{RLP}.
+The flow to trace and reconstruct the railway line is presented in \cref{fig_overview}.
+The basic cell of our reconstruction is the railway line pair (\rlp) consists of two railway lines (\textit{RL})~(\cref{fig_overview}~(1)).
 Denote the point and direction as
 $\mathbf p=\left(x,y,z\right)$ and $\mathbf d=\left(dx,dy,dz\right)$,
-respectively.
-The vector to be estimated for the \textit{RLP} is
+\rlp is formulated as a vector
 \begin{equation}
 \mathbf x = \begin{bmatrix}
     \mathbf p_1 & \mathbf p_2 & \mathbf d_1  & \mathbf d_2 
 \end{bmatrix}^ \top \in R^{12}.
 \label{eq_prediction3} 
 \end{equation}
+that contains a pair of middle points ($\mathbf p_1$,$ \mathbf p_2$) and directions ($\mathbf d_1$,$\mathbf d_2$) to describe the local railway.
+Our method takes aerial images and their camera matrix as input.
+We first obtain the 3D line with our 2D line extraction and reconstruction algorithm.
+Then
+we cluster the single 3D line to find the seed of \rlp~ with the alignment in both geometry and deep features.
+Starting with each seed,
+we trace and reconstruct the \rlp~ in the framework of Kalman filter,
+in which the prediction and the observation comes from the geometry property of the \rlp~ structure
+and the multiview reconstruction,
+respectively;
+also,
+we use the alignment of the deep texture to check for the termination during the Kalman filter.
+
+
+\subsection{Initial seed generation with geometries and deep features}
+\label{sec_initialseed}
+With the 3D lines $\left\{L\right\}$ reconstructed from images,
+we first group $L_i$ and $L_j$ as a seed candidate of the \rlp  based on their angle $\theta_{i,j}$,
+overlap $o_{i,j}$,
+and projection distance $d_{i,j}$:
+\begin{equation}
+   \left\{\left(L_i, L_j\right) \mid \theta_{i,j} < t_\theta, o_{i,j} > t_o, d_{i,j} \in \left[\frac{2\omega}{3} ,\frac{4\omega}{3}\right]  \right\},
+    \label{eq_geometrycons}
+\end{equation}
+in which $\theta_{i,j}$ and $o_{i,j}$are easy to choose,
+e.g.,
+$5^\circ$ and 60\%,
+because the lines in \rlp~ is parallel and is highly overlapped;
+while the interval needs the rough width $\omega$ of \rlp,
+which can be acquired from construction standards or point clouds.
+We use one-third of $\omega$ as the margin error to reduce reliance on precise initial values.
+Because a 3D line may satisfy \cref{eq_geometrycons} with many others,
+we score the pair with the geometry alignments:
+if its two 3D lines are within $1^\circ$ and $t$ projection distance with another pair,
+the score is increased by $\mathcal{N}\left(\mu, \left(t/3\right)^2\right)$.
+Then,
+the greedy algorithm is used to assign the candidate pair:
+we sort the candidate based on their scores of the geometry alignment and eliminate the pair whose 3D line has been grouped in the former pairs.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.98\textwidth]{images/initialSeed.pdf}
+    \caption{The initial seed with deep features.
+    Given the line pair with geometry alignment, 
+    we extract the deep feature for their image block in multiple image,
+    with which we use the DBSCAN to confirm the initial seed of \rlp.}
+    \label{fig_initialseed}
+\end{figure}
+
+As illustrated in \cref{fig_initialseed}, considering that the texture along the \rlp~ should be roughly the same, 
+we use the global average pooling layer in ResNet101 as the basic feature,
+which has been trained on massive amounts of data and can capture texture patterns for classification in the absence of labels,
+to confirm the initial seed.
+Denoting $\mathbf f \in R^n$ as the \rlp~ feature,
+we acquire the set of features $\left\{\mathbf f_i\right\}_{i=1}^m$ from the support images,
+which can be confirmed in the line reconstruction method (ref).
+To reduce the ambiguity of the deep feature caused by scale and rotation,
+the image block is corrected: the center line of \rlp~ passes through the image center horizontally and the width of \rlp~ is half of the image.
+After extraction of RT features, 
+we use DBSCAN to cluster them with the cosine distance,
+and retain the largest group as the seeds of the \rlp.
+
+\subsection{Railway track with Kalman filter}
+Given the initial seed of \rlp,
 The prediction of $\mathbf x$ is controlled by a scalar $t$:
 \begin{equation}
         \mathbf{x}^{pre}= 
@@ -91,9 +91,9 @@ The prediction of $\mathbf x$ is controlled by a scalar $t$:
         \label {eq_statetransition}
 \end{equation}
 where the superscript $^{\mbox -}$ marks the previous state.
-For each prediction $\mathbf{x}^{pre}$,
-There is an actual observation $\mathbf{x}^{obs}$ arising from line reconstruction in multiple images~(\cref*{sec_linereconstruction}).
-The \textit{RLP} has fixed geometry patterns,
+For each state $\mathbf{x}^{pre}$,
+there is an actual observation $\mathbf{x}^{obs}$ arising from line reconstruction in multiple images~(\cref*{sec_linereconstruction}).
+The \rlp~ has fixed geometry patterns,
 i.e.,
 $\mathbf d_1$ and $\mathbf d_2$ should be as close as possible,
 and the distance change between $\mathbf p_1$ and $\mathbf p_2$ is as small as possible.
@@ -122,7 +122,7 @@ as shown in \cref{fig_kalmanflow},
 we use the general discrete Kalman filter to update the state.
 \begin{figure} [h]
     \centering
-    \resizebox{0.9\textwidth}{!}{%
+    \resizebox{0.98\textwidth}{!}{%
     \begin{circuitikz}
     \tikzstyle{every node}=[font=\normalsize]
     
@@ -179,7 +179,7 @@ we use the general discrete Kalman filter to update the state.
     \draw [fill=gray!10,rounded corners=5pt] (-7.7,20.5) rectangle  
     node {\large
     \begin{minipage}{5cm}
-    Initial estimation of $\mathbf {\hat{x}}$~(\cref{sec_seedgeneration}) and the initial covariance error $\hat{\mathrm {P}}=\mathrm{I}_{12\times 12}$
+    Initial estimation of $\mathbf {\hat{x}}$~(\cref{sec_initialseed}) and the initial covariance error $\hat{\mathrm {P}}=\mathrm{I}_{12\times 12}$
     \end{minipage}
     } (-1.72,18.5);
     
@@ -209,11 +209,69 @@ we use the general discrete Kalman filter to update the state.
     
     \end{circuitikz}
     }%
-    \caption{The flow of kalman filter for the \textit{RLP} estimation.$\mathrm{Q}$ in \cref{eq_xprediction} and $\mathrm{R}$ in \cref{eq_kalmangain} represents the covariance matrix of observation noise and process noise,respectively.}
+    \caption{The flow of kalman filter for the \rlp estimation.$\mathrm{Q}$ in \cref{eq_xprediction} and $\mathrm{R}$ in \cref{eq_kalmangain} represents the covariance matrix of observation noise and process noise,respectively.}
     \label{fig_kalmanflow}
 \end{figure}
 
-\subsection{Accurate railway line measurement}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.98\textwidth]{images/visualCheck.pdf}
+    \caption{Visual alignment check in Kalman Filter.
+    We project the estimation of \rlp in multiple images and extract the deep feature with pre-trained network.
+    Then, 
+    we check their cosine distance with the first $n/2$ cells in the queue,
+    where $n$ is obtained by dividing the \rlp width by the step size $t$.}
+    \label{fig_visualCheck}
+\end{figure}
+
+For each seed of \rlp~,
+we will track it with the Kalman filter and terminate the track when one of the following conditions is met.
+(1) \textit{Overlap}:
+with each of the last $k$ \rlp~ in the current filter process, 
+we find the nearest \rlp~ set that have been reconstructed in the previous filter process.
+If half of the \rlp~ can find a nearest one within $\frac{1}{10}d$,
+we say that the overlap has occurred.
+(2) \textit{Inaligned deep features:}
+the texture is not aligned with the previous state,
+We save the set of deep features that has passed the texture validation in a queue and use the first half of the elements in the queue to validate the new $\left\{\mathbf f^\prime\right\}_{i=1}^{m1}$:
+\begin{equation}
+\sum_{i=1}^{m_1} \mathbb{I} \left( \exists j \in \left[ m_2 \right], \, \cos \left( \mathbf{f}_i, \mathbf f^{\prime}_j \right) > \theta \right) \geq \frac{m_1}{2}
+\label{eq_featureValidation}
+\end{equation}
+where $m2$ is the total number of $\mathbf f$ in the first half of the feature set in the queue;
+$\mathbb{I}$ represents an indicator function which takes the value of 1 when a certain condition is true and 0 otherwise.
+If $\left\{\mathbf f^\prime\right\}_{i=1}^{m1}$ satisfies \cref{eq_featureValidation},
+it is pushed to the queue, 
+and then the queue is dequeued if its cell passed $cal$.
+(3) \textit{Degenerate reconstruction:}
+there is no correct 3D line that can be reconstructed from multiple images in \cref{sec_linereconstruction}.
+Note that
+it is unnecessary to check for termination in every estimate, especially when we use a small $t$ for robustness;
+instead,
+we employ this check when $k$ iterations are reached and roll back to the state of the previous check when the overlap or feature inconsistency occurs. 
+
+\begin{figure}[htbp]
+    \centering
+    % 第一个子图
+    \subfloat[The weight function of \cref{eq_gradientweight}]{
+        \includegraphics[width=0.24\textwidth]{images/linereconstruction1.pdf}
+    }
+    \hfill % 空格，均匀分布
+    % 第二个子图
+    \subfloat[Some results of the GD algorithm]{
+        \includegraphics[width=0.44\textwidth]{images/linereconstruction2.pdf}
+    }
+    \hfill
+    % 第三个子图
+    \subfloat[The 3D lines from image pairs]{
+        \includegraphics[width=0.25\textwidth]{images/linereconstruction3.pdf}
+    }
+    \caption{Illustration of the line reconstruction.} % 总标题
+    \label{fig:three-images}
+\end{figure}
+
+
+\subsection{Accurate railway line position with gradient descending}
 \label{sec_linereconstruction}
 For a 3D line in $\mathbf{x}^{pre}$~(\cref{eq_statetransition}),
 we convert it into image with camera matrix and obtain the 2D line segment
@@ -247,20 +305,21 @@ p_i
 \end{bmatrix},
 \label{eq_samplepoints}
 \end{equation}
-where $h_i$ and $ p_i$ is the parallel and horizontal distance of $\mathbf{l}^{obs}$,
+where $h_i$ and $ p_i$ is the parallel and horizontal distance to $\mathbf{l}^{obs}$,
 respectively.
-Because the \textit{RL} has a width that is different at different positions in different images,
-we use $\lambda_i$ to weight the gradients:
+Because the \textit{RL} has a width that is different at with positions and images,
+we use $\lambda_i$ in \cref{eq_GDobjfunction} to weight the gradients:
 \begin{equation}
 \lambda_i= 1 - \frac{1}{1 + e^{10\left(w_1-p_i \right)}} + \frac{1}{1 + e^{10\left(w_2-p_i\right)}}
+\label{eq_gradientweight}
 \end{equation}
 where $w_1$ and $w_2$ are the distance calculated from the the prior width of \textit{RL}.
-We use the gradient ascend,
+
+We use the gradient ascend to find $\mathbf{l}^{obs}$ with \cref{eq_GDobjfunction}:
 \begin{equation}
 \mathbf{l}^{obs}_{i}=\mathbf{l}^{obs}_{i-1}-\alpha \Delta \mathcal{L},
 \label{eq_gditerative}
 \end{equation}
-to find $\mathbf{l}^{obs}$ with \cref{eq_GDobjfunction},
 where \( \alpha \) is the learning rate.
 \( \Delta \mathcal{L} \) is the gradient from \cref{eq_GDobjfunction} and \cref{eq_samplepoints}:
 \begin{equation}
@@ -278,35 +337,23 @@ where $\mathbf{J}_i$ is the Jacobian matrix
 \partial y_i / \partial x_c & \partial y_i / \partial y_c & \partial y_i / \partial \theta
 \end{bmatrix}^{\top}
 \end{equation}
-
 \cref{eq_gditerative} takes $\mathbf{l}^{pre}$ as input and iterates until the parameters converge, i.e., when the change in the parameters is smaller than a predefined threshold.
-After the measurement in multiple images, 
-we obtain a set of image lines and the accurate 3D line is reconstructed with the method in (ref).
 
-\subsection{Initial seed and termination with deep features}
+In the task of reconstructing the optimal 3D line segment from multiple $\mathbf l^{obs}$, we propose an efficient strategy. 
+Specifically, 
+for \( n \) images with \( n \) observed line segments, 
+we first perform pairwise 3D line segment reconstructions for all image pairs, 
+generating \( n \times (n-1) / 2 \) candidate 3D line segments. 
+Next, a score is computed for each 3D line segment by calculating the weighted sum of distances to other 3D line segments within a specified distance threshold. 
+Finally, the 3D line segment with the highest score is selected as the optimal reconstruction.
+We say the degenerate reconstruction occurs when the highest score is 0 and the Kalman filter will be terminated as illustrated in  \cref{fig_kalmanflow,fig_visualCheck}. 
+Using the known RLP structure, 
+we can easily use the approximate RLP width range to define an appropriate inlier threshold,
+enhancing the robustness and accuracy of the method.
 
 
-\textbf{Check for termination.} We save the set that has passed texture validation in a queue and use the first half of the elements in the queue to validate the new $\left\{\mathbf f^\prime\right\}_{i=1}^{m1}$:
-\begin{equation}
-\sum_{i=1}^{m_1} \mathbb{I} \left( \exists j \in \left[ m_2 \right], \, \cos \left( \mathbf{f}_i, \mathbf f^{\prime}_j \right) > \theta \right) \geq \frac{m_1}{2}
-\label{eq_featureValidation}
-\end{equation}
-where $m2$ is the total number of $\mathbf f$ in the first half of the feature set in the queue;
-$\mathbb{I}$ represents an indicator function which takes the value of 1 when a certain condition is true and 0 otherwise.
-If $\left\{\mathbf f^\prime\right\}_{i=1}^{m1}$ satisfy \cref{eq_featureValidation},
-it is pushed to the queue, 
-and then the queue is dequeued if its cell passed $cal$.
+    
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/visualCheck.pdf}
-    \caption{Visual alignment check in Kalman Filter.
-    We project the estimation of \textit{RLP} in multiple images and extract the deep feature with pre-trained network.
-    Then, 
-    we check their cosine distance with the first $n/2$ cells in the queue,
-    where $n$ is obtained by dividing the \textit{RLP} width by the step size $t$.}
-    \label{fig_visualCheck}
-\end{figure}
 
 
 

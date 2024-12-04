@@ -1,1 +1,42 @@
 \section{Related works}
+
+Railway detection and line reconstruction are essential components of accurately modeling railway infrastructure. This study reviews three key aspects: point cloud-based methods for railway detection, image-based approaches for enhanced recognition, and 3D line reconstruction techniques for precise segment modeling.
+
+\subsection{Point Cloud-Based railway detection}
+3D point clouds, owing to their efficiency and precision, are widely used for railway segment detection, with both traditional and modern methods contributing to advancements in the field.
+Traditional approaches primarily rely on data fusion and geometric models. \cite{Beger2011} demonstrated that fusing aerial imagery with LiDAR data significantly enhances railway centerline reconstruction, highlighting the benefits of multi-source data integration. Similarly, \cite{Yang2014} utilized shape and intensity features to model railway tracks, while \cite{SanchezRodriguez2019} adopted a coarse-to-fine RANSAC strategy to refine railway tunnel power line detection. These methods showcase the potential of tailored geometric models in specific applications but suffer from sensitivity to data quality and acquisition conditions.
+Infrastructure-focused approaches, such as those by \cite{Cserep2022}, emphasize detailed railway fragmentation and infrastructure recognition using dense LiDAR data, enabling detailed mapping of complex structures. 
+\cite{Ye2022} extended this to high-definition lane extraction in curved road scenarios, underlining the adaptability of point cloud data for intricate transportation features. 
+\cite{Ariyachandra2023} further enhanced railway topology analysis by integrating geometric constraints, paving the way for more reliable detection and modeling of railway components, including catenary structures \citep{Zhang2023a}.
+
+Although these methods provide valuable information, they rely heavily on manually defined features, which limits their scalability across diverse environments. 
+To address these challenges, deep learning approaches have emerged as a promissing solution.
+\cite{Ma2022} introduced BoundaryNet, leveraging MLS point clouds and satellite imagery to extract road boundaries with high accuracy. 
+\cite{Zhang2022} tackle complex geometries, such as overhead wires, by learning intricate patterns in airborne LiDAR data. 
+Simulation frameworks like TrainSim \citep{DAmico2023} provide a synthetic system to train deep learning models, enhancing their robustness in real-world applications.
+Real-time detection systems, such as the fusion-based approach \citep{Tang2024}, combine LiDAR and camera data to improve efficiency and accuracy, and the anomaly detection techniques by \cite{Ge2024} integrate semi-supervised learning and decision fusion for robust railway inspection.
+Despite these advances, deep learning methods demand substantial computational resources and rely on extensive annotated datasets, as exemplified by WHU-Railway3D \citep{Qiu2024}, which serves as a benchmark for railway semantic segmentation. 
+
+\subsection{Image-Based railway detection}
+Image-based railway detection has been revolutionized by deep learning, leveraging recent advances in pattern recognition to improve performance across diverse scenarios. Unlike point cloud-based methods, image-based techniques benefit from the ubiquity of cameras and the rich contextual information in images, making them ideal for railway recognition.
+Early approaches, such as those by \cite{Yang2022b}, combined discretization, filtering, and reconstruction to detect railway tracks in UAV images, demonstrating their applicability for inspection purposes.
+\cite{Zheng2022} improved feature integration through cross-layer refinement, enabling robust lane detection under varying environmental conditions. These methods laid the foundation for incorporating deeper geometric modeling and advanced architectures.
+Recent methods have focused on improving the representation of complex structures.
+For instance, \cite{Chae2023} reconstructed lane lines as polylines, emphasizing the importance of geometric modeling for autonomous driving. Transformer-based methods \citep{Chen2023,Luo2023,Yao2023} introduced a paradigm shift by capturing long-range dependencies, enabling accurate detection even in complex or sparse data scenarios. Flexible anchoring mechanisms like FLAMNet \citep{Ran2023} adapt to challenges such as lane curvature and occlusions, addressing limitations of fixed-detection models.
+
+Semantic segmentation remains a cornerstone for image-based railway detection.
+\cite{Weng2023} enhanced traditional architectures like DeepLabV3+, providing precise track extraction for automated maintenance. Furthermore,
+\cite{zhang2024enhanced} advanced curved lane detection with ECPNet, a method that combines global spatial understanding with local precision, showcasing the role of adaptive techniques in refining detection accuracy.
+Geometry-driven methods, such as the topology-guided approach by \cite{Yang2022a}, bridge the gap between traditional and deep learning methods by leveraging structural constraints to enhance detection robustness. 
+This highlights the enduring relevance of geometric insights in complementing data-driven techniques.
+
+\subsection{3D line reconstruction}
+The forward intersection of multi-view line segments is performed based on segment association, where multiple planes constructed by the imaging center and image segments are intersected to solve for accurate 3D line segments. The overall framework can be broadly categorized into two types:
+Strict association results: These methods directly fit line segments in 3D space under strict threshold constraints \citep{Jain2010}, or iteratively adjust and optimize 3D line segments through more rigorous back-projection models \citep{Schmid1997, HOFER, LiuCVPR}.
+Reconstruction-based methods: These approaches reconstruct 3D line segments from matched two-view line segments and then select the optimal representative line segment based on the geometric consistency of the segments \citep{WEI2022}. Although these methods typically achieve suboptimal positioning accuracy compared to the first type, they are less sensitive to gross errors in matching and feature association, balancing reconstruction efficiency and quality, and are suitable for scenarios with more relaxed matching and association constraints.
+The forward intersection of multi-view line segments is more complex than that of point features. When line segments are close to the epipolar plane, significant intersection errors may occur, resulting in inaccurate segment positioning \citep{Hartley2003}. Although various solutions have been proposed to address this issue, their fundamental idea remains consistent: constructing an optimization function by integrating geometric information and back-projection errors, rather than solely focusing on the error model of the line segments themselves. Among these, coplanarity between line segments serves as an effective geometric constraint. For distant adjacent line segments, 3D line segments are solved jointly based on coplanarity constraints \citep{OK}. Other studies reconstruct 3D line segments, group them into planes through fitting, and project the grouped segments onto the fitted planes to obtain 3D line segments.
+
+Recently, deep learning methods have been explored for plane detection and grouping based on the orientation of 3D lines, using plane associations for forward intersection \citep{wang2020reconstruction}. This method produces visually regularized line clouds, but its actual positioning accuracy is significantly affected by coplanarity thresholds and scene structure. In the latest studies \citep{LiuCVPR}, two approaches were proposed to optimize the forward intersection of line segments:
+Vanishing point-based intersection constraints: This approach corrects segment errors using vanishing point constraints. It remains based on the coplanarity of line segments but allows the use of existing vanishing point detection algorithms for segment grouping.
+Deep learning-based matching of homologous points on line segments: Since the intersection of homologous points is only invalid near the epipolar line, this method provides robust positional constraints.
+These advancements demonstrate promising directions for improving both the accuracy and robustness of line segment forward intersection.

@@ -1,81 +1,74 @@
 \section{Introduction}
 
-Currently,
-the length of the railway has exceeded 1.3 million kilometers on the earth,
-for which the maintenance and development of railways have a significant impact on safe operations.
-As the preliminary stage of 
-extracting 3D railway track (RT) accurately and efficiently, 
+The length of the railway has exceeded 1.3 million kilometers on earth, 
+for which maintenance and development have a significant impact on safe operations.
+Thus,
+extracting vectorized 3D railway line (\rl) accurately and efficiently, 
 to support engineering design, monitor construction quality, 
 and ensure operational safety,
-has become one of the basic components in the maintenance of existing railways.
+has become one of the basic preliminary tasks in the maintenance of the \rl.
 
-The extraction of RT can be achieved by real-time kinematics, LiDAR,
+\rl extraction can be achieved by real-time kinematics, 
+LiDAR,
 and multiple images.
-The real-time kinematic is generally mounted on a railway measurement vehicle and obtains the RT by moving along the rail track.
+The real-time kinematic is generally mounted on a railway measurement vehicle and obtains the \rl by moving along the rail track.
 In general, 
 it has a satisfactory accuracy while requiring operations on the track,
 thus demanding the cooperation of railway departments, 
 and there are issues related to both safety and efficiency.
 LiDAR sensors can be mounted on a drone, 
 which is more convenient and secure than real-time kinematic. 
-Because a further process, 
-like point segmentation or classification,
-is required for RT extraction,
-the drone must maintain a low flight altitude to satisfy the standards of the point-cloud density,
-which would impact the efficiency.
-A drone with cameras can capture aerial images efficiently with a safe distance from the railway area.
-But RT extraction is challenging in aerial images:
-(1) The dense points reconstructed with aerial images are inaccurate around the railway track because of the occlusion and matching problems caused by the parallax variation.
-(2) Joining image semantics to obtain RT might be workable;
-However,
-how to detect the semantics of RT accurately and completely in aerial images remains to be studied.
+Because further process is required for extraction of \rl with LiDAR points, 
+such as point segmentation or classification,
+the drone must maintain a low flight altitude to satisfy the requirement of point-cloud density.
+This would also impact safety and efficiency.
+A drone with cameras can capture high-resolution aerial images efficiently with a safe distance from the railway.
+But extraction of \rl is challenging in aerial images:
+(1) The dense points of aerial images are inaccurate around the railway track due to occlusion and matching problems caused by the parallax variation.
+(2) Joining image semantics could be workable;
+but how to detect and reconstruct \rl accurately and completely in multiple aerial images remains to be studied.
 
-If we reconstruct the dense points from multiple aerial images and detect the RT from point clouds,
-the overall method of finding RT is similar to deal with the point clouds that obtained from mobile laser scanning (MLS) or airborne laser scanning (ALS).
-Generally,
-the RT can be detected with semantic segmentation,
-while the significant noise, inaccurate edge localization, and large density variations of point clouds bring about great challenges to the robust semantic segmentation.
-Thus,
-most general segmentation algorithm cannot be used directly in RT segmentation;
-instead,
-the carefully designed geometric priors was used to guide the segmentation and the grouping of RT:
-such as constructing the shape features and density data on the basis of railway bed extraction.
-However,
-these methods relies heavily on the quality and density of the point cloud,
-thus requiring the drone to maintain a low flight path to improve point cloud quality and reduce the processing range.
+Point segmentation is the core method for detecting \rl with point clouds,
+either from aerial images or LiDAR points from mobile laser scanning (MLS) or airborne laser scanning (ALS).
+Traditional algorithms carefully design geometric priors to guide segmentation to find \rl and learning-based algorithms generally train the segmentation model on the basis of PointNet. 
+Significant noise,
+which requires the drone to maintain a low flight path to improve the quality of the point cloud and reduce the processing range,
+because inaccurate edge localization, 
+and large density variations of point clouds will present great challenges for robust semantic segmentation.
 Compared with point clouds,
-images contains rich semantic informations.
+images contain rich semantic information.
 Thus,
-several studies exploited the deep learning method that design the network for training and detect the RT from aerial images,
-which demonstrated the effectiveness of deep learning technology in RT extraction. 
-Moreover,
-the deep learning method relies heavily on training samples and considering the texture of railway regions varies greatly across the world,
-it may require an increased number of training samples to obtain a more generalizable detection network.
-In addition, 
-these methods just deal with single frame and lacked the strategy of processing multiple aerial images.
+some studies used the deep learning method to detect \rl from aerial images,
+but may require an increased number of training samples to obtain a more generalizable detection network;
+also, 
+most of these methods only dealt with a single image block and lacked the strategy for processing multiple aerial images.
+In recent years, significant progress has been made in 3D line detection, but there are still no specific algorithms tailored for railway line detection. 
+As a result, the reconstructed 3D lines often represent railway edges and are prone to fragmentation and missing segments.
 
-This paper propose the accurate RT extraction for multiple aerial images,
-which fully exploits the contexture and geometry informations across multiple images:
+This work is inspired by autonomous driving technology. 
+If railway tracks are considered analogous to roads, lane-following techniques can be used to simulate the train autopilot. 
+In straight sections of the railway, where the direction of travel is locally linear, trajectories can be predicted directly. 
+For curved sections, multiview reconstruction is utilized to refine the prediction, enabling precise curve navigation. 
+By integrating multi-view reconstruction with local prediction through a Kalman Filter,
+this approach effectively addresses the challenges of track reconstruction, 
+which is often vulnerable to noise and errors.
+To determine the starting point of the train, we employed a joint clustering method that combines the features of the deep network from the images with the geometric features of the 3D line segments. 
+To reconstruct a precise and detailed 3D railway track, we used a gradient descent approach to optimize the local track segments in images based on the structural characteristics of the railway.
+In summary:
 \vspace{-0.5em}
 \begin{itemize}
-    \item To exploit the geometry constraint of RT across multiple images, 
-    we extract the straight line from images as the basic geometry cell, 
-    for which we propose the robust clustering and triangulation methods.
-    We first propose the noise-resistant clustering across multiple images to obtain the complete and non-redundant 3D line;
-    Then, we propose the novel and accurate triangulation algorithm to refine the 3D line position of the RT.  
+    \item We propose the Kalman Filter framework, which combines both multiview geometry and semantics for automatic and accurate 3D \rl extraction from aerial images.
     \vspace{-0.5em}
-    \item To exploit the rich texture information in images,
-    our clustering method exploit the deep features of existing network trianed from millions of images, 
-    rather than a new network specifically designed for RT extraction;
-    thus requiring non pre-training, which generaly needs expensive samples.
+    \item We propose an iterative optimization method with Gradient descend algorithm to find the accurate \rl in images, 
+    which fully considers the \rl various in different images.
 \end{itemize}
 \vspace{-0.5em}
-Compared to LiDAR based methods,
-we use more affordable imaging drones to conduct an efficient and safer railway aera maping than ALS drones or MLS equipments,
-and the rich contexture is exploited to compensate for issues caused by point cloud quality.
-Compared to the former image-based methods,
-we propsose the complete clustering and reconstruction strategies that obtain the accurate and non-redundant 3D RT from multiple aerial images;
-and non pre-training is required due to the utilization of geometry guidance in multiple images.
+Compared to LiDAR-based methods,
+we use more affordable imaging drones to conduct an efficient and safer railway map than ALS drones or MLS equipment.
+Compared to previous image-based methods,
+we propose complete tracking and reconstruction strategies that obtain accurate and vectorized 3D \rl from multiple aerial images;
+also,
+no pre-training is required in our method.
 
 
 

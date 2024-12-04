@@ -51,11 +51,13 @@
 \usepackage{pst-grad} % For gradients
 \usepackage{pst-plot} % For axes
 \usepackage{etoolbox} % For spaces in paths
+\usepackage{subcaption}
 \makeatletter % For spaces in paths
 \patchcmd\Gread@eps{\@inputcheck#1 }{\@inputcheck"#1"\relax}{}{ }
 \makeatother
 
-
+\newcommand{\rlp}{\textit{RLP}}
+\newcommand{\rl}{\textit{RL}\xspace}
 
 \newcommand{\lightblue}{rgb:red,0.8;green,1;blue,1.2}
 \definecolor{mygray}{rgb}{1,1,1} %
@@ -95,7 +97,7 @@
 \shorttitle{}
 
 % Main title of the paper
-\title [mode = title]{Automatic and Accurate 3D Railway Line Extraction and Reconstruction in Multiple Aerial Images with Kalman Filter }                      
+\title [mode = title]{Railway Line Reconstruction in Images with Kalman Filter }                      
 % Title footnote mark
 % eg: \tnotemark[1]
 
@@ -127,10 +129,10 @@
 \author[1]{Yongjun Zhang}
 \cormark[1]
 \ead{zhangyj@whu.edu.cn}
-% Third author
-\author[2]{Chang Li}
-\ead{lichang@ccnu.edu.cn}
-
+\author[1]{Bin Zhang}
+\fnmark[1]
+\author[1]{Guangshuai Wang}
+\fnmark[1]
 \author[1]{Ziqian Huang}
 \fnmark[1]
 
@@ -208,7 +210,7 @@ to determine adaptive thresholds;
 \input{sec/Introduction.tex}
 \input{sec/relatedWorks.tex}
 \input{sec/methodology.tex}
-
+\input{sec/experiments.tex}
 \bibliographystyle{plainnat}
 \bibliography{cas-refs}
 
