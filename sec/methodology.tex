@@ -8,14 +8,15 @@
     \label{fig_overview}
 \end{figure}
 
-The flow to trace and reconstruct the railway line is presented in \cref{fig_overview}.
-The basic cell of our reconstruction is the railway line pair (\rlp) consists of two railway lines (\textit{RL})~(\cref{fig_overview}~(1)).
-Denote the point and direction as
-$\mathbf p=\left(x,y,z\right)$ and $\mathbf d=\left(dx,dy,dz\right)$,
-\rlp is formulated as a vector
+The flow is presented in \cref{fig_overview}.
+The basic cell of our reconstruction is the railway line pair (\rlp) consisting of two railway lines (\textit{RL})~(\cref{fig_overview}~(1)).
+We use a center point $\mathbf p=\left(x,y,z\right)$,
+the forward vector $\mathbf d=\left(d_x,d_y,d_z\right)$,
+the rotation angle $r$ perpendicular to $\mathbf d$,
+and the with $w$ to shape the \rlp:
 \begin{equation}
 \mathbf x = \begin{bmatrix}
-    \mathbf p_1 & \mathbf p_2 & \mathbf d_1  & \mathbf d_2 
+    \mathbf p  & \mathbf d  & \mathbf d_2 
 \end{bmatrix}^ \top \in R^{12}.
 \label{eq_prediction3} 
 \end{equation}
