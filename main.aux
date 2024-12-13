@@ -7,51 +7,128 @@
 \csgdef{mark@fnau2}{1}
 \csgdef{mark@corau3}{1}
 \emailauthor{zhangyj@whu.edu.cn}{Yongjun Zhang}
-\emailauthor{lichang@ccnu.edu.cn}{Chang Li}
+\csgdef{mark@fnau4}{1}
 \csgdef{mark@fnau5}{1}
+\csgdef{mark@fnau6}{1}
 \NewLabel{cor1}{1}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{Beger2011}
+\citation{Yang2014}
+\citation{SanchezRodriguez2019}
+\citation{Cserep2022}
+\citation{Ye2022}
+\citation{Ariyachandra2023}
+\citation{Zhang2023a}
+\citation{Ma2022}
+\citation{Zhang2022}
+\citation{DAmico2023}
+\citation{Tang2024}
+\citation{Ge2024}
+\citation{Qiu2024}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related works}{2}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{2}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Initial seed generation}{2}{subsection.3.1}\protected@file@percent }
-\newlabel{eq_geometrycons}{{1}{2}{Initial seed generation}{equation.3.1}{}}
-\newlabel{eq_geometrycons@cref}{{[equation][1][]1}{[1][2][]2}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Visual alignment check in Kalman Filter. We project the estimation of \textit  {RLP} in multiple images and extract the deep feature with pre-trained network. Then, we check their cosine distance with the first $n/2$ cells in the queue, where $n$ is obtained by dividing the \textit  {RLP} width by the step size $t$.}}{3}{figure.caption.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Point Cloud-Based railway detection}{2}{subsection.2.1}\protected@file@percent }
+\citation{Yang2022b}
+\citation{Zheng2022}
+\citation{Chae2023}
+\citation{Chen2023,Luo2023,Yao2023}
+\citation{Ran2023}
+\citation{Weng2023}
+\citation{zhang2024enhanced}
+\citation{Yang2022a}
+\citation{Jain2010}
+\citation{Schmid1997,HOFER,LiuCVPR}
+\citation{WEI2022}
+\citation{Hartley2003}
+\citation{OK}
+\citation{wang2020reconstruction}
+\citation{LiuCVPR}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Image-Based railway detection}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}3D line reconstruction}{3}{subsection.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The flow of our method. It uses the aerial images as the input and produces accurate and connected 3D railway lines.}}{4}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig_visualCheck}{{1}{3}{Visual alignment check in Kalman Filter. We project the estimation of \textit {RLP} in multiple images and extract the deep feature with pre-trained network. Then, we check their cosine distance with the first $n/2$ cells in the queue, where $n$ is obtained by dividing the \textit {RLP} width by the step size $t$}{figure.caption.1}{}}
-\newlabel{fig_visualCheck@cref}{{[figure][1][]1}{[1][2][]3}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Railway track with Kalman filter}{3}{subsection.3.2}\protected@file@percent }
-\newlabel{eq_prediction3}{{2}{3}{Railway track with Kalman filter}{equation.3.2}{}}
-\newlabel{eq_prediction3@cref}{{[equation][2][]2}{[1][3][]3}{}{}{}}
-\newlabel{eq_statetransition}{{3}{3}{Railway track with Kalman filter}{equation.3.3}{}}
-\newlabel{eq_statetransition@cref}{{[equation][3][]3}{[1][3][]3}{}{}{}}
-\newlabel{eq_observationvector}{{4}{3}{Railway track with Kalman filter}{equation.3.4}{}}
-\newlabel{eq_observationvector@cref}{{[equation][4][]4}{[1][3][]3}{}{}{}}
-\newlabel{eq_observationmatrix }{{5}{3}{Railway track with Kalman filter}{equation.3.5}{}}
-\newlabel{eq_observationmatrix @cref}{{[equation][5][]5}{[1][3][]3}{}{}{}}
-\newlabel{eq_xprediction}{{6}{3}{Railway track with Kalman filter}{equation.3.6}{}}
-\newlabel{eq_xprediction@cref}{{[equation][6][]6}{[1][3][]3}{}{}{}}
-\newlabel{eq_kalmangain}{{7}{3}{Railway track with Kalman filter}{equation.3.7}{}}
-\newlabel{eq_kalmangain@cref}{{[equation][7][]7}{[1][3][]3}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The flow of kalman filter for the \textit  {RLP} estimation.$\mathrm  {Q}$ in \cref  {eq_xprediction} and $\mathrm  {R}$ in \cref  {eq_kalmangain} represents the covariance matrix of observation noise and process noise,respectively.}}{3}{figure.caption.2}\protected@file@percent }
-\newlabel{fig_kalmanflow}{{2}{3}{The flow of kalman filter for the \textit {RLP} estimation.$\mathrm {Q}$ in \cref {eq_xprediction} and $\mathrm {R}$ in \cref {eq_kalmangain} represents the covariance matrix of observation noise and process noise,respectively}{figure.caption.2}{}}
-\newlabel{fig_kalmanflow@cref}{{[figure][2][]2}{[1][3][]3}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Accurate railway line measurement}{3}{subsection.3.3}\protected@file@percent }
-\newlabel{sec_linereconstruction}{{3.3}{3}{Accurate railway line measurement}{subsection.3.3}{}}
-\newlabel{sec_linereconstruction@cref}{{[subsection][3][3]3.3}{[1][3][]3}{}{}{}}
+\newlabel{fig_overview}{{1}{4}{The flow of our method. It uses the aerial images as the input and produces accurate and connected 3D railway lines}{figure.caption.1}{}}
+\newlabel{fig_overview@cref}{{[figure][1][]1}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{4}{section.3}\protected@file@percent }
+\newlabel{eq_prediction3}{{1}{4}{Methodology}{equation.3.1}{}}
+\newlabel{eq_prediction3@cref}{{[equation][1][]1}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Initial seed generation}{4}{subsection.3.1}\protected@file@percent }
+\newlabel{sec_initialseed}{{3.1}{4}{Initial seed generation}{subsection.3.1}{}}
+\newlabel{sec_initialseed@cref}{{[subsection][1][3]3.1}{[1][4][]4}{}{}{}}
+\newlabel{eq_geometrycons}{{2}{4}{Initial seed generation}{equation.3.2}{}}
+\newlabel{eq_geometrycons@cref}{{[equation][2][]2}{[1][4][]4}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The initial seed with deep features. Given the line pair with geometry alignment, we extract the deep feature for their image block in multiple image, with which we use the DBSCAN to confirm the initial seed of \textit  {RLP}.}}{5}{figure.caption.2}\protected@file@percent }
+\newlabel{fig_initialseed}{{2}{5}{The initial seed with deep features. Given the line pair with geometry alignment, we extract the deep feature for their image block in multiple image, with which we use the DBSCAN to confirm the initial seed of \rlp }{figure.caption.2}{}}
+\newlabel{fig_initialseed@cref}{{[figure][2][]2}{[1][4][]5}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Railway track with Kalman filter}{5}{subsection.3.2}\protected@file@percent }
+\newlabel{eq_statetransition}{{3}{5}{Railway track with Kalman filter}{equation.3.3}{}}
+\newlabel{eq_statetransition@cref}{{[equation][3][]3}{[1][5][]5}{}{}{}}
+\newlabel{eq_xprediction}{{4}{5}{Railway track with Kalman filter}{equation.3.4}{}}
+\newlabel{eq_xprediction@cref}{{[equation][4][]4}{[1][5][]5}{}{}{}}
+\newlabel{eq_kalmangain}{{5}{5}{Railway track with Kalman filter}{equation.3.5}{}}
+\newlabel{eq_kalmangain@cref}{{[equation][5][]5}{[1][5][]5}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The flow of kalman filter for the \textit  {RLP}estimation.$\mathrm  {Q}$ in \cref  {eq_xprediction} and $\mathrm  {R}$ in \cref  {eq_kalmangain} represents the covariance matrix of observation noise and process noise,respectively.}}{5}{figure.caption.3}\protected@file@percent }
+\newlabel{fig_kalmanflow}{{3}{5}{The flow of kalman filter for the \rlp estimation.$\mathrm {Q}$ in \cref {eq_xprediction} and $\mathrm {R}$ in \cref {eq_kalmangain} represents the covariance matrix of observation noise and process noise,respectively}{figure.caption.3}{}}
+\newlabel{fig_kalmanflow@cref}{{[figure][3][]3}{[1][5][]5}{}{}{}}
+\newlabel{eq_jacobian}{{8}{5}{Railway track with Kalman filter}{equation.3.8}{}}
+\newlabel{eq_jacobian@cref}{{[equation][8][]8}{[1][5][]5}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Visual alignment check in Kalman Filter. We project the estimation of \textit  {RLP}in multiple images and extract the deep feature with pre-trained network. Then, we check their cosine distance with the first $n/2$ cells in the queue, where $n$ is obtained by dividing the \textit  {RLP}width by the step size $t$.}}{6}{figure.caption.4}\protected@file@percent }
+\newlabel{fig_visualCheck}{{4}{6}{Visual alignment check in Kalman Filter. We project the estimation of \rlp in multiple images and extract the deep feature with pre-trained network. Then, we check their cosine distance with the first $n/2$ cells in the queue, where $n$ is obtained by dividing the \rlp width by the step size $t$}{figure.caption.4}{}}
+\newlabel{fig_visualCheck@cref}{{[figure][4][]4}{[1][5][]6}{}{}{}}
+\newlabel{eq_featureValidation}{{9}{6}{Railway track with Kalman filter}{equation.3.9}{}}
+\newlabel{eq_featureValidation@cref}{{[equation][9][]9}{[1][6][]6}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Illustration of the line reconstruction.}}{6}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:three-images}{{5}{6}{Illustration of the line reconstruction}{figure.caption.5}{}}
+\newlabel{fig:three-images@cref}{{[figure][5][]5}{[1][6][]6}{}{}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {The weight function of \cref {eq_gradientweight}}}}{6}{subfigure.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Some results of the GD algorithm}}}{6}{subfigure.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {The 3D lines from image pairs}}}{6}{subfigure.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Accurate railway line position with gradient descending}{6}{subsection.3.3}\protected@file@percent }
+\newlabel{sec_linereconstruction}{{3.3}{6}{Accurate railway line position with gradient descending}{subsection.3.3}{}}
+\newlabel{sec_linereconstruction@cref}{{[subsection][3][3]3.3}{[1][6][]6}{}{}{}}
+\newlabel{eq_GDobjfunction}{{10}{6}{Accurate railway line position with gradient descending}{equation.3.10}{}}
+\newlabel{eq_GDobjfunction@cref}{{[equation][10][]10}{[1][6][]6}{}{}{}}
+\newlabel{eq_samplepoints}{{11}{7}{Accurate railway line position with gradient descending}{equation.3.11}{}}
+\newlabel{eq_samplepoints@cref}{{[equation][11][]11}{[1][6][]7}{}{}{}}
+\newlabel{eq_gradientweight}{{12}{7}{Accurate railway line position with gradient descending}{equation.3.12}{}}
+\newlabel{eq_gradientweight@cref}{{[equation][12][]12}{[1][7][]7}{}{}{}}
+\newlabel{eq_gditerative}{{13}{7}{Accurate railway line position with gradient descending}{equation.3.13}{}}
+\newlabel{eq_gditerative@cref}{{[equation][13][]13}{[1][7][]7}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{7}{section.4}\protected@file@percent }
 \bibstyle{plainnat}
 \bibdata{cas-refs}
-\csxdef{lastpage}{4}
-\newlabel{eq_GDobjfunction}{{10}{4}{Accurate railway line measurement}{equation.3.10}{}}
-\newlabel{eq_GDobjfunction@cref}{{[equation][10][]10}{[1][3][]4}{}{}{}}
-\newlabel{eq_samplepoints}{{11}{4}{Accurate railway line measurement}{equation.3.11}{}}
-\newlabel{eq_samplepoints@cref}{{[equation][11][]11}{[1][4][]4}{}{}{}}
-\newlabel{eq_gditerative}{{13}{4}{Accurate railway line measurement}{equation.3.13}{}}
-\newlabel{eq_gditerative@cref}{{[equation][13][]13}{[1][4][]4}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Initial seed and termination with deep features}{4}{subsection.3.4}\protected@file@percent }
-\newlabel{eq_featureValidation}{{16}{4}{Initial seed and termination with deep features}{equation.3.16}{}}
-\newlabel{eq_featureValidation@cref}{{[equation][16][]16}{[1][4][]4}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Visual alignment check in Kalman Filter. We project the estimation of \textit  {RLP} in multiple images and extract the deep feature with pre-trained network. Then, we check their cosine distance with the first $n/2$ cells in the queue, where $n$ is obtained by dividing the \textit  {RLP} width by the step size $t$.}}{5}{figure.caption.3}\protected@file@percent }
-\newlabel{fig_visualCheck}{{3}{5}{Visual alignment check in Kalman Filter. We project the estimation of \textit {RLP} in multiple images and extract the deep feature with pre-trained network. Then, we check their cosine distance with the first $n/2$ cells in the queue, where $n$ is obtained by dividing the \textit {RLP} width by the step size $t$}{figure.caption.3}{}}
-\newlabel{fig_visualCheck@cref}{{[figure][3][]3}{[1][4][]5}{}{}{}}
-\gdef \@abspage@last{5}
+\bibcite{Ariyachandra2023}{{1}{2023}{{Ariyachandra and Brilakis}}{{}}}
+\bibcite{Beger2011}{{2}{2011}{{Beger et~al.}}{{Beger, Gedrange, Hecht, and Neubert}}}
+\bibcite{Chae2023}{{3}{2023}{{Chae et~al.}}{{Chae, Park, Kang, Chae, Ngo, and Cho}}}
+\bibcite{Chen2023}{{4}{2023}{{Chen et~al.}}{{}}}
+\bibcite{Cserep2022}{{5}{2022}{{Cserép et~al.}}{{Cserép, Demján, Mayer, Tábori, and Hudoba}}}
+\bibcite{DAmico2023}{{6}{2023}{{D’Amico et~al.}}{{}}}
+\bibcite{Ge2024}{{7}{2024}{{Ge et~al.}}{{}}}
+\bibcite{Hartley2003}{{8}{2003}{{Hartley and Zisserman}}{{}}}
+\bibcite{HOFER}{{9}{2017}{{Hofer et~al.}}{{Hofer, Maurer, and Bischof}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The initial seed with deep features. Given the line pair with geometry alignment, we extract the deep feature for their image block in multiple image, with which we use the DBSCAN to confirm the initial seed of \textit  {RLP}.}}{8}{figure.caption.6}\protected@file@percent }
+\newlabel{fig_aerial1}{{6}{8}{The initial seed with deep features. Given the line pair with geometry alignment, we extract the deep feature for their image block in multiple image, with which we use the DBSCAN to confirm the initial seed of \rlp }{figure.caption.6}{}}
+\newlabel{fig_aerial1@cref}{{[figure][6][]6}{[1][7][]8}{}{}{}}
+\bibcite{Jain2010}{{10}{2010}{{Jain et~al.}}{{Jain, Kurz, Thormählen, and Seidel}}}
+\bibcite{LiuCVPR}{{11}{2021}{{Liu et~al.}}{{Liu, Li, Yao, and Zha}}}
+\bibcite{Luo2023}{{12}{2023}{{Luo et~al.}}{{}}}
+\bibcite{Ma2022}{{13}{2022}{{Ma et~al.}}{{Ma, Li, Li, Junior, Goncalves, and Chapman}}}
+\bibcite{OK}{{14}{2012}{{Ok et~al.}}{{Ok, Wegner, Heipke, Rottensteiner, Soergel, and Toprak}}}
+\bibcite{Qiu2024}{{15}{2024}{{Qiu et~al.}}{{}}}
+\bibcite{Ran2023}{{16}{2023}{{Ran et~al.}}{{Ran, Yin, Huang, and Bao}}}
+\bibcite{Schmid1997}{{17}{1997}{{Schmid and Zisserman}}{{}}}
+\bibcite{SanchezRodriguez2019}{{18}{2019}{{Sánchez-Rodríguez et~al.}}{{Sánchez-Rodríguez, Soilán, Cabaleiro, and Arias}}}
+\bibcite{Tang2024}{{19}{2024}{{Tang et~al.}}{{}}}
+\bibcite{wang2020reconstruction}{{20}{2020}{{Wang et~al.}}{{Wang, Gao, Cui, and Hu}}}
+\bibcite{WEI2022}{{21}{2022}{{Wei et~al.}}{{Wei, Wan, Zhang, Liu, Zhang, and Wang}}}
+\bibcite{Weng2023}{{22}{2023}{{Weng et~al.}}{{}}}
+\bibcite{Yang2014}{{23}{2014}{{Yang and Fang}}{{}}}
+\bibcite{Yang2022b}{{24}{2022{a}}{{Yang et~al.}}{{Yang, Li, Guo, and Jia}}}
+\bibcite{Yang2022a}{{25}{2022{b}}{{Yang et~al.}}{{Yang, Yu, Wang, Zhou, Chen, and Zhang}}}
+\bibcite{Yao2023}{{26}{2023}{{Yao et~al.}}{{Yao, Yu, Wu, and Jia}}}
+\bibcite{Ye2022}{{27}{2022}{{Ye et~al.}}{{}}}
+\bibcite{Zhang2022}{{28}{2022}{{Zhang et~al.}}{{}}}
+\bibcite{Zhang2023a}{{29}{2023}{{Zhang et~al.}}{{Zhang, Yang, Gao, Xu, Liu, and Liang}}}
+\bibcite{zhang2024enhanced}{{30}{2024}{{Zhang et~al.}}{{Zhang, Zheng, Wu, and Zhang}}}
+\bibcite{Zheng2022}{{31}{2022}{{Zheng et~al.}}{{}}}
+\csxdef{lastpage}{9}
+\gdef \@abspage@last{9}

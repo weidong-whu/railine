@@ -8,56 +8,52 @@
     \label{fig_overview}
 \end{figure}
 
-The flow is presented in \cref{fig_overview}.
+
 The basic cell of our reconstruction is the railway line pair (\rlp) consisting of two railway lines (\textit{RL})~(\cref{fig_overview}~(1)).
-We use a center point $\mathbf p=\left(x,y,z\right)$,
-the forward vector $\mathbf d=\left(d_x,d_y,d_z\right)$,
-the rotation angle $r$ perpendicular to $\mathbf d$,
-and the with $w$ to shape the \rlp:
+We use a center point $\left(x,y,z\right)$,
+the position angle $\left(\phi,\omega,\kappa\right)$,
+and the width $w$ of the \rlp~ to shape the local \rlp:
 \begin{equation}
 \mathbf x = \begin{bmatrix}
-    \mathbf p  & \mathbf d  & \mathbf d_2 
-\end{bmatrix}^ \top \in R^{12}.
+    x,y,z,\rho,\kappa,\phi,\omega
+\end{bmatrix}^ \top \in R^{7}.
 \label{eq_prediction3} 
 \end{equation}
-that contains a pair of middle points ($\mathbf p_1$,$ \mathbf p_2$) and directions ($\mathbf d_1$,$\mathbf d_2$) to describe the local railway.
-Our method takes aerial images and their camera matrix as input.
-We first obtain the 3D line with our 2D line extraction and reconstruction algorithm.
+
+The flow is presented in \cref{fig_overview}. 
+Our method takes the SfM result of the aerial images as input.
+We first obtain the 3D line with our 2D line extraction (ref) and reconstruction (ref) algorithm.
 Then
-we cluster the single 3D line to find the seed of \rlp~ with the alignment in both geometry and deep features.
+we cluster the single 3D line to find the seed of \rlp~ with the alignment in geometry and deep features.
 Starting with each seed,
 we trace and reconstruct the \rlp~ in the framework of Kalman filter,
-in which the prediction and the observation comes from the geometry property of the \rlp~ structure
+in which the prediction and the observation comes from the geometry property of the \rlp~ 
 and the multiview reconstruction,
-respectively;
-also,
-we use the alignment of the deep texture to check for the termination during the Kalman filter.
+respectively.
 
 
-\subsection{Initial seed generation with geometries and deep features}
+\subsection{Initial seed generation}
 \label{sec_initialseed}
 With the 3D lines $\left\{L\right\}$ reconstructed from images,
-we first group $L_i$ and $L_j$ as a seed candidate of the \rlp  based on their angle $\theta_{i,j}$,
-overlap $o_{i,j}$,
-and projection distance $d_{i,j}$:
+we first group double lines as a seed candidate of the \rlp~  based on their angle $\theta_{a,b}$,
+overlap $o_{a,b}$,
+and projection distance $d_{a,b}$:
 \begin{equation}
-   \left\{\left(L_i, L_j\right) \mid \theta_{i,j} < t_\theta, o_{i,j} > t_o, d_{i,j} \in \left[\frac{2\omega}{3} ,\frac{4\omega}{3}\right]  \right\},
+   \left\{\left(L_a, L_b\right) \mid \theta_{a,b} < t_\theta, o_{a,b} > t_o, d_{a,b} \in \left[\frac{2\omega}{3} ,\frac{4\omega}{3}\right]  \right\}.
     \label{eq_geometrycons}
 \end{equation}
-in which $\theta_{i,j}$ and $o_{i,j}$are easy to choose,
-e.g.,
-$5^\circ$ and 60\%,
+$\theta_{a,b}$ and $o_{a,b}$ are easy to choose
 because the lines in \rlp~ is parallel and is highly overlapped;
-while the interval needs the rough width $\omega$ of \rlp,
+while $d_{a,b}$ needs the rough width $\omega$ of \rlp,
 which can be acquired from construction standards or point clouds.
-We use one-third of $\omega$ as the margin error to reduce reliance on precise initial values.
-Because a 3D line may satisfy \cref{eq_geometrycons} with many others,
-we score the pair with the geometry alignments:
-if its two 3D lines are within $1^\circ$ and $t$ projection distance with another pair,
-the score is increased by $\mathcal{N}\left(\mu, \left(t/3\right)^2\right)$.
+We use one-third of $\omega$ as the margin error to reduce reliance on initial values.
+Because $L_i$ may satisfy \cref{eq_geometrycons} with others,
+we score $\left(L_a, L_b\right)$ with its geometry alignments to other candidates:
+we fit the central line of $L_{a}$ and $L_{b}$ as $L_{ci}$;
+if $L_{c1}$ and $L_{c2}$ are within $t_p$,
+the scores of both $\left(L_{a1}, L_{b1}\right)$ are increased by $\mathcal{N}\left(\mu, \left(t_p/3\right)^2\right)$.
 Then,
-the greedy algorithm is used to assign the candidate pair:
-we sort the candidate based on their scores of the geometry alignment and eliminate the pair whose 3D line has been grouped in the former pairs.
+we sort the candidate based on their scores and eliminate the pair whose 3D line has been grouped in the former pairs.
 
 \begin{figure}[h]
     \centering
@@ -70,57 +66,43 @@ we sort the candidate based on their scores of the geometry alignment and elimin
 \end{figure}
 
 As illustrated in \cref{fig_initialseed}, considering that the texture along the \rlp~ should be roughly the same, 
-we use the global average pooling layer in ResNet101 as the basic feature,
+we use the global average pooling layer in ResNet as the basic feature,
 which has been trained on massive amounts of data and can capture texture patterns for classification in the absence of labels,
-to confirm the initial seed.
+to cluster the initial seed.
 Denoting $\mathbf f \in R^n$ as the \rlp~ feature,
 we acquire the set of features $\left\{\mathbf f_i\right\}_{i=1}^m$ from the support images,
-which can be confirmed in the line reconstruction method (ref).
-To reduce the ambiguity of the deep feature caused by scale and rotation,
-the image block is corrected: the center line of \rlp~ passes through the image center horizontally and the width of \rlp~ is half of the image.
-After extraction of RT features, 
-we use DBSCAN to cluster them with the cosine distance,
-and retain the largest group as the seeds of the \rlp.
+which can be confirmed our line reconstruction method (ref).
+Before the feature extraction,the image block is corrected to ensure
+the center line of \rlp~ passes through the image center horizontally and the width of \rlp~ is half of the image.
+it reduces the ambiguity of the deep feature caused by scale and rotation.
+Then,
+we use DBSCAN to cluster the features with the cosine distance and retain the largest group as the seeds of the \rlp.
 
 \subsection{Railway track with Kalman filter}
 Given the initial seed of \rlp,
-The prediction of $\mathbf x$ is controlled by a scalar $t$:
+we take it as the start place of the train and 
+the predict position for the running train in the next time $\mathbf x$ is controlled by $\Delta t$ with the train's attitude:
 \begin{equation}
-        \mathbf{x}^{pre}= 
-        \mathrm F \mathbf x^{{\mbox -}}, \in R^{12}, \quad  
-        \mathrm F=\operatorname{diag}\left(t \! \cdot \! \mathrm I_{6\times6} , \mathrm I_{6\times6}\right) \in R^{12\times 12},
+        \begin{aligned}
+            & x_k = x_{k-1} + \Delta t \cdot \cos(\phi_{k-1}) \cdot \cos(\omega_{k-1}), \\
+            & y_k = y_{k-1} + \Delta t \cdot \sin(\phi_{k-1}) \cdot \cos(\omega_{k-1}), \\
+            & z_k = z_{k-1} + \Delta t \cdot \sin(\omega_{k-1}),\\
+            &\rho_k=\rho_{k-1},
+        \kappa_k=\kappa_{k-1},
+        \phi_k=\phi_{k-1},
+        \omega_k=\omega_{k-1}.
+        \end{aligned}
         \label {eq_statetransition}
 \end{equation}
-where the superscript $^{\mbox -}$ marks the previous state.
-For each state $\mathbf{x}^{pre}$,
-there is an actual observation $\mathbf{x}^{obs}$ arising from line reconstruction in multiple images~(\cref*{sec_linereconstruction}).
-The \rlp~ has fixed geometry patterns,
-i.e.,
-$\mathbf d_1$ and $\mathbf d_2$ should be as close as possible,
-and the distance change between $\mathbf p_1$ and $\mathbf p_2$ is as small as possible.
-We achieve these two constraints by extending the observation vector:
-\begin{equation}
-\mathbf{z}^{obs} = \begin{bmatrix}
-    \mathbf{x}^{obs} & \mathbf p_1^{\mbox -} - \mathbf p_{2}^{\mbox -} & \mathbf 0_{1\times3}
-\end{bmatrix}^ \top \in R^{18}.
-\label {eq_observationvector}
-\end{equation}
-Correspondingly,
-the observation matrix that translate $\mathbf{x}^{pre}$ to the observation form is
-\begin{equation}
-        \mathbf{z}^{pre}= 
-        \mathrm H \mathbf x^{pre}, \quad  
-        \mathrm H=
-        \begin{bmatrix}
-            \multicolumn{4}{c}{\mathrm{I}_{12 \times 12}} \\
-            \mathrm{I}_{3 \times 3} & -\mathrm{I}_{3 \times 3} & \mathbf{0}_{3 \times 3} & \mathbf{0}_{3 \times 3} \\
-            \mathbf{0}_{3 \times 3} & \mathbf{0}_{3 \times 3} & \mathrm{I}_{3 \times 3} & -\mathrm{I}_{3 \times 3}
-        \end{bmatrix} \in R^{18 \times 12}.
-        \label {eq_observationmatrix }
-\end{equation}
-Then,
+Note the train's attitude is unchanged during the prediction.
+For each state,
+there is an actual observation $\mathbf{x}^{obs}$ arising from the line reconstruction in multiple images~(\cref*{sec_linereconstruction}).
+Generally,
+the observation may contain errors induced from wrong 2D \textit{rl} detection and the corresponding 3D \textit{rl} reconstruction;
+while the prediction is destined to fail when the tain is passing through a bend.
+Thus,
 as shown in \cref{fig_kalmanflow},
-we use the general discrete Kalman filter to update the state.
+we update the state of the train by combining the observation and prediction state with the discrete Kalman filter.
 \begin{figure} [h]
     \centering
     \resizebox{0.98\textwidth}{!}{%
@@ -224,6 +206,20 @@ we use the general discrete Kalman filter to update the state.
     where $n$ is obtained by dividing the \rlp width by the step size $t$.}
     \label{fig_visualCheck}
 \end{figure}
+
+Because the triansation is a nonlinear process,
+we need the Jacobian matrix $F_k \in R^{7\times7}$ for the linearization:
+\begin{equation}
+    \begin{aligned}
+        &F_k(1,6)=-\Delta t \sin(\phi_{k-1}) \cos(\omega_{k-1}),\\
+        &F_k(1,7)=-\Delta t \cos(\phi_{k-1}) \sin(\omega_{k-1}),\\
+        &F_k(2,6)=\Delta t \cos(\phi_{k-1}) \cos(\omega_{k-1}) ,\\
+        &F_k\left(2,7\right)=\Delta t \sin(\phi_{k-1}) \sin(\omega_{k-1}),\\
+        &F_k\left(i,i\right)=1,i \in [1,7].
+    \end{aligned}
+    \label {eq_jacobian}
+\end{equation}
+With \cref{eq_jacobian},
 
 For each seed of \rlp~,
 we will track it with the Kalman filter and terminate the track when one of the following conditions is met.

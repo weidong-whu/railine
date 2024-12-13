@@ -1,8 +1,246 @@
-\begin{thebibliography}{0}
+\begin{thebibliography}{31}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ariyachandra and Brilakis(2023)]{Ariyachandra2023}
+M.~R. M.~F. Ariyachandra and I.~Brilakis.
+\newblock {Leveraging railway topology to automatically generate track
+  geometric information models from airborne LiDAR data}.
+\newblock \emph{Automation in Construction}, 155:\penalty0 105068, Nov. 2023.
+\newblock \doi{10.1016/j.autcon.2023.105068}.
+
+\bibitem[Beger et~al.(2011)Beger, Gedrange, Hecht, and Neubert]{Beger2011}
+R.~Beger, C.~Gedrange, R.~Hecht, and M.~Neubert.
+\newblock {Data fusion of extremely high resolution aerial imagery and LiDAR
+  data for automated railroad centre line reconstruction}.
+\newblock \emph{ISPRS Journal of Photogrammetry and Remote Sensing},
+  66\penalty0 (6):\penalty0 S40--S51, Dec. 2011.
+\newblock \doi{10.1016/j.isprsjprs.2011.09.012}.
+
+\bibitem[Chae et~al.(2023)Chae, Park, Kang, Chae, Ngo, and Cho]{Chae2023}
+Y.~J. Chae, S.~J. Park, E.~S. Kang, M.~J. Chae, B.~H. Ngo, and S.~I. Cho.
+\newblock {Point2Lane: Polyline-Based Reconstruction With Principal Points for
+  Lane Detection}.
+\newblock \emph{IEEE Transactions on Intelligent Transportation Systems},
+  24\penalty0 (12):\penalty0 14813--14829, Dec. 2023.
+\newblock \doi{10.1109/TITS.2023.3295807}.
+
+\bibitem[Chen et~al.(2023)]{Chen2023}
+Z.~Chen et~al.
+\newblock {Generating Dynamic Kernels via Transformers for Lane Detection}.
+\newblock \emph{Proceedings of the IEEE/CVF International Conference on
+  Computer Vision}, pages 6812--6821, 2023.
+\newblock \doi{10.1109/ICCV51070.2023.00629}.
+
+\bibitem[Cserép et~al.(2022)Cserép, Demján, Mayer, Tábori, and
+  Hudoba]{Cserep2022}
+M.~Cserép, A.~Demján, F.~Mayer, B.~Tábori, and P.~Hudoba.
+\newblock {Effective Railroad Fragmentation and Infrastructure Recognition
+  Based on Dense LiDAR Point Clouds}.
+\newblock \emph{ISPRS Annals of Photogrammetry, Remote Sensing and Spatial
+  Information Sciences}, V-2–2022:\penalty0 103--109, May 2022.
+\newblock \doi{10.5194/isprs-annals-V-2-2022-103-2022}.
+
+\bibitem[D’Amico et~al.(2023)]{DAmico2023}
+G.~D’Amico et~al.
+\newblock {TrainSim: A Railway Simulation Framework for LiDAR and Camera
+  Dataset Generation}.
+\newblock \emph{IEEE Transactions on Intelligent Transportation Systems},
+  24\penalty0 (12):\penalty0 15006--15017, Dec. 2023.
+\newblock \doi{10.1109/TITS.2023.3297728}.
+
+\bibitem[Ge et~al.(2024)]{Ge2024}
+X.~Ge et~al.
+\newblock {An Anomaly Detection Method for Railway Track Using Semisupervised
+  Learning and Vision-Lidar Decision Fusion}.
+\newblock \emph{IEEE Transactions on Instrumentation and Measurement},
+  73:\penalty0 1--15, 2024.
+\newblock \doi{10.1109/TIM.2024.3417537}.
+
+\bibitem[Hartley and Zisserman(2003)]{Hartley2003}
+R.~Hartley and A.~Zisserman.
+\newblock Multiple view geometry in computer vision.
+\newblock 2003.
+
+\bibitem[Hofer et~al.(2017)Hofer, Maurer, and Bischof]{HOFER}
+Manuel Hofer, Michael Maurer, and Horst Bischof.
+\newblock Efficient 3d scene abstraction using line segments.
+\newblock \emph{Computer Vision and Image Understanding}, 157:\penalty0
+  167--178, 2017.
+\newblock ISSN 1077-3142.
+\newblock \doi{https://doi.org/10.1016/j.cviu.2016.03.017}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S1077314216300236}.
+
+\bibitem[Jain et~al.(2010)Jain, Kurz, Thormählen, and Seidel]{Jain2010}
+Arjun Jain, Christian Kurz, Thorsten Thormählen, and Hans-Peter Seidel.
+\newblock Exploiting global connectivity constraints for reconstruction of 3d
+  line segments from images.
+\newblock In \emph{CVPR}, pages 1586--1593, 2010.
+\newblock \doi{10.1109/CVPR.2010.5539781}.
+
+\bibitem[Liu et~al.(2021)Liu, Li, Yao, and Zha]{LiuCVPR}
+Liu Liu, Hongdong Li, Haodong Yao, and Ruyi Zha.
+\newblock Plückernet: Learn to register 3d line reconstructions¨.
+\newblock In \emph{2021 IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 1842--1852, 2021.
+\newblock \doi{10.1109/CVPR46437.2021.00188}.
+
+\bibitem[Luo et~al.(2023)]{Luo2023}
+Y.~Luo et~al.
+\newblock {LATR: 3D Lane Detection from Monocular Images with Transformer}.
+\newblock In \emph{Proceedings of the IEEE/CVF International Conference on
+  Computer Vision}, pages 7907--7918, 2023.
+\newblock \doi{10.1109/ICCV51070.2023.00730}.
+
+\bibitem[Ma et~al.(2022)Ma, Li, Li, Junior, Goncalves, and Chapman]{Ma2022}
+L.~Ma, Y.~Li, J.~Li, J.~M. Junior, W.~N. Goncalves, and M.~A. Chapman.
+\newblock {BoundaryNet: Extraction and Completion of Road Boundaries With Deep
+  Learning Using Mobile Laser Scanning Point Clouds and Satellite Imagery}.
+\newblock \emph{IEEE Transactions on Intelligent Transportation Systems},
+  23\penalty0 (6):\penalty0 5638--5654, Jun. 2022.
+\newblock \doi{10.1109/TITS.2021.3055366}.
+
+\bibitem[Ok et~al.(2012)Ok, Wegner, Heipke, Rottensteiner, Soergel, and
+  Toprak]{OK}
+Ali~Ozgun Ok, Jan~Dirk Wegner, Christian Heipke, Franz Rottensteiner, Uwe
+  Soergel, and Vedat Toprak.
+\newblock Matching of straight line segments from aerial stereo images of urban
+  areas.
+\newblock \emph{ISPRS Journal of Photogrammetry and Remote Sensing},
+  74:\penalty0 133--152, 2012.
+\newblock ISSN 0924-2716.
+\newblock \doi{https://doi.org/10.1016/j.isprsjprs.2012.09.003}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S0924271612001591}.
+
+\bibitem[Qiu et~al.(2024)]{Qiu2024}
+B.~Qiu et~al.
+\newblock {WHU-Railway3D: A Diverse Dataset and Benchmark for Railway Point
+  Cloud Semantic Segmentation}.
+\newblock \emph{IEEE Transactions on Intelligent Transportation Systems}, pages
+  1--17, 2024.
+\newblock \doi{10.1109/TITS.2024.3469546}.
+
+\bibitem[Ran et~al.(2023)Ran, Yin, Huang, and Bao]{Ran2023}
+H.~Ran, Y.~Yin, F.~Huang, and X.~Bao.
+\newblock {FLAMNet: A Flexible Line Anchor Mechanism Network for Lane
+  Detection}.
+\newblock \emph{IEEE Transactions on Intelligent Transportation Systems},
+  24\penalty0 (11):\penalty0 12767--12778, Nov. 2023.
+\newblock \doi{10.1109/TITS.2023.3290991}.
+
+\bibitem[Schmid and Zisserman(1997)]{Schmid1997}
+C.~Schmid and A.~Zisserman.
+\newblock Automatic line matching across views.
+\newblock In \emph{CVPR}, pages 666--671, 1997.
+\newblock \doi{10.1109/CVPR.1997.609397}.
+
+\bibitem[Sánchez-Rodríguez et~al.(2019)Sánchez-Rodríguez, Soilán,
+  Cabaleiro, and Arias]{SanchezRodriguez2019}
+A.~Sánchez-Rodríguez, M.~Soilán, M.~Cabaleiro, and P.~Arias.
+\newblock {Automated Inspection of Railway Tunnels’ Power Line Using LiDAR
+  Point Clouds}.
+\newblock \emph{Remote Sensing}, 11\penalty0 (21):\penalty0 2567, Nov. 2019.
+\newblock \doi{10.3390/rs11212567}.
+
+\bibitem[Tang et~al.(2024)]{Tang2024}
+T.~Tang et~al.
+\newblock {A Real-Time Method for Railway Track Detection and 3D Fitting Based
+  on Camera and LiDAR Fusion Sensing}.
+\newblock \emph{Remote Sensing}, 16\penalty0 (8):\penalty0 1441, Apr. 2024.
+\newblock \doi{10.3390/rs16081441}.
+
+\bibitem[Wang et~al.(2020)Wang, Gao, Cui, and Hu]{wang2020reconstruction}
+Wei Wang, Wei Gao, Hainan Cui, and Zhanyi Hu.
+\newblock Reconstruction of lines and planes of urban buildings with angle
+  regularization.
+\newblock \emph{ISPRS Journal of Photogrammetry and Remote Sensing}, 165, 2020.
+
+\bibitem[Wei et~al.(2022)Wei, Wan, Zhang, Liu, Zhang, and Wang]{WEI2022}
+Dong Wei, Yi~Wan, Yongjun Zhang, Xinyi Liu, Bin Zhang, and Xiqi Wang.
+\newblock Elsr: Efficient line segment reconstruction with planes and points
+  guidance.
+\newblock In \emph{2022 IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 15786--15794, 2022.
+\newblock \doi{10.1109/CVPR52688.2022.01535}.
+
+\bibitem[Weng et~al.(2023)]{Weng2023}
+Y.~Weng et~al.
+\newblock {A Railway Track Extraction Method Based on Improved DeepLabV3+}.
+\newblock \emph{Electronics}, 12\penalty0 (16):\penalty0 3500, Aug. 2023.
+\newblock \doi{10.3390/electronics12163500}.
+
+\bibitem[Yang and Fang(2014)]{Yang2014}
+B.~Yang and L.~Fang.
+\newblock {Automated Extraction of 3-D Railway Tracks from Mobile Laser
+  Scanning Point Clouds}.
+\newblock \emph{IEEE Journal of Selected Topics in Applied Earth Observations
+  and Remote Sensing}, 7\penalty0 (12):\penalty0 4750--4761, Dec. 2014.
+\newblock \doi{10.1109/JSTARS.2014.2312378}.
+
+\bibitem[Yang et~al.(2022{\natexlab{a}})Yang, Li, Guo, and Jia]{Yang2022b}
+H.~Yang, X.~Li, Y.~Guo, and L.~Jia.
+\newblock {Discretization–Filtering–Reconstruction: Railway Detection in
+  Images for Navigation of Inspection UAV}.
+\newblock \emph{IEEE Transactions on Instrumentation and Measurement},
+  71:\penalty0 1--13, 2022{\natexlab{a}}.
+\newblock \doi{10.1109/TIM.2022.3220295}.
+
+\bibitem[Yang et~al.(2022{\natexlab{b}})Yang, Yu, Wang, Zhou, Chen, and
+  Zhang]{Yang2022a}
+S.~Yang, G.~Yu, Z.~Wang, B.~Zhou, P.~Chen, and Q.~Zhang.
+\newblock {A Topology Guided Method for Rail-Track Detection}.
+\newblock \emph{IEEE Transactions on Vehicular Technology}, 71\penalty0
+  (2):\penalty0 1426--1438, Feb. 2022{\natexlab{b}}.
+\newblock \doi{10.1109/TVT.2021.3133327}.
+
+\bibitem[Yao et~al.(2023)Yao, Yu, Wu, and Jia]{Yao2023}
+C.~Yao, L.~Yu, Y.~Wu, and Y.~Jia.
+\newblock {Sparse Point Guided 3D Lane Detection}.
+\newblock \emph{Proceedings of the IEEE/CVF International Conference on
+  Computer Vision}, pages 8329--8338, 2023.
+\newblock \doi{10.1109/ICCV51070.2023.00768}.
+
+\bibitem[Ye et~al.(2022)]{Ye2022}
+C.~Ye et~al.
+\newblock {Robust Lane Extraction From MLS Point Clouds Towards HD Maps
+  Especially in Curve Road}.
+\newblock \emph{IEEE Transactions on Intelligent Transportation Systems},
+  23\penalty0 (2):\penalty0 1505--1518, Feb. 2022.
+\newblock \doi{10.1109/TITS.2020.3028033}.
+
+\bibitem[Zhang et~al.(2022)]{Zhang2022}
+L.~Zhang et~al.
+\newblock {A Deep Learning Based Method for Railway Overhead Wire
+  Reconstruction from Airborne LiDAR Data}.
+\newblock \emph{Remote Sensing}, 14\penalty0 (20):\penalty0 5272, Oct. 2022.
+\newblock \doi{10.3390/rs14205272}.
+
+\bibitem[Zhang et~al.(2023)Zhang, Yang, Gao, Xu, Liu, and Liang]{Zhang2023a}
+Y.~Zhang, Y.~Yang, X.~Gao, L.~Xu, B.~Liu, and X.~Liang.
+\newblock {Robust Extraction of Multiple-Type Support Positioning Devices in
+  the Catenary System of Railway Dataset Based on MLS Point Clouds}.
+\newblock \emph{IEEE Transactions on Geoscience and Remote Sensing},
+  61:\penalty0 1--14, 2023.
+\newblock \doi{10.1109/TGRS.2023.3280208}.
+
+\bibitem[Zhang et~al.(2024)Zhang, Zheng, Wu, and Zhang]{zhang2024enhanced}
+Y.~Zhang, Y.~Zheng, C.~Wu, and T.~Zhang.
+\newblock Enhanced curve perception in lane detection via adaptive guided
+  techniques.
+\newblock \emph{IEEE Transactions on Vehicular Technology}, 73\penalty0
+  (10):\penalty0 14450--14461, Oct 2024.
+\newblock \doi{10.1109/TVT.2024.3408162}.
+
+\bibitem[Zheng et~al.(2022)]{Zheng2022}
+T.~Zheng et~al.
+\newblock {CLRNet: Cross Layer Refinement Network for Lane Detection}.
+\newblock In \emph{Proceedings of the IEEE/CVF Conference on Computer Vision
+  and Pattern Recognition}, pages 888--897, 2022.
+\newblock \doi{10.1109/CVPR52688.2022.00097}.
 
 \end{thebibliography}
