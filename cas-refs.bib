@@ -1198,3 +1198,43 @@ year = {2024}
   volume    = {165},
   year      = {2020}
 }
+
+
+@article{ag3line,
+title = {AG3line: Active grouping and geometry-gradient combined validation for fast line segment extraction},
+journal = {Pattern Recognition},
+volume = {113},
+pages = {107834},
+year = {2021},
+issn = {0031-3203},
+doi = {https://doi.org/10.1016/j.patcog.2021.107834},
+url = {https://www.sciencedirect.com/science/article/pii/S0031320321000212},
+author = {Yongjun Zhang and Dong Wei and Yansheng Li},
+keywords = {Line extraction, Active grouping, Anchor map, Alignment of gradient magnitude},
+abstract = {Line segment detectors based on local image domain passively fit a line segment from a set of pixels, but no constraint on line geometry is set in the grouping process. Therefore, unstable pixels, such as the pixels in grass, clouds, or weak gradient edges, may cause false positives and fractures. This paper proposes the detector named AG3line, which employs an efficient active grouping strategy. In AG3line, the pixel for the next grouping is calculated actively with the line geometry and it can even be accurate to one pixel. To reduce the fracture caused by unstable pixels, when the adjacent pixel cannot satisfy the grouping rules, the candidate pixels for the next grouping are expanded with the line geometry constraint. To furtherly control false positives, AG3line then validates and refines the line segments by exploiting both the line geometry and the alignment of gradient magnitude. When AG3line was evaluated utilizing the image dataset with the ground truth, it outperformed both the classical and the latest detectors.The implementation of AG3line is available at https://github.com/weidong-whu/AG3line.}
+}
+
+@article{WEI2024,
+title = {Clustering, triangulation, and evaluation of 3D lines in multiple images},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {218},
+pages = {678-692},
+year = {2024},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2024.10.001},
+url = {https://www.sciencedirect.com/science/article/pii/S0924271624003782},
+author = {Dong Wei and Haoyu Guo and Yi Wan and Yongjun Zhang and Chang Li and Guangshuai Wang},
+keywords = {3D line segments, Line clustering, Line triangulation, 3D line evaluation},
+abstract = {Three-dimensional (3D) lines require further enhancement in both clustering and triangulation. Line clustering assigns multiple image lines to a single 3D line to eliminate redundant 3D lines. Currently, it depends on the fixed and empirical parameter. However, a loose parameter could lead to over-clustering, while a strict one may cause redundant 3D lines. Due to the absence of the ground truth, the assessment of line clustering remains unexplored. Additionally, 3D line triangulation, which determines the 3D line segment in object space, is prone to failure due to its sensitivity to positional and camera errors. This paper aims to improve the clustering and triangulation of 3D lines and to offer a reliable evaluation method. (1) To achieve accurate clustering, we introduce a probability model, which uses the prior error of the structure from the motion, to determine adaptive thresholds; thus controlling false clustering caused by the fixed hyperparameter. (2) For robust triangulation, we employ a universal framework that refines the 3D line with various forms of geometric consistency. (3) For a reliable evaluation, we investigate consistent patterns in urban environments to evaluate the clustering and triangulation, eliminating the need to manually draw the ground truth. To evaluate our method, we utilized datasets of Internet image, totaling over ten thousand images, alongside aerial images with dimensions exceeding ten thousand pixels. We compared our approach to state-of-the-art methods, including Line3D++, Limap, and ELSR. In these datasets, our method demonstrated improvements in clustering and triangulation accuracy by at least 20% and 3%, respectively. Additionally, our method ranked second in execution speed, surpassed only by ELSR, the current fastest algorithm. The C++ source code for the proposed algorithm, along with the dataset used in this paper, is available at https://github.com/weidong-whu/3DLineResconstruction.}
+}
+
+@INPROCEEDINGS{resnet,
+  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle={2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}, 
+  title={Deep Residual Learning for Image Recognition}, 
+  year={2016},
+  volume={},
+  number={},
+  pages={770-778},
+  keywords={Training;Degradation;Complexity theory;Image recognition;Neural networks;Visualization;Image segmentation},
+  doi={10.1109/CVPR.2016.90}}

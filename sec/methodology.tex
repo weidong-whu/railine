@@ -9,51 +9,60 @@
 \end{figure}
 
 
-The basic cell of our reconstruction is the railway line pair (\rlp) consisting of two railway lines (\textit{RL})~(\cref{fig_overview}~(1)).
+The basic cell of our reconstruction is the railway line pair (\rlp) (\cref{fig_overview}~(1)).
+An \rlp~consists of two railway lines (\textit{RL}) denoted as $D=\left\{L_i,L_j\right\}$.
+The continuous \rlp~obtained in the Kalman process forms the \textit{RL} of the scene.
 We use a center point $\left(x,y,z\right)$,
 the position angle $\left(\phi,\omega,\kappa\right)$,
-and the width $w$ of the \rlp~ to shape the local \rlp:
+and the width $w$ of the two railway lines to shape the local \rlp:
 \begin{equation}
 \mathbf x = \begin{bmatrix}
     x,y,z,\rho,\kappa,\phi,\omega
 \end{bmatrix}^ \top \in R^{7}.
 \label{eq_prediction3} 
 \end{equation}
+Obviously,
+$\mathbf x $ and $D=\left\{L_i,L_j\right\}$ can be converted into each other.
 
-The flow is presented in \cref{fig_overview}. 
-Our method takes the SfM result of the aerial images as input.
-We first obtain the 3D line with our 2D line extraction (ref) and reconstruction (ref) algorithm.
+The flow of our method is presented in \cref{fig_overview}. 
+It takes the SfM result of the aerial images as input.
+We first obtain the 3D line with our 2D line extraction (\cite{ag3line}) and 3D line reconstruction (\cite{WEI2024}) algorithm.
 Then
-we cluster the single 3D line to find the seed of \rlp~ with the alignment in geometry and deep features.
+we cluster the single 3D line to find the seed of \rlp~ with the alignment in geometry and deep features (\cref{sec_initialseed}).
 Starting with each seed,
-we trace and reconstruct the \rlp~ in the framework of Kalman filter,
-in which the prediction and the observation comes from the geometry property of the \rlp~ 
-and the multiview reconstruction,
+we track and reconstruct the \rlp~in the framework of the Kalman filter (\cref{sec_kalman}),
+in which the prediction and the observation come from the inner geometry of the \rlp~and the line reconstruction from multiple images,
 respectively.
 
 
-\subsection{Initial seed generation}
+\subsection{Seed generation}
 \label{sec_initialseed}
-With the 3D lines $\left\{L\right\}$ reconstructed from images,
-we first group double lines as a seed candidate of the \rlp~  based on their angle $\theta_{a,b}$,
-overlap $o_{a,b}$,
-and projection distance $d_{a,b}$:
+With the 3D lines $\left\{L\right\}$ reconstructed from \citep{WEI2024},
+we first group the double lines of $L_i$ and $L_j$ as a seed candidate of the \rlp~  based on their angle $\theta$,
+overlap $o$,
+and projection distance $d$:
 \begin{equation}
-   \left\{\left(L_a, L_b\right) \mid \theta_{a,b} < t_\theta, o_{a,b} > t_o, d_{a,b} \in \left[\frac{2\omega}{3} ,\frac{4\omega}{3}\right]  \right\}.
+   \left\{D_i \mid \theta_{i1,i2} < t_\theta, o_{i1,i2} > t_o, d_{i1,i2} \in I \right\}.
     \label{eq_geometrycons}
 \end{equation}
-$\theta_{a,b}$ and $o_{a,b}$ are easy to choose
-because the lines in \rlp~ is parallel and is highly overlapped;
-while $d_{a,b}$ needs the rough width $\omega$ of \rlp,
-which can be acquired from construction standards or point clouds.
-We use one-third of $\omega$ as the margin error to reduce reliance on initial values.
-Because $L_i$ may satisfy \cref{eq_geometrycons} with others,
-we score $\left(L_a, L_b\right)$ with its geometry alignments to other candidates:
-we fit the central line of $L_{a}$ and $L_{b}$ as $L_{ci}$;
-if $L_{c1}$ and $L_{c2}$ are within $t_p$,
-the scores of both $\left(L_{a1}, L_{b1}\right)$ are increased by $\mathcal{N}\left(\mu, \left(t_p/3\right)^2\right)$.
+$t_\theta$ and $t_o$ are easy to choose
+because the lines in \rlp~ are parallel and are highly overlapped;
+while the interval of $I$ needs the rough width $\hat w$ of \rlp,
+which can be acquired directly from construction standards or the measurement of point clouds.
+We use one-third of $\omega$ as the margin error to reduce reliance on initial values,
+i.e., 
+$I=[\frac{2}{3}w,\frac{4}{3}w]$.
+Because $L_i$ may satisfy \cref{eq_geometrycons} with many other lines,
+we score $D_i$ by its geometry alignments to other candidates:
+denote the central line of $D_i$ as $C_i$;
+if the line segment distance between $C_i$ and $C_j$
+is within $t_{dis}$,
+the scores of both $D_i$ and $D_j$ are increased by the Gaussian weight:$\mathcal{N}\left(d_{i,j},0, t_{dis}/3\right)$,
+where the first parameter is the line to line distance,
+and the second and third parameter denotes the mean and the standard deviation,
+respectively.
 Then,
-we sort the candidate based on their scores and eliminate the pair whose 3D line has been grouped in the former pairs.
+we sort the candidate of line pairs based on their scores and eliminate the pair whose 3D line has been grouped in the former pairs.
 
 \begin{figure}[h]
     \centering
@@ -65,23 +74,31 @@ we sort the candidate based on their scores and eliminate the pair whose 3D line
     \label{fig_initialseed}
 \end{figure}
 
-As illustrated in \cref{fig_initialseed}, considering that the texture along the \rlp~ should be roughly the same, 
-we use the global average pooling layer in ResNet as the basic feature,
-which has been trained on massive amounts of data and can capture texture patterns for classification in the absence of labels,
-to cluster the initial seed.
+Besides the geometry alignment,
+the texture alignment of the \rlp~ is also employed to enhance the seed of \rlp.
+As illustrated in \cref{fig_initialseed}, 
+we acquire the image blocks for the line pair by the crop with their 2D lines.   
+We project a line pair to at most four images where the two 3D lines induced,
+which have been confirmed in the line reconstruction method \citep{WEI2024}.
+To reduce the ambiguity of the texture feature caused by scale and rotation,
+the local image is corrected to ensure that the center line of \rlp~ passes through the image center horizontally and the width of \rlp~ is half of the image.
+
+We use the global average pooling layer in ResNet \citep{resnet} as the basic feature to describe the image block,
+which has been trained on massive amounts of public dataset and can capture texture patterns for classification in the absence of labels.
+Thus,
+no additional benchmarks and training data are required in our method.
 Denoting $\mathbf f \in R^n$ as the \rlp~ feature,
-we acquire the set of features $\left\{\mathbf f_i\right\}_{i=1}^m$ from the support images,
-which can be confirmed our line reconstruction method (ref).
-Before the feature extraction,the image block is corrected to ensure
-the center line of \rlp~ passes through the image center horizontally and the width of \rlp~ is half of the image.
-it reduces the ambiguity of the deep feature caused by scale and rotation.
+we acquire the set of features $\left\{\mathbf f_i\right\}_{i=1}^m$ from the image blocks.
 Then,
 we use DBSCAN to cluster the features with the cosine distance and retain the largest group as the seeds of the \rlp.
+DBSCAN contains the parameters of the maximum distance between nodes and the 
 
-\subsection{Railway track with Kalman filter}
+\subsection{Railway track}
+\label{sec_kalman}
 Given the initial seed of \rlp,
-we take it as the start place of the train and 
-the predict position for the running train in the next time $\mathbf x$ is controlled by $\Delta t$ with the train's attitude:
+we convert it to the form of $\mathbf x$ and take it as the starting place of a train.
+We use the train's inertial forward direction for prediction,
+during which the prediction $\bar{\mathbf x}$ in the next step is controlled by $\Delta t$ with the train's attitude:
 \begin{equation}
         \begin{aligned}
             & x_k = x_{k-1} + \Delta t \cdot \cos(\phi_{k-1}) \cdot \cos(\omega_{k-1}), \\
@@ -94,12 +111,13 @@ the predict position for the running train in the next time $\mathbf x$ is contr
         \end{aligned}
         \label {eq_statetransition}
 \end{equation}
-Note the train's attitude is unchanged during the prediction.
+Note the train's attitude is unchanged in the prediction.
 For each state,
-there is an actual observation $\mathbf{x}^{obs}$ arising from the line reconstruction in multiple images~(\cref*{sec_linereconstruction}).
-Generally,
-the observation may contain errors induced from wrong 2D \textit{rl} detection and the corresponding 3D \textit{rl} reconstruction;
-while the prediction is destined to fail when the tain is passing through a bend.
+there is an actual observation $\hat{\mathbf x}$ arising from the 3D railway line reconstruction in multiple images,
+which will be discussed in \cref{sec_linereconstruction}.
+
+The observation may contain errors induced from wrong 2D line detection and the corresponding 3D reconstruction,
+and the prediction is easy to fail, especially when the train is passing through a bend.
 Thus,
 as shown in \cref{fig_kalmanflow},
 we update the state of the train by combining the observation and prediction state with the discrete Kalman filter.
@@ -110,64 +128,65 @@ we update the state of the train by combining the observation and prediction sta
     \tikzstyle{every node}=[font=\normalsize]
     
     % 右侧矩形 (b)
-    \draw [rounded corners=5pt]  (0,23.5) rectangle  
+    \draw [fill=gray!10,rounded corners=5pt]  (0,23.5) rectangle  
     node {\large
     \begin{minipage}{6cm}
-    (b)~$\mathbf{z}^{obs}$ (\cref{eq_observationvector}) calculation via
+    (b)~$\hat{\mathbf{x}}_k$ (\cref{sec_linereconstruction}) observation via
     3D line reconstruction.  
     \end{minipage}
     } (6.25,21.5);
     
     % 右侧矩形 (a)
-    \draw [rounded corners=5pt] (0,20.5) rectangle  
+    \draw [fill=gray!10,rounded corners=5pt] (0,20.5) rectangle  
     node {\large
     \begin{minipage}{6cm}
-    (a)~$\mathbf{x}^{pre}$ prediction  with \cref{eq_statetransition}
+    (a)~$\bar{\mathbf{x}}_k$ prediction with \cref{eq_statetransition}
     and error covariance prediction via 
     \vspace{-0.5em}
     \begin{equation}
-    \mathrm P^{pred}= \mathrm F \hat{\mathrm {P}}\mathrm F^{\top}+\mathrm Q
+    \mathrm P_k= \mathrm F \mathrm {P}_{k-1}\mathrm F^{\top}+\mathrm Q
     \label{eq_xprediction}
     \end{equation}
     \end{minipage}
     }  (6.25,18.5);
     
     % 右侧大矩形，右移 0.5 单位
-    \draw  [rounded corners=5pt] (8.0,23.5) rectangle  
+    \draw  [fill=gray!10,rounded corners=5pt] (8.0,23.5) rectangle  
     node {
         \large
     \begin{minipage}{7cm}
-    (c)~Kalman gain update :
+    (c)~Kalman gain update:
     \begin{equation}
-    \mathrm K= \mathrm P \mathrm H^{\top}
-    \left(\mathrm H \mathrm P \mathrm H^{\top}+\mathrm R\right)^{-1}
+    \mathrm K_k= \mathrm P_k 
+    \left( \mathrm P_k +\mathrm R\right)^{-1}
     \label{eq_kalmangain}
     \end{equation}
     (d)~estimation update:
     \begin{equation}
-    \mathbf{\hat{x}}= \mathbf x^{pre} + \mathrm K \left(\mathbf{z}^{pre}- \mathbf{z}^{obs}\right)
+    \mathbf{x}_k= \bar{\mathbf x}_k + \mathrm K_k \left(\bar{\mathbf{x}}_k- \hat{\mathbf{x}}_k  \right)
     \end{equation}
     (e)~error covariance update:
     \begin{equation}
-    \hat{\mathrm {P}} = \left( \mathrm{I} - \mathrm{K} \mathrm{H} \right) \mathrm{P}^{pre}
+    \mathrm P_k = \left( \mathrm{I} - \mathrm{K}_k \right) \mathrm P_k
     \end{equation}
      \end{minipage}
     } (15.5,18.5);
     
     % 拉长的右侧箭头
     \draw [->, >=Stealth] (6.25,22.5) -- (8.0,22.5); % 拉长到 8.0
-    \draw [->, >=Stealth] (8.0,19.5) -- (6.25,19.5); % 拉长到 8.0
+    \draw [->, >=Stealth] (8.0,19.5) -- node[midway, above] {$k=k+1$} (6.25,19.5); % 拉长到 8.0 并添加标签
+
 
     % 左侧矩形 Initial estimate，左移 0.5 单位
-    \draw [fill=gray!10,rounded corners=5pt] (-7.7,20.5) rectangle  
+    \draw [rounded corners=5pt] (-7.7,20.5) rectangle  
     node {\large
     \begin{minipage}{5cm}
-    Initial estimation of $\mathbf {\hat{x}}$~(\cref{sec_initialseed}) and the initial covariance error $\hat{\mathrm {P}}=\mathrm{I}_{12\times 12}$
+    Initial estimation of $\mathbf {\hat{x}}_k$~(\cref{sec_initialseed}) and the initial covariance error $\mathrm P = \mathrm{I}_{7\times 7}$
     \end{minipage}
     } (-1.72,18.5);
     
     % 左侧矩形 Check for termination，左移 0.5 单位 []
-    \draw [fill=gray!10,rounded corners=5pt] (-7.7,23.5) rectangle  
+    \draw [rounded corners=5pt] (-7.7,23.5) rectangle  
     node {\large
     \hspace{0.4em} 
     \begin{minipage}{5.5cm}
@@ -180,173 +199,120 @@ we update the state of the train by combining the observation and prediction sta
             \setlength{\parsep}{0pt}
             \setlength{\leftskip}{0pt} % 保持item缩进
             \item non-convergence of reconstruction~(\cref{sec_linereconstruction})
-            \item visual inconsistency
             \item positional overlap 
         \end{itemize}
     \end{minipage}
-    } (-1.72,21);
+    } (-1.72,21.5);
 
     % 拉长的左侧箭头
-    \draw [->, >=Stealth] (-1.72,19.5) -- (0,19.5); % 左侧箭头延长到 -1.72
-    \draw [<-, >=Stealth] (-1.72,22.5) -- (0,22.5); % 左侧箭头延长到 -1.72
+    \draw [<-, >=Stealth]  (0,19.5)-- (-1.72,19.5); % 左侧箭头延长到 -1.72
+    \draw [<-, >=Stealth] (0,22.5)--(-1.72,22.5)  ; % 左侧箭头延长到 -1.72
     
+    % 新增的箭头连接 (b) 和 (a)
+    \draw [->, >=Stealth] (3.125,20.5) -- (3.125,21.5); % 从 (b) 底部到 (a) 顶部
+
     \end{circuitikz}
     }%
-    \caption{The flow of kalman filter for the \rlp estimation.$\mathrm{Q}$ in \cref{eq_xprediction} and $\mathrm{R}$ in \cref{eq_kalmangain} represents the covariance matrix of observation noise and process noise,respectively.}
+    \caption{The flow of Kalman filter for the \rlp~estimation. $\mathrm{Q}$ in \cref{eq_xprediction} and $\mathrm{R}$ in \cref{eq_kalmangain} represent the covariance matrix of observation noise and process noise, respectively.}
     \label{fig_kalmanflow}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.98\textwidth]{images/visualCheck.pdf}
-    \caption{Visual alignment check in Kalman Filter.
-    We project the estimation of \rlp in multiple images and extract the deep feature with pre-trained network.
-    Then, 
-    we check their cosine distance with the first $n/2$ cells in the queue,
-    where $n$ is obtained by dividing the \rlp width by the step size $t$.}
-    \label{fig_visualCheck}
-\end{figure}
-
-Because the triansation is a nonlinear process,
-we need the Jacobian matrix $F_k \in R^{7\times7}$ for the linearization:
+Because the transition is a nonlinear process,
+we use the Jacobian matrix in \cref{eq_xprediction} for the linear transition of $\mathrm F_k \in R^{7\times7}$:
 \begin{equation}
     \begin{aligned}
-        &F_k(1,6)=-\Delta t \sin(\phi_{k-1}) \cos(\omega_{k-1}),\\
-        &F_k(1,7)=-\Delta t \cos(\phi_{k-1}) \sin(\omega_{k-1}),\\
-        &F_k(2,6)=\Delta t \cos(\phi_{k-1}) \cos(\omega_{k-1}) ,\\
-        &F_k\left(2,7\right)=\Delta t \sin(\phi_{k-1}) \sin(\omega_{k-1}),\\
-        &F_k\left(i,i\right)=1,i \in [1,7].
+        &\mathrm F^k_{1:2,6:7}=\Delta t\left[\begin{matrix}
+             -\sin(\phi_{k-1}) \cos(\omega_{k-1}) & - \cos(\phi_{k-1}) \sin(\omega_{k-1})\\
+             \cos(\phi_{k-1}) \cos(\omega_{k-1})  & \sin(\phi_{k-1}) \sin(\omega_{k-1})
+        \end{matrix}\right]\\
+        &\mathrm F^k_{i,i}=1,i \in [1,7].
     \end{aligned}
     \label {eq_jacobian}
 \end{equation}
-With \cref{eq_jacobian},
 
 For each seed of \rlp~,
-we will track it with the Kalman filter and terminate the track when one of the following conditions is met.
+we will track it with a Kalman filter toward two directions by setting a positive and negative $\Delta t$,
+respectively.
+Each track is terminated when one of the following two conditions is met.
 (1) \textit{Overlap}:
-with each of the last $k$ \rlp~ in the current filter process, 
-we find the nearest \rlp~ set that have been reconstructed in the previous filter process.
-If half of the \rlp~ can find a nearest one within $\frac{1}{10}d$,
-we say that the overlap has occurred.
-(2) \textit{Inaligned deep features:}
-the texture is not aligned with the previous state,
-We save the set of deep features that has passed the texture validation in a queue and use the first half of the elements in the queue to validate the new $\left\{\mathbf f^\prime\right\}_{i=1}^{m1}$:
-\begin{equation}
-\sum_{i=1}^{m_1} \mathbb{I} \left( \exists j \in \left[ m_2 \right], \, \cos \left( \mathbf{f}_i, \mathbf f^{\prime}_j \right) > \theta \right) \geq \frac{m_1}{2}
-\label{eq_featureValidation}
-\end{equation}
-where $m2$ is the total number of $\mathbf f$ in the first half of the feature set in the queue;
-$\mathbb{I}$ represents an indicator function which takes the value of 1 when a certain condition is true and 0 otherwise.
-If $\left\{\mathbf f^\prime\right\}_{i=1}^{m1}$ satisfies \cref{eq_featureValidation},
-it is pushed to the queue, 
-and then the queue is dequeued if its cell passed $cal$.
-(3) \textit{Degenerate reconstruction:}
+a half of the nearest \rlp~is within $t_{dis}$ of the \rlp~that have been reconstructed in the previous filter process.
+(2) \textit{Degenerate reconstruction:}
 there is no correct 3D line that can be reconstructed from multiple images in \cref{sec_linereconstruction}.
 Note that
-it is unnecessary to check for termination in every estimate, especially when we use a small $t$ for robustness;
-instead,
-we employ this check when $k$ iterations are reached and roll back to the state of the previous check when the overlap or feature inconsistency occurs. 
+it is unnecessary to check for termination in every estimate, 
+especially when we use a small $\Delta t$ for robustness.
+Instead,
+we employ this check when a certain number of iterations are reached and roll back to the state of the previous check when the overlap or degenerate reconstruction occurs. 
 
 \begin{figure}[htbp]
     \centering
     % 第一个子图
-    \subfloat[The weight function of \cref{eq_gradientweight}]{
-        \includegraphics[width=0.24\textwidth]{images/linereconstruction1.pdf}
+    \subfloat[Hough line detection]{
+        \includegraphics[width=0.2\textwidth]{images/linereconstruction1.pdf}
     }
     \hfill % 空格，均匀分布
     % 第二个子图
-    \subfloat[Some results of the GD algorithm]{
-        \includegraphics[width=0.44\textwidth]{images/linereconstruction2.pdf}
+    \subfloat[Examples of 2D line pairs ]{
+        \includegraphics[width=0.40\textwidth]{images/linereconstruction2.pdf}
     }
     \hfill
     % 第三个子图
-    \subfloat[The 3D lines from image pairs]{
-        \includegraphics[width=0.25\textwidth]{images/linereconstruction3.pdf}
+    \subfloat[The selected 3D line pair with parallel constraint]{
+        \includegraphics[width=0.35\textwidth]{images/linereconstruction3.pdf}
     }
     \caption{Illustration of the line reconstruction.} % 总标题
     \label{fig:three-images}
 \end{figure}
 
 
-\subsection{Accurate railway line position with gradient descending}
+\subsection{Railway reconstruction}
 \label{sec_linereconstruction}
-For a 3D line in $\mathbf{x}^{pre}$~(\cref{eq_statetransition}),
-we convert it into image with camera matrix and obtain the 2D line segment
-$\mathbf{l}^{pre}=\begin{bmatrix} x_c,y_c,\theta \end{bmatrix}$;
-then we search around $\mathbf{l}^{pre}$ for the observation $\mathbf{l}^{obs}$,
-which should have the maximum gradient response:
-\begin{equation}
- \mathcal{L} = \sum_{i=1}^{N} \lambda_i \cdot \|G_x \left(x_i, y_i \right),G_y\left(x_i, y_i\right) \|^2, 
-\label{eq_GDobjfunction}
-\end{equation}
-where $G_x$ and $G_y$ is the gradient magnitude in two dimensions;
-the sample point is calculated by
-\begin{equation}
-\begin{bmatrix}
-x_i \\
-y_i
-\end{bmatrix}
-=
-\begin{bmatrix}
-x_c \\
-y_c
-\end{bmatrix}
-+
-\begin{bmatrix}
-\cos\theta & -\sin\theta \\
-\sin\theta & \cos\theta
-\end{bmatrix}
-\begin{bmatrix}
-h_i \\
-p_i
-\end{bmatrix},
-\label{eq_samplepoints}
-\end{equation}
-where $h_i$ and $ p_i$ is the parallel and horizontal distance to $\mathbf{l}^{obs}$,
-respectively.
-Because the \textit{RL} has a width that is different at with positions and images,
-we use $\lambda_i$ in \cref{eq_GDobjfunction} to weight the gradients:
-\begin{equation}
-\lambda_i= 1 - \frac{1}{1 + e^{10\left(w_1-p_i \right)}} + \frac{1}{1 + e^{10\left(w_2-p_i\right)}}
-\label{eq_gradientweight}
-\end{equation}
-where $w_1$ and $w_2$ are the distance calculated from the the prior width of \textit{RL}.
+In each step of the Kalman process,
+the 2D \textit{RL} relating to the prediction of $\bar {\mathbf x}$ can be obtained in images with the camera matrix,
+around which the image is slightly extended as the region of interest to find the observation of the 2D \textit{RL}.
+We use the tie point in SfM to determine which images the current \textit{RLP} should be projected onto:
+we search the $k$ nearest 3D tie points, 
+which contain the indices of the images they belong to,
+and count the number of tie points associated with each image;
+then, 
+we select the top $k$ images that contain at least one tie point for 2D \textit{RL} detection.
 
-We use the gradient ascend to find $\mathbf{l}^{obs}$ with \cref{eq_GDobjfunction}:
+We use the Hough framework for \textit{RL} detection by converting the Canny edge of the image block into Hough space and constructing the accumulator matrix $\mathrm H$.
+Then,
+we select the top $k$ peaks in $\mathrm H$ and find the two peaks satisfying 
 \begin{equation}
-\mathbf{l}^{obs}_{i}=\mathbf{l}^{obs}_{i-1}-\alpha \Delta \mathcal{L},
-\label{eq_gditerative}
+    \begin{aligned}
+        &i^*,j^*=\max_{i,j} \left(\mathrm{H}_i + \mathrm{H}_j \right) \\
+        &\text{s.t.,} \quad |\theta_i - \theta_j| < t_{ang},
+        \quad |\rho_i - \rho_j| < t_{dis2},
+    \end{aligned}
 \end{equation}
-where \( \alpha \) is the learning rate.
-\( \Delta \mathcal{L} \) is the gradient from \cref{eq_GDobjfunction} and \cref{eq_samplepoints}:
-\begin{equation}
-\Delta \mathcal{L} = - \sum_{i=1}^{N} \lambda_i \mathbf{J}_i
-\begin{bmatrix}
-G_x(x_i, y_i) &
-G_y(x_i, y_i)
-\end{bmatrix}^{\top},
-\end{equation}
-where $\mathbf{J}_i$ is the Jacobian matrix
-\begin{equation}
-\mathbf{J}_i=
-\begin{bmatrix}
-\partial x_i / \partial x_c & \partial x_i / \partial y_c & \partial x_i / \partial \theta \\
-\partial y_i / \partial x_c & \partial y_i / \partial y_c & \partial y_i / \partial \theta
-\end{bmatrix}^{\top}
-\end{equation}
-\cref{eq_gditerative} takes $\mathbf{l}^{pre}$ as input and iterates until the parameters converge, i.e., when the change in the parameters is smaller than a predefined threshold.
+where $\rho_i$ represents the shortest distance between the straight line and the origin of the image coordinate system, while $\theta_i$ is the angle between the straight line and the x-axis.  
+The parameter of the distance threshold $t_{dis2}$ is crucial in confirming the railway line,
+which determines the width of the railway line that the line will be detected.
+As shown in figure 1,
+since the railway line has a fixed width in 3D space,
+we directly convert it into the image as the distance threshold.
+After confirming the two peaks in hough space,
+the central 2D line of the railway is fitted by all the pixels subjecting to $i$ and $j$.
 
-In the task of reconstructing the optimal 3D line segment from multiple $\mathbf l^{obs}$, we propose an efficient strategy. 
-Specifically, 
-for \( n \) images with \( n \) observed line segments, 
-we first perform pairwise 3D line segment reconstructions for all image pairs, 
-generating \( n \times (n-1) / 2 \) candidate 3D line segments. 
-Next, a score is computed for each 3D line segment by calculating the weighted sum of distances to other 3D line segments within a specified distance threshold. 
-Finally, the 3D line segment with the highest score is selected as the optimal reconstruction.
-We say the degenerate reconstruction occurs when the highest score is 0 and the Kalman filter will be terminated as illustrated in  \cref{fig_kalmanflow,fig_visualCheck}. 
-Using the known RLP structure, 
-we can easily use the approximate RLP width range to define an appropriate inlier threshold,
-enhancing the robustness and accuracy of the method.
+In multiple images,
+we could find $n_1$ and $n_2$ 2D straight lines for the 3D railway line pair on each side,
+and there will be \( n_1 \times (n_1-1) / 2 \) and \( n_2 \times (n_2-1) / 2 \) 3D lines reconstructing from the 2D lines.
+Instead of fitting them with least squares,
+we select the two representative 3D lines,
+which should be parallel and have enough support lines.
+It can be formulated as
+\begin{equation}
+    \begin{aligned}
+        &i^*,j^*=\max_{i,j} \left(S\left(L_i\right) + S\left(L_j\right) \right) \quad \text{s.t.,} \quad \angle \left(L_i,L_j\right)<t_{ang} \\
+        &S\left(L\right) = \sum \mathcal{N}\left(d(L,L_i), \mu, \left(t_p/3\right)^2\right)
+    \end{aligned}
+    \label{eq_3dlinescore}
+\end{equation}
+When the 2D railway line is unobserved and there are few 3D lines in the reconstruction
+the highest score in \cref{eq_3dlinescore} is likely to be zero,
+for which we say the degenerate reconstruction occurs and the Kalman filter will be terminated.
 
 
     
