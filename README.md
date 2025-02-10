@@ -1,7 +1,9 @@
 # Automatic Detection and Reconstruction of the Rail Track Line from Aerial Images with a Simulated Train
 ### Source code and datasets will comming soon!!!
 ## Video : Rail track line detection simulation
-![3_1](https://github.com/user-attachments/assets/6b5e4c2b-afaf-4cdc-b619-2f28237bea83)
+<center>
+  ![3_1](https://github.com/user-attachments/assets/6b5e4c2b-afaf-4cdc-b619-2f28237bea83)
+</center>
 
 ## Figure 1 : With our reconstructions, we could efficiently make the detection and segmentation datasets in a semi-supervised way.
 ![Fig1](https://github.com/user-attachments/assets/b707a4d7-55cf-4863-8b47-b6b804dbfe73)
