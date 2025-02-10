@@ -2,8 +2,9 @@
 ### Source code and datasets will comming soon!!!
 ## Video : Rail track line detection simulation
 <div align=center>
-![3_1](https://github.com/user-attachments/assets/6b5e4c2b-afaf-4cdc-b619-2f28237bea83)
+<img src="https://github.com/user-attachments/assets/6b5e4c2b-afaf-4cdc-b619-2f28237bea83>" width="640" height="480">
 </div>
+
 ## Figure 1 : With our reconstructions, we could efficiently make the detection and segmentation datasets in a semi-supervised way.
 ![Fig1](https://github.com/user-attachments/assets/b707a4d7-55cf-4863-8b47-b6b804dbfe73)
 
