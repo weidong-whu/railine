@@ -1,6 +1,6 @@
 # Rail track detection and reconstruction in aeral images
 
-## Video : Visualization of the Rail track detection and reconstruction.
+## <span style="font-size: 50px;">&#8226;</span>  Video : Visualization of the Rail track detection and reconstruction.
 
 [YouTube Link](https://www.youtube.com/watch?v=iy-kxUioIZw)
 
