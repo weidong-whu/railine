@@ -1,4 +1,4 @@
-# Automatic Detection and Reconstruction of the Rail Track Line from Aerial Images with a Simulated Train
+# Travel Like a Train: rail track detection and reconstruction in aeral images
 ### Source code and datasets will comming soon!!!
 ### One can download parts of the data through the link.
 ## Video : Visualization of the Rail track detection and reconstruction, which simulates the train travel on the track.
