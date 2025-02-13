@@ -1,4 +1,4 @@
-# Travel Like a Train: rail track detection and reconstruction in aeral images
+# Rail track detection and reconstruction in aeral images
 ### Source code and datasets will comming soon!!!
 ## One can download parts of the dataset through the link, which contains totally 4000 image blocks and the ground truth for OBB-detection and segmentation of the rail track.
 
@@ -10,7 +10,7 @@
 
 
 
-## Video : Visualization of the Rail track detection and reconstruction, which simulates the train travel on the track.
+## Video : Visualization of the Rail track detection and reconstruction.
 
 [YouTube Link](https://www.youtube.com/watch?v=iy-kxUioIZw)
 
