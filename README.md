@@ -7,6 +7,10 @@
 
 -We will publicly release all the images and annotations (approximately 45,000 images).
 
+<p align="center">
+  <img src="detect.png" alt="Detect Image" style="display: inline-block;" />
+  <img src="segment.png" alt="Segment Image" style="display: inline-block;" />
+</p>
 
 
 
