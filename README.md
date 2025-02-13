@@ -13,10 +13,10 @@
 ### Source code and datasets will comming soon!!!
 ## One can download parts of the dataset through the link, which contains totally 4000 image blocks and the ground truth for OBB-detection and segmentation of the rail track.
 
--Our datasets are organized according to the YOLOv11 format for [OBB-detection](https://docs.ultralytics.com/datasets/obb/#usage) and
+### - Our datasets are organized according to the YOLOv11 format for [OBB-detection](https://docs.ultralytics.com/datasets/obb/#usage) and
 [Segmentation](https://docs.ultralytics.com/datasets/segment/)
 
--We will publicly release all the images and annotations (approximately 45,000 images).
+### - We will publicly release all the images and annotations (approximately 45,000 images).
 
 <p align="center">
   <figure style="display: inline-block; margin-right: 20px;">
