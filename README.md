@@ -19,9 +19,16 @@
 -We will publicly release all the images and annotations (approximately 45,000 images).
 
 <p align="center">
-  <img src="detect.png" alt="Detect Image" style="display: inline; margin-right: 10px;" />
-  <img src="segment.png" alt="Segment Image" style="display: inline;" />
+  <figure style="display: inline-block; margin-right: 20px;">
+    <img src="detect.png" alt="Detect Image" style="display: inline;" />
+    <figcaption> The examples of the detection image </figcaption>
+  </figure>
+  <figure style="display: inline-block;">
+    <img src="segment.png" alt="Segment Image" style="display: inline;" />
+    <figcaption>The examples of the segmentation image</figcaption>
+  </figure>
 </p>
+
 
 
 
