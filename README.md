@@ -10,7 +10,7 @@
   <img src="https://github.com/user-attachments/assets/b563f129-9f64-4a49-8dae-054c6b18f4ed" alt="3_1">
 </p>
 
-### Source code and datasets will comming soon!!!
+### Source code and datasets will come soon!!!
 ## One can download parts of the dataset through the link, which contains totally 4000 image blocks and the ground truth for OBB-detection and segmentation of the rail track.
 
 ### - Our datasets are organized according to the YOLOv11 format for [OBB-detection](https://docs.ultralytics.com/datasets/obb/#usage) and [Segmentation](https://docs.ultralytics.com/datasets/segment/)
